@@ -86,23 +86,27 @@ import sys, pathlib, re
 url, pages_on = sys.argv[1], sys.argv[2] == "yes"
 p = pathlib.Path("README.md")
 t = p.read_text()
-hosted = "**[Open the interactive dashboard](" + url + ")**\n\nIf that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\nserver and no network."
-local = "**Open the dashboard:** clone this repository and open `index.html` in any browser. It needs no\nserver and no network.\n\nIf this repository is made public, the hosted version appears at " + url
+
+hosted = ("**[Open the interactive dashboard](" + url + ")**\n\n"
+          "If that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\n"
+          "server and no network.")
+local = ("**Open the dashboard:** clone this repository and open `index.html` in any browser. It needs no\n"
+         "server and no network.\n\n"
+         "If this repository is made public, the hosted version appears at " + url)
 want = hosted if pages_on else local
-# whichever variant is present now, replace it with the one that matches reality
-variants = [
-    "**[Open the interactive dashboard](DASHBOARD_URL)**\n\nIf that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\nserver and no network.",
-    local,
-    re.sub(r"\(.*?\)", "(" + url + ")", hosted, count=1),
-]
-done = False
-for v in variants:
-    if v in t:
-        t = t.replace(v, want); done = True; break
-if not done:
-    t = re.sub(r"\*\*\[Open the interactive dashboard\]\([^)]*\)\*\*.*?server and no network\.",
-               want, t, count=1, flags=re.S)
-p.write_text(t)
+
+# Match the link block whichever form it is in, ignoring the URL and its casing.
+pattern = re.compile(
+    r"(?:\*\*\[Open the interactive dashboard\]\([^)]*\)\*\*\s*\n\n"
+    r"If that link is not live yet.*?server and no network\.)"
+    r"|"
+    r"(?:\*\*Open the dashboard:\*\*.*?server and no network\."
+    r"(?:\s*\n\nIf this repository is made public, the hosted version appears at \S+)?)",
+    re.S)
+t2, n = pattern.subn(lambda _: want, t, count=1)
+if n == 0:                      # nothing recognisable: fall back to the placeholder
+    t2 = t.replace("DASHBOARD_URL", url)
+p.write_text(t2)
 PY
 git add -A
 git diff --cached --quiet || { git commit -q -m "Point the README at the dashboard"; git push -q origin main; }
