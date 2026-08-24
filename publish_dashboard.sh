@@ -32,7 +32,7 @@ gh auth setup-git >/dev/null 2>&1 || true
 
 LOGIN=$(gh api user --jq .login)
 UID_GH=$(gh api user --jq .id)
-URL="https://$LOGIN.github.io/$REPO/"
+URL="https://$(echo "$LOGIN" | tr "[:upper:]" "[:lower:]").github.io/$REPO/"
 echo "Publishing as $LOGIN to $REPO ($VISIBILITY)"
 
 # Commit identity: the GitHub noreply address, so the personal email stays private.
@@ -63,9 +63,11 @@ PAGES_ON=no
 if [ "$VISIBILITY" = "public" ]; then
   if ERR=$(gh api -X POST "repos/$LOGIN/$REPO/pages" -f "source[branch]=main" -f "source[path]=/" 2>&1); then
     PAGES_ON=yes
+    URL=$(gh api "repos/$LOGIN/$REPO/pages" --jq .html_url 2>/dev/null || echo "$URL")
     echo "GitHub Pages enabled."
   elif ERR2=$(gh api -X PUT "repos/$LOGIN/$REPO/pages" -f "source[branch]=main" -f "source[path]=/" 2>&1); then
     PAGES_ON=yes
+    URL=$(gh api "repos/$LOGIN/$REPO/pages" --jq .html_url 2>/dev/null || echo "$URL")
     echo "GitHub Pages already on, source confirmed."
   else
     echo "Could not turn on Pages automatically:"
@@ -78,29 +80,32 @@ fi
 
 # ------------------------------------------------------- the README's link line --
 # Point the README at the hosted dashboard if it exists, at the local file if it does not.
-if grep -q "DASHBOARD_URL" README.md 2>/dev/null; then
-  if [ "$PAGES_ON" = "yes" ]; then
-    sed "s|DASHBOARD_URL|$URL|g" README.md > README.md.tmp && mv README.md.tmp README.md
-    echo "README now links to $URL"
-  else
-    python3 - "$URL" <<'PY'
-import sys, pathlib
-url = sys.argv[1]
+# Runs every time, so a repository that goes from private to public gets its link back.
+python3 - "$URL" "$PAGES_ON" <<'PY'
+import sys, pathlib, re
+url, pages_on = sys.argv[1], sys.argv[2] == "yes"
 p = pathlib.Path("README.md")
 t = p.read_text()
-block = ("**[Open the interactive dashboard](DASHBOARD_URL)**\n\n"
-         "If that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\n"
-         "server and no network.")
-repl = ("**Open the dashboard:** clone this repository and open `index.html` in any browser. It needs no\n"
-        "server and no network.\n\n"
-        "If this repository is made public, the hosted version appears at " + url)
-p.write_text(t.replace(block, repl) if block in t else t.replace("DASHBOARD_URL", url))
+hosted = "**[Open the interactive dashboard](" + url + ")**\n\nIf that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\nserver and no network."
+local = "**Open the dashboard:** clone this repository and open `index.html` in any browser. It needs no\nserver and no network.\n\nIf this repository is made public, the hosted version appears at " + url
+want = hosted if pages_on else local
+# whichever variant is present now, replace it with the one that matches reality
+variants = [
+    "**[Open the interactive dashboard](DASHBOARD_URL)**\n\nIf that link is not live yet, clone the repository and open `index.html` in any browser. It needs no\nserver and no network.",
+    local,
+    re.sub(r"\(.*?\)", "(" + url + ")", hosted, count=1),
+]
+done = False
+for v in variants:
+    if v in t:
+        t = t.replace(v, want); done = True; break
+if not done:
+    t = re.sub(r"\*\*\[Open the interactive dashboard\]\([^)]*\)\*\*.*?server and no network\.",
+               want, t, count=1, flags=re.S)
+p.write_text(t)
 PY
-    echo "README points at the local index.html for now."
-  fi
-  git add -A
-  git diff --cached --quiet || { git commit -q -m "Point the README at the dashboard"; git push -q origin main; }
-fi
+git add -A
+git diff --cached --quiet || { git commit -q -m "Point the README at the dashboard"; git push -q origin main; }
 
 echo
 echo "Repository: https://github.com/$LOGIN/$REPO  ($VISIBILITY)"
