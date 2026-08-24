@@ -1,0 +1,5154 @@
+{
+  "meta": {
+    "script": "scripts/27_association_v3.py",
+    "seed": 20260818,
+    "data": "data/processed/analysis_final.csv",
+    "snapshot_citations": "2026-06-11",
+    "hf_upvote_scrape": "2026-06-05 (2024\u201325 papers) / 2026-06-11 (2023 papers)",
+    "subfield_variable": "subfield_kw (uniform 13-level keyword taxonomy)",
+    "prestige_main": "Tier B leakage-free: log1p(max prior papers of first/last author) + max years active",
+    "n_boot": 500,
+    "n_placebo": 300,
+    "n_boot_match": 300,
+    "runtime_sec": 381.8
+  },
+  "measurement": {
+    "snapshot_statement": "Upvotes are cumulative HF counts at scrape time (2026-06-05 for 2024\u201325 papers, 2026-06-11 for 2023 papers), not day-one counts; citations are Semantic Scholar counts at the 2026-06-11 snapshot; age_months = months from the HF published_at date to 2026-06-11 (5.4\u201339.8).",
+    "monthly": {
+      "2023-02": {
+        "n": 2,
+        "median_upvotes": 9.5,
+        "p90_upvotes": 9.9,
+        "median_cites": 358.0,
+        "share_zero_cites": 0.0,
+        "median_age_months": 39.7
+      },
+      "2023-04": {
+        "n": 2,
+        "median_upvotes": 4.0,
+        "p90_upvotes": 6.4,
+        "median_cites": 325.0,
+        "share_zero_cites": 0.0,
+        "median_age_months": 37.8
+      },
+      "2023-05": {
+        "n": 277,
+        "median_upvotes": 2.0,
+        "p90_upvotes": 7.4,
+        "median_cites": 78.0,
+        "share_zero_cites": 0.004,
+        "median_age_months": 36.8
+      },
+      "2023-06": {
+        "n": 249,
+        "median_upvotes": 7.0,
+        "p90_upvotes": 27.2,
+        "median_cites": 69.0,
+        "share_zero_cites": 0.012,
+        "median_age_months": 35.9
+      },
+      "2023-07": {
+        "n": 187,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 39.0,
+        "median_cites": 96.0,
+        "share_zero_cites": 0.005,
+        "median_age_months": 34.8
+      },
+      "2023-08": {
+        "n": 107,
+        "median_upvotes": 14.0,
+        "p90_upvotes": 34.4,
+        "median_cites": 63.0,
+        "share_zero_cites": 0.009,
+        "median_age_months": 34.0
+      },
+      "2023-09": {
+        "n": 174,
+        "median_upvotes": 15.0,
+        "p90_upvotes": 55.0,
+        "median_cites": 65.5,
+        "share_zero_cites": 0.006,
+        "median_age_months": 32.8
+      },
+      "2023-10": {
+        "n": 147,
+        "median_upvotes": 14.0,
+        "p90_upvotes": 37.0,
+        "median_cites": 82.0,
+        "share_zero_cites": 0.0,
+        "median_age_months": 31.7
+      },
+      "2023-11": {
+        "n": 160,
+        "median_upvotes": 17.0,
+        "p90_upvotes": 44.3,
+        "median_cites": 63.5,
+        "share_zero_cites": 0.013,
+        "median_age_months": 30.8
+      },
+      "2023-12": {
+        "n": 297,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 33.4,
+        "median_cites": 44.0,
+        "share_zero_cites": 0.003,
+        "median_age_months": 29.9
+      },
+      "2024-01": {
+        "n": 219,
+        "median_upvotes": 19.0,
+        "p90_upvotes": 54.0,
+        "median_cites": 53.0,
+        "share_zero_cites": 0.018,
+        "median_age_months": 28.7
+      },
+      "2024-02": {
+        "n": 257,
+        "median_upvotes": 18.0,
+        "p90_upvotes": 49.4,
+        "median_cites": 61.0,
+        "share_zero_cites": 0.008,
+        "median_age_months": 27.8
+      },
+      "2024-03": {
+        "n": 224,
+        "median_upvotes": 18.0,
+        "p90_upvotes": 55.4,
+        "median_cites": 63.5,
+        "share_zero_cites": 0.004,
+        "median_age_months": 26.7
+      },
+      "2024-04": {
+        "n": 198,
+        "median_upvotes": 21.0,
+        "p90_upvotes": 61.3,
+        "median_cites": 43.0,
+        "share_zero_cites": 0.0,
+        "median_age_months": 25.9
+      },
+      "2024-05": {
+        "n": 144,
+        "median_upvotes": 20.0,
+        "p90_upvotes": 48.0,
+        "median_cites": 47.0,
+        "share_zero_cites": 0.014,
+        "median_age_months": 24.6
+      },
+      "2024-06": {
+        "n": 383,
+        "median_upvotes": 16.0,
+        "p90_upvotes": 43.0,
+        "median_cites": 36.0,
+        "share_zero_cites": 0.016,
+        "median_age_months": 23.8
+      },
+      "2024-07": {
+        "n": 321,
+        "median_upvotes": 17.0,
+        "p90_upvotes": 46.0,
+        "median_cites": 28.0,
+        "share_zero_cites": 0.012,
+        "median_age_months": 22.8
+      },
+      "2024-08": {
+        "n": 271,
+        "median_upvotes": 15.0,
+        "p90_upvotes": 56.0,
+        "median_cites": 21.0,
+        "share_zero_cites": 0.022,
+        "median_age_months": 21.7
+      },
+      "2024-09": {
+        "n": 259,
+        "median_upvotes": 16.0,
+        "p90_upvotes": 50.0,
+        "median_cites": 22.0,
+        "share_zero_cites": 0.012,
+        "median_age_months": 20.7
+      },
+      "2024-10": {
+        "n": 483,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 44.0,
+        "median_cites": 19.0,
+        "share_zero_cites": 0.023,
+        "median_age_months": 19.8
+      },
+      "2024-11": {
+        "n": 297,
+        "median_upvotes": 15.0,
+        "p90_upvotes": 47.0,
+        "median_cites": 18.0,
+        "share_zero_cites": 0.04,
+        "median_age_months": 18.7
+      },
+      "2024-12": {
+        "n": 361,
+        "median_upvotes": 16.0,
+        "p90_upvotes": 53.0,
+        "median_cites": 22.0,
+        "share_zero_cites": 0.019,
+        "median_age_months": 17.9
+      },
+      "2025-01": {
+        "n": 270,
+        "median_upvotes": 19.5,
+        "p90_upvotes": 68.2,
+        "median_cites": 25.0,
+        "share_zero_cites": 0.011,
+        "median_age_months": 16.8
+      },
+      "2025-02": {
+        "n": 511,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 51.0,
+        "median_cites": 17.0,
+        "share_zero_cites": 0.022,
+        "median_age_months": 15.7
+      },
+      "2025-03": {
+        "n": 537,
+        "median_upvotes": 12.0,
+        "p90_upvotes": 49.0,
+        "median_cites": 13.0,
+        "share_zero_cites": 0.039,
+        "median_age_months": 14.8
+      },
+      "2025-04": {
+        "n": 429,
+        "median_upvotes": 16.0,
+        "p90_upvotes": 59.2,
+        "median_cites": 16.0,
+        "share_zero_cites": 0.021,
+        "median_age_months": 13.8
+      },
+      "2025-05": {
+        "n": 720,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 50.0,
+        "median_cites": 12.0,
+        "share_zero_cites": 0.031,
+        "median_age_months": 12.6
+      },
+      "2025-06": {
+        "n": 600,
+        "median_upvotes": 10.0,
+        "p90_upvotes": 48.0,
+        "median_cites": 9.0,
+        "share_zero_cites": 0.057,
+        "median_age_months": 12.0
+      },
+      "2025-07": {
+        "n": 379,
+        "median_upvotes": 18.0,
+        "p90_upvotes": 70.2,
+        "median_cites": 10.0,
+        "share_zero_cites": 0.055,
+        "median_age_months": 10.8
+      },
+      "2025-08": {
+        "n": 458,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 66.9,
+        "median_cites": 6.5,
+        "share_zero_cites": 0.092,
+        "median_age_months": 9.9
+      },
+      "2025-09": {
+        "n": 569,
+        "median_upvotes": 14.0,
+        "p90_upvotes": 64.4,
+        "median_cites": 7.0,
+        "share_zero_cites": 0.079,
+        "median_age_months": 8.6
+      },
+      "2025-10": {
+        "n": 851,
+        "median_upvotes": 12.0,
+        "p90_upvotes": 57.0,
+        "median_cites": 5.0,
+        "share_zero_cites": 0.095,
+        "median_age_months": 7.8
+      },
+      "2025-11": {
+        "n": 460,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 63.0,
+        "median_cites": 4.0,
+        "share_zero_cites": 0.146,
+        "median_age_months": 6.7
+      },
+      "2025-12": {
+        "n": 541,
+        "median_upvotes": 13.0,
+        "p90_upvotes": 52.0,
+        "median_cites": 3.0,
+        "share_zero_cites": 0.152,
+        "median_age_months": 5.9
+      }
+    },
+    "median_upvotes_range_2023H2_on": [
+      10.0,
+      21.0
+    ],
+    "spearman_upvotes_age_by_year": {
+      "2023": {
+        "n": 1602,
+        "spearman_upvotes_age": -0.501,
+        "p": 0.0
+      },
+      "2024": {
+        "n": 3417,
+        "spearman_upvotes_age": 0.126,
+        "p": 0.0
+      },
+      "2025": {
+        "n": 6325,
+        "spearman_upvotes_age": 0.031,
+        "p": 0.0138
+      }
+    },
+    "spearman_upvotes_age_all": 0.007,
+    "share_zero_cites_by_year": {
+      "2023": 0.006,
+      "2024": 0.017,
+      "2025": 0.069
+    },
+    "median_cites_by_year": {
+      "2023": 67.0,
+      "2024": 30.0,
+      "2025": 8.0
+    },
+    "median_age_by_year": {
+      "2023": 33.5,
+      "2024": 22.4,
+      "2025": 11.1
+    },
+    "n_by_year": {
+      "2023": 1602,
+      "2024": 3417,
+      "2025": 6325
+    },
+    "descriptives": {
+      "n": 11344,
+      "median_upvotes": 14.0,
+      "median_cites": 16.0,
+      "share_zero_cites": 0.045,
+      "spearman_upvotes_cites": 0.371,
+      "n_repaired_outcomes": 113,
+      "tierB_resolved_share": 0.991,
+      "author_max_appear_lookahead_share": 0.482
+    }
+  },
+  "ladder": {
+    "M0_raw": {
+      "label": "M0 raw",
+      "controls": [],
+      "fixed_effects": [],
+      "poisson_qmle": {
+        "beta": 0.8339,
+        "se": 0.1198,
+        "ci95": [
+          0.599,
+          1.0688
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.783,
+        "irr_per_doubling_ci95": [
+          1.515,
+          2.098
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.6558,
+        "se": 0.1468,
+        "ci95": [
+          0.3681,
+          0.9434
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.575,
+        "irr_per_doubling_ci95": [
+          1.291,
+          1.923
+        ],
+        "converged": true,
+        "alpha": 2.136,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.6126,
+        "se": 0.0858,
+        "ci95": [
+          0.4443,
+          0.7808
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.529,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.361,
+          1.718
+        ],
+        "r2": 0.14
+      }
+    },
+    "M1_age": {
+      "label": "M1 + log age",
+      "controls": [
+        "log_age"
+      ],
+      "fixed_effects": [],
+      "poisson_qmle": {
+        "beta": 1.0094,
+        "se": 0.0975,
+        "ci95": [
+          0.8183,
+          1.2005
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.013,
+        "irr_per_doubling_ci95": [
+          1.763,
+          2.298
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7485,
+        "se": 0.0402,
+        "ci95": [
+          0.6698,
+          0.8273
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.68,
+        "irr_per_doubling_ci95": [
+          1.591,
+          1.774
+        ],
+        "converged": true,
+        "alpha": 1.363,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.619,
+        "se": 0.0354,
+        "ci95": [
+          0.5496,
+          0.6883
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.536,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.464,
+          1.611
+        ],
+        "r2": 0.424
+      }
+    },
+    "M2_subfield": {
+      "label": "M2 + subfield_kw FE",
+      "controls": [
+        "log_age"
+      ],
+      "fixed_effects": [
+        "subfield_kw"
+      ],
+      "poisson_qmle": {
+        "beta": 0.997,
+        "se": 0.1008,
+        "ci95": [
+          0.7993,
+          1.1946
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.996,
+        "irr_per_doubling_ci95": [
+          1.74,
+          2.289
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7305,
+        "se": 0.0396,
+        "ci95": [
+          0.6528,
+          0.8081
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.659,
+        "irr_per_doubling_ci95": [
+          1.572,
+          1.751
+        ],
+        "converged": true,
+        "alpha": 1.332,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5942,
+        "se": 0.035,
+        "ci95": [
+          0.5256,
+          0.6629
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.51,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.439,
+          1.583
+        ],
+        "r2": 0.439
+      }
+    },
+    "M3_month_dow": {
+      "label": "M3 + release-month FE + day-of-week FE",
+      "controls": [
+        "log_age"
+      ],
+      "fixed_effects": [
+        "subfield_kw",
+        "release_month",
+        "dow"
+      ],
+      "poisson_qmle": {
+        "beta": 1.0956,
+        "se": 0.0598,
+        "ci95": [
+          0.9784,
+          1.2127
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.137,
+        "irr_per_doubling_ci95": [
+          1.97,
+          2.318
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.799,
+        "se": 0.0293,
+        "ci95": [
+          0.7417,
+          0.8564
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.74,
+        "irr_per_doubling_ci95": [
+          1.672,
+          1.811
+        ],
+        "converged": true,
+        "alpha": 1.283,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.6371,
+        "se": 0.0331,
+        "ci95": [
+          0.5722,
+          0.702
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.555,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.487,
+          1.627
+        ],
+        "r2": 0.456
+      }
+    },
+    "M4_tierB_prestige": {
+      "label": "M4 + Tier B prestige (leakage-free) [main]",
+      "controls": [
+        "log_age",
+        "tierB_prior",
+        "tierB_yrs",
+        "tierB_miss"
+      ],
+      "fixed_effects": [
+        "subfield_kw",
+        "release_month",
+        "dow"
+      ],
+      "poisson_qmle": {
+        "beta": 1.0992,
+        "se": 0.0608,
+        "ci95": [
+          0.98,
+          1.2184
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.142,
+        "irr_per_doubling_ci95": [
+          1.972,
+          2.327
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7997,
+        "se": 0.0291,
+        "ci95": [
+          0.7426,
+          0.8569
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.741,
+        "irr_per_doubling_ci95": [
+          1.673,
+          1.811
+        ],
+        "converged": true,
+        "alpha": 1.28,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.6335,
+        "se": 0.0332,
+        "ci95": [
+          0.5684,
+          0.6986
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.551,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.483,
+          1.623
+        ],
+        "r2": 0.46
+      }
+    },
+    "M5_plus_hindex_LEAKY": {
+      "label": "M5 + today-measured h-index (LEAKY control)",
+      "controls": [
+        "log_age",
+        "tierB_prior",
+        "tierB_yrs",
+        "tierB_miss",
+        "log_max_h",
+        "log_last_h",
+        "h_miss"
+      ],
+      "fixed_effects": [
+        "subfield_kw",
+        "release_month",
+        "dow"
+      ],
+      "poisson_qmle": {
+        "beta": 1.0672,
+        "se": 0.0656,
+        "ci95": [
+          0.9385,
+          1.1958
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.095,
+        "irr_per_doubling_ci95": [
+          1.917,
+          2.291
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7282,
+        "se": 0.0322,
+        "ci95": [
+          0.6652,
+          0.7913
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.657,
+        "irr_per_doubling_ci95": [
+          1.586,
+          1.731
+        ],
+        "converged": true,
+        "alpha": 1.209,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5694,
+        "se": 0.034,
+        "ci95": [
+          0.5028,
+          0.636
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.484,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.417,
+          1.554
+        ],
+        "r2": 0.497
+      }
+    },
+    "M6_plus_text": {
+      "label": "M6 + text/format controls (authors, title, abstract, GitHub, kw flags)",
+      "controls": [
+        "log_age",
+        "tierB_prior",
+        "tierB_yrs",
+        "tierB_miss",
+        "log_max_h",
+        "log_last_h",
+        "h_miss",
+        "log_n_authors",
+        "title_n_words",
+        "title_has_colon",
+        "log_abs_chars",
+        "has_github",
+        "kw_llm",
+        "kw_agent",
+        "kw_diffusion",
+        "kw_reasoning",
+        "kw_benchmark",
+        "kw_survey",
+        "kw_efficient",
+        "kw_multimodal",
+        "kw_rl",
+        "kw_scaling"
+      ],
+      "fixed_effects": [
+        "subfield_kw",
+        "release_month",
+        "dow"
+      ],
+      "poisson_qmle": {
+        "beta": 0.9256,
+        "se": 0.0584,
+        "ci95": [
+          0.8111,
+          1.04
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.899,
+        "irr_per_doubling_ci95": [
+          1.755,
+          2.056
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.6389,
+        "se": 0.0342,
+        "ci95": [
+          0.5719,
+          0.7058
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.557,
+        "irr_per_doubling_ci95": [
+          1.486,
+          1.631
+        ],
+        "converged": true,
+        "alpha": 1.156,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.4921,
+        "se": 0.0344,
+        "ci95": [
+          0.4247,
+          0.5595
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.407,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.342,
+          1.474
+        ],
+        "r2": 0.521
+      }
+    }
+  },
+  "ladder_robustness": {
+    "M4_legacy_subfield_taxonomy": {
+      "note": "legacy 26-level `subfield` (two taxonomies keyed on upvotes) instead of subfield_kw",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.1102,
+        "se": 0.0623,
+        "ci95": [
+          0.9881,
+          1.2323
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.159,
+        "irr_per_doubling_ci95": [
+          1.984,
+          2.349
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.8205,
+        "se": 0.032,
+        "ci95": [
+          0.7577,
+          0.8832
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.766,
+        "irr_per_doubling_ci95": [
+          1.691,
+          1.845
+        ],
+        "converged": true,
+        "alpha": 1.28,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.6499,
+        "se": 0.036,
+        "ci95": [
+          0.5793,
+          0.7204
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.569,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.494,
+          1.648
+        ],
+        "r2": 0.457
+      }
+    },
+    "M4_no_log_age": {
+      "note": "month FE only, no within-month log-age term",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.0991,
+        "se": 0.0609,
+        "ci95": [
+          0.9796,
+          1.2185
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.142,
+        "irr_per_doubling_ci95": [
+          1.972,
+          2.327
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7982,
+        "se": 0.0296,
+        "ci95": [
+          0.7403,
+          0.8562
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.739,
+        "irr_per_doubling_ci95": [
+          1.67,
+          1.81
+        ],
+        "converged": true,
+        "alpha": 1.281,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.632,
+        "se": 0.0336,
+        "ci95": [
+          0.5661,
+          0.698
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.55,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.481,
+          1.622
+        ],
+        "r2": 0.459
+      }
+    },
+    "M4_plus_appear_prior": {
+      "note": "+ log1p prior-only author HF appearances (v1 'recurrence prestige', look-ahead removed)",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.0669,
+        "se": 0.062,
+        "ci95": [
+          0.9453,
+          1.1885
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.095,
+        "irr_per_doubling_ci95": [
+          1.926,
+          2.279
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7217,
+        "se": 0.0334,
+        "ci95": [
+          0.6561,
+          0.7872
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.649,
+        "irr_per_doubling_ci95": [
+          1.576,
+          1.726
+        ],
+        "converged": true,
+        "alpha": 1.243,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5581,
+        "se": 0.0354,
+        "ci95": [
+          0.4886,
+          0.6275
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.472,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.403,
+          1.545
+        ],
+        "r2": 0.48
+      }
+    },
+    "M4_plus_appear_LOOKAHEAD": {
+      "note": "+ log1p author_max_appear as stored (48% look-ahead) \u2014 shown only to quantify the leak",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.0685,
+        "se": 0.0663,
+        "ci95": [
+          0.9385,
+          1.1985
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.097,
+        "irr_per_doubling_ci95": [
+          1.917,
+          2.295
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7258,
+        "se": 0.0338,
+        "ci95": [
+          0.6595,
+          0.792
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.654,
+        "irr_per_doubling_ci95": [
+          1.58,
+          1.731
+        ],
+        "converged": true,
+        "alpha": 1.247,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5546,
+        "se": 0.0343,
+        "ci95": [
+          0.4873,
+          0.6218
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.469,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.402,
+          1.539
+        ],
+        "r2": 0.481
+      }
+    },
+    "M4_plus_hindex_LEAKY_only": {
+      "note": "same as M5",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.0672,
+        "se": 0.0656,
+        "ci95": [
+          0.9385,
+          1.1958
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.095,
+        "irr_per_doubling_ci95": [
+          1.917,
+          2.291
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7282,
+        "se": 0.0322,
+        "ci95": [
+          0.6652,
+          0.7913
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.657,
+        "irr_per_doubling_ci95": [
+          1.586,
+          1.731
+        ],
+        "converged": true,
+        "alpha": 1.209,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5694,
+        "se": 0.034,
+        "ci95": [
+          0.5028,
+          0.636
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.484,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.417,
+          1.554
+        ],
+        "r2": 0.497
+      }
+    },
+    "M4_plus_comments": {
+      "note": "+ log1p HF comments (second attention signal, cumulative at scrape)",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.0689,
+        "se": 0.0684,
+        "ci95": [
+          0.9348,
+          1.203
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.098,
+        "irr_per_doubling_ci95": [
+          1.912,
+          2.302
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7366,
+        "se": 0.0317,
+        "ci95": [
+          0.6745,
+          0.7988
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.666,
+        "irr_per_doubling_ci95": [
+          1.596,
+          1.74
+        ],
+        "converged": true,
+        "alpha": 1.272,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.572,
+        "se": 0.0286,
+        "ci95": [
+          0.5159,
+          0.628
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.487,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.43,
+          1.545
+        ],
+        "r2": 0.465
+      }
+    },
+    "M4_influential_citations": {
+      "note": "outcome = influential citations (S2)",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 1.288,
+        "se": 0.0774,
+        "ci95": [
+          1.1362,
+          1.4397
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 2.442,
+        "irr_per_doubling_ci95": [
+          2.198,
+          2.713
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.97,
+        "se": 0.0355,
+        "ci95": [
+          0.9004,
+          1.0397
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 1.959,
+        "irr_per_doubling_ci95": [
+          1.867,
+          2.056
+        ],
+        "converged": true,
+        "alpha": 2.373,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.4617,
+        "se": 0.0398,
+        "ci95": [
+          0.3838,
+          0.5397
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 1.377,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.305,
+          1.454
+        ],
+        "r2": 0.31
+      }
+    },
+    "M4_age_ge_12mo": {
+      "note": "papers with >= 12 months exposure",
+      "n": 7736,
+      "poisson_qmle": {
+        "beta": 1.1307,
+        "se": 0.0647,
+        "ci95": [
+          1.004,
+          1.2575
+        ],
+        "nobs": 7736,
+        "irr_per_doubling": 2.19,
+        "irr_per_doubling_ci95": [
+          2.006,
+          2.391
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.8522,
+        "se": 0.0352,
+        "ci95": [
+          0.7833,
+          0.9212
+        ],
+        "nobs": 7736,
+        "irr_per_doubling": 1.805,
+        "irr_per_doubling_ci95": [
+          1.721,
+          1.894
+        ],
+        "converged": true,
+        "alpha": 1.298,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.7209,
+        "se": 0.0471,
+        "ci95": [
+          0.6285,
+          0.8133
+        ],
+        "nobs": 7736,
+        "ratio_1p_cites_per_doubling": 1.648,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.546,
+          1.757
+        ],
+        "r2": 0.366
+      }
+    },
+    "M4_cohort_2023": {
+      "note": "mature 2023 cohort only",
+      "n": 1602,
+      "poisson_qmle": {
+        "beta": 1.1163,
+        "se": 0.1106,
+        "ci95": [
+          0.8996,
+          1.3331
+        ],
+        "nobs": 1602,
+        "irr_per_doubling": 2.168,
+        "irr_per_doubling_ci95": [
+          1.866,
+          2.519
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 1.0273,
+        "se": 0.068,
+        "ci95": [
+          0.894,
+          1.1607
+        ],
+        "nobs": 1602,
+        "irr_per_doubling": 2.038,
+        "irr_per_doubling_ci95": [
+          1.858,
+          2.236
+        ],
+        "converged": true,
+        "alpha": 1.273,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 1.0348,
+        "se": 0.0545,
+        "ci95": [
+          0.9279,
+          1.1416
+        ],
+        "nobs": 1602,
+        "ratio_1p_cites_per_doubling": 2.049,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.903,
+          2.206
+        ],
+        "r2": 0.304
+      }
+    },
+    "M4_cohort_2024": {
+      "note": "2024 cohort only",
+      "n": 3417,
+      "poisson_qmle": {
+        "beta": 1.1939,
+        "se": 0.0994,
+        "ci95": [
+          0.999,
+          1.3888
+        ],
+        "nobs": 3417,
+        "irr_per_doubling": 2.288,
+        "irr_per_doubling_ci95": [
+          1.999,
+          2.619
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.8974,
+        "se": 0.0612,
+        "ci95": [
+          0.7774,
+          1.0174
+        ],
+        "nobs": 3417,
+        "irr_per_doubling": 1.863,
+        "irr_per_doubling_ci95": [
+          1.714,
+          2.024
+        ],
+        "converged": true,
+        "alpha": 1.283,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.7636,
+        "se": 0.0704,
+        "ci95": [
+          0.6256,
+          0.9016
+        ],
+        "nobs": 3417,
+        "ratio_1p_cites_per_doubling": 1.698,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.543,
+          1.868
+        ],
+        "r2": 0.287
+      }
+    },
+    "M4_cohort_2025": {
+      "note": "2025 cohort only (young)",
+      "n": 6325,
+      "poisson_qmle": {
+        "beta": 0.9624,
+        "se": 0.0601,
+        "ci95": [
+          0.8445,
+          1.0802
+        ],
+        "nobs": 6324,
+        "irr_per_doubling": 1.948,
+        "irr_per_doubling_ci95": [
+          1.796,
+          2.114
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.7278,
+        "se": 0.0301,
+        "ci95": [
+          0.6688,
+          0.7869
+        ],
+        "nobs": 6325,
+        "irr_per_doubling": 1.656,
+        "irr_per_doubling_ci95": [
+          1.59,
+          1.725
+        ],
+        "converged": true,
+        "alpha": 1.245,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.5423,
+        "se": 0.0224,
+        "ci95": [
+          0.4983,
+          0.5862
+        ],
+        "nobs": 6324,
+        "ratio_1p_cites_per_doubling": 1.456,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.413,
+          1.501
+        ],
+        "r2": 0.355
+      }
+    },
+    "M4_drop_repaired": {
+      "note": "drop 113 title-match-repaired outcomes",
+      "n": 11231,
+      "poisson_qmle": {
+        "beta": 1.1024,
+        "se": 0.0609,
+        "ci95": [
+          0.983,
+          1.2218
+        ],
+        "nobs": 11231,
+        "irr_per_doubling": 2.147,
+        "irr_per_doubling_ci95": [
+          1.977,
+          2.332
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.8023,
+        "se": 0.0299,
+        "ci95": [
+          0.7437,
+          0.8608
+        ],
+        "nobs": 11231,
+        "irr_per_doubling": 1.744,
+        "irr_per_doubling_ci95": [
+          1.674,
+          1.816
+        ],
+        "converged": true,
+        "alpha": 1.278,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.633,
+        "se": 0.0334,
+        "ci95": [
+          0.5675,
+          0.6986
+        ],
+        "nobs": 11231,
+        "ratio_1p_cites_per_doubling": 1.551,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.482,
+          1.623
+        ],
+        "r2": 0.461
+      }
+    },
+    "M4_upvote_rank_in_month": {
+      "note": "treatment = within-release-month percentile rank of upvotes (0..1); beta = bottom-to-top gap",
+      "n": 11344,
+      "poisson_qmle": {
+        "beta": 3.2642,
+        "se": 0.1574,
+        "ci95": [
+          2.9558,
+          3.5726
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 9.608,
+        "irr_per_doubling_ci95": [
+          7.759,
+          11.898
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 2.5792,
+        "se": 0.08,
+        "ci95": [
+          2.4223,
+          2.736
+        ],
+        "nobs": 11344,
+        "irr_per_doubling": 5.976,
+        "irr_per_doubling_ci95": [
+          5.36,
+          6.662
+        ],
+        "converged": true,
+        "alpha": 1.323,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 2.0007,
+        "se": 0.0739,
+        "ci95": [
+          1.8558,
+          2.1455
+        ],
+        "nobs": 11344,
+        "ratio_1p_cites_per_doubling": 4.002,
+        "ratio_1p_cites_per_doubling_ci95": [
+          3.62,
+          4.424
+        ],
+        "r2": 0.459
+      }
+    },
+    "M4_ai_keywords_only_labels": {
+      "note": "papers whose subfield_kw came from ai_keywords (drop title/summary fallback + Other)",
+      "n": 10447,
+      "poisson_qmle": {
+        "beta": 1.0902,
+        "se": 0.0594,
+        "ci95": [
+          0.9737,
+          1.2067
+        ],
+        "nobs": 10446,
+        "irr_per_doubling": 2.129,
+        "irr_per_doubling_ci95": [
+          1.964,
+          2.308
+        ],
+        "converged": true
+      },
+      "nb2": {
+        "beta": 0.8055,
+        "se": 0.0308,
+        "ci95": [
+          0.7452,
+          0.8658
+        ],
+        "nobs": 10447,
+        "irr_per_doubling": 1.748,
+        "irr_per_doubling_ci95": [
+          1.676,
+          1.822
+        ],
+        "converged": true,
+        "alpha": 1.27,
+        "optimizer": "newton"
+      },
+      "ols_log1p": {
+        "beta": 0.6392,
+        "se": 0.0344,
+        "ci95": [
+          0.5719,
+          0.7066
+        ],
+        "nobs": 10446,
+        "ratio_1p_cites_per_doubling": 1.558,
+        "ratio_1p_cites_per_doubling_ci95": [
+          1.486,
+          1.632
+        ],
+        "r2": 0.454
+      }
+    }
+  },
+  "ladder_convexity": {
+    "note": "M4 + log_upvotes^2. Positive squared term = elasticity rises with attention; Poisson-QMLE weights papers by their expected count, so it is dominated by the top tail and returns a larger average IRR than NB2 (which down-weights high counts) or log-OLS (geometric mean).",
+    "poisson": {
+      "beta_lin": 0.3516,
+      "beta_sq": 0.1043,
+      "se_sq": 0.0374
+    },
+    "nb2": {
+      "beta_lin": 0.2576,
+      "beta_sq": 0.0933,
+      "se_sq": 0.0191
+    },
+    "ols": {
+      "beta_lin": 0.318,
+      "beta_sq": 0.0556,
+      "se_sq": 0.0168
+    },
+    "slope_by_upvote_band": {
+      "upvotes<10": {
+        "n": 3953,
+        "poisson_beta": 0.951,
+        "ols_beta": 0.55
+      },
+      "10-29": {
+        "n": 4755,
+        "poisson_beta": 0.805,
+        "ols_beta": 0.648
+      },
+      ">=30": {
+        "n": 2636,
+        "poisson_beta": 1.374,
+        "ols_beta": 0.799
+      }
+    }
+  },
+  "bootstrap_M4": {
+    "note": "block bootstrap over release months (34 clusters), percentile 95% CI; each rep refits M4",
+    "n_reps": 500,
+    "poisson_beta_ci95": [
+      0.9976,
+      1.2128
+    ],
+    "poisson_irr2x_ci95": [
+      1.997,
+      2.318
+    ],
+    "poisson_beta_sd": 0.0574,
+    "nb2_beta_ci95": [
+      0.7457,
+      0.8616
+    ],
+    "nb2_irr2x_ci95": [
+      1.677,
+      1.817
+    ],
+    "nb2_reps_converged": 500,
+    "ols_beta_ci95": [
+      0.5807,
+      0.713
+    ],
+    "ols_beta_sd": 0.0344
+  },
+  "e_value_M4": {
+    "poisson_qmle": {
+      "irr_per_doubling": 2.142,
+      "e_value_point": 3.706,
+      "irr_ci_lower": 1.972,
+      "e_value_ci_lower": 3.356
+    },
+    "nb2": {
+      "irr_per_doubling": 1.741,
+      "e_value_point": 2.877,
+      "irr_ci_lower": 1.673,
+      "e_value_ci_lower": 2.734
+    },
+    "ols_log1p_ratio": {
+      "ratio_per_doubling": 1.551,
+      "e_value_point": 2.475,
+      "e_value_ci_lower": 2.329
+    },
+    "note": "VanderWeele\u2013Ding E-value on the risk-ratio scale (IRR per doubling of upvotes). Minimum strength of association an unmeasured confounder needs with BOTH attention and citations to explain the estimate away. Not a causal claim \u2014 a sensitivity summary."
+  },
+  "placebo_permutation_M4": {
+    "note": "log_upvotes permuted within release_month \u00d7 subfield_kw cells; M4 refit each time",
+    "n_perm": 300,
+    "poisson": {
+      "placebo_beta_mean": 0.05,
+      "placebo_beta_sd": 0.0555,
+      "placebo_beta_ci95": [
+        -0.0678,
+        0.1531
+      ],
+      "placebo_beta_max": 0.2161,
+      "placebo_irr2x_range": [
+        0.92,
+        1.162
+      ],
+      "real_beta": 1.0992,
+      "real_irr2x": 2.142,
+      "share_placebo_ge_real": 0.0,
+      "z_real_vs_placebo": 18.9
+    },
+    "ols": {
+      "placebo_beta_mean": 0.0302,
+      "placebo_beta_sd": 0.0128,
+      "placebo_beta_ci95": [
+        0.0058,
+        0.0559
+      ],
+      "real_beta": 0.6335,
+      "share_placebo_ge_real": 0.0,
+      "z_real_vs_placebo": 47.0
+    },
+    "additive_fe_note": "With additive month + subfield FE the placebo mean is slightly positive because permuting within month \u00d7 subfield cells preserves cell-mean upvotes, and cell means of upvotes and citations co-move beyond the additive FE. The cell-FE variant below (release_month \u00d7 subfield_kw interacted FE) removes this and is centred at ~0.",
+    "cell_fe_variant": {
+      "n_perm": 100,
+      "fixed_effects": [
+        "release_month^subfield_kw",
+        "dow"
+      ],
+      "poisson": {
+        "real_beta": 1.0896,
+        "real_irr2x": 2.128,
+        "placebo_beta_mean": 0.0041,
+        "placebo_beta_sd": 0.0664,
+        "placebo_beta_ci95": [
+          -0.1132,
+          0.1426
+        ],
+        "share_placebo_ge_real": 0.0
+      },
+      "ols": {
+        "real_beta": 0.6318,
+        "placebo_beta_mean": -0.0005,
+        "placebo_beta_sd": 0.0154,
+        "placebo_beta_ci95": [
+          -0.0301,
+          0.0288
+        ],
+        "share_placebo_ge_real": 0.0
+      }
+    }
+  },
+  "placebo_outcome_reference_count_M4": {
+    "note": "reference count is fixed at submission; attention should not 'predict' it if controls are adequate. n excludes 771 papers with reference_count = 0 (S2 parse gaps).",
+    "n": 10573,
+    "poisson": {
+      "beta": 0.0552,
+      "se": 0.0065,
+      "ci95": [
+        0.0424,
+        0.068
+      ],
+      "nobs": 10573,
+      "irr_per_doubling": 1.039,
+      "irr_per_doubling_ci95": [
+        1.03,
+        1.048
+      ],
+      "converged": true
+    },
+    "ols_log": {
+      "beta": 0.0549,
+      "se": 0.0066,
+      "ci95": [
+        0.0419,
+        0.0678
+      ],
+      "nobs": 10573,
+      "ratio_1p_cites_per_doubling": 1.039,
+      "ratio_1p_cites_per_doubling_ci95": [
+        1.029,
+        1.048
+      ],
+      "r2": 0.067
+    },
+    "ratio_to_citation_effect_ols": 0.087
+  },
+  "hierarchical_mixedlm": {
+    "spec": "log_citations ~ log_upvotes + log_age + tierB_prior + tierB_yrs + tierB_miss + C(release_month) + C(dow)  | groups = subfield_kw, re_formula = ~log_upvotes (REML)",
+    "why_not_poisson_glmm": "statsmodels has no maximum-likelihood Poisson/NB GLMM with correlated random intercept+slope and cluster-robust SEs (only a variational-Bayes PoissonBayesMixedGLM); the count-scale association is therefore estimated with FE Poisson/NB (ladder) and the hierarchical/heterogeneity part with this linear mixed model on log1p citations, as in the June-11 analysis but with the uniform taxonomy and month FE.",
+    "converged": true,
+    "n": 11344,
+    "n_groups": 13,
+    "fixed_slope_log_upvotes": 0.6253,
+    "fixed_slope_se": 0.016,
+    "fixed_slope_ci95": [
+      0.594,
+      0.6567
+    ],
+    "fixed_log_age": 1.369,
+    "fixed_tierB_prior": 0.0828,
+    "variance_components": {
+      "intercept_var": 0.01457,
+      "slope_var": 0.000961,
+      "intercept_slope_cov": 0.00374,
+      "slope_sd": 0.031,
+      "intercept_sd": 0.1207,
+      "residual_var": 1.3185,
+      "icc_intercept_only_model": 0.0311
+    },
+    "lr_test_random_slope": {
+      "lr_stat": 5.373,
+      "p_boundary_mixture": 0.0443,
+      "note": "ML fits; 50:50 chi2(1)/chi2(2) mixture for the boundary"
+    },
+    "subfield_slopes": {
+      "Robotics/Embodied": {
+        "slope": 0.672,
+        "se_approx": 0.022,
+        "ci95": [
+          0.629,
+          0.714
+        ],
+        "intercept_re": 0.182,
+        "n": 116
+      },
+      "Agents": {
+        "slope": 0.667,
+        "se_approx": 0.017,
+        "ci95": [
+          0.633,
+          0.7
+        ],
+        "intercept_re": 0.162,
+        "n": 761
+      },
+      "Multimodal": {
+        "slope": 0.661,
+        "se_approx": 0.016,
+        "ci95": [
+          0.629,
+          0.693
+        ],
+        "intercept_re": 0.139,
+        "n": 2143
+      },
+      "Reasoning/RL": {
+        "slope": 0.656,
+        "se_approx": 0.016,
+        "ci95": [
+          0.624,
+          0.688
+        ],
+        "intercept_re": 0.12,
+        "n": 1732
+      },
+      "Vision/Image-Gen": {
+        "slope": 0.632,
+        "se_approx": 0.016,
+        "ci95": [
+          0.6,
+          0.664
+        ],
+        "intercept_re": 0.025,
+        "n": 2317
+      },
+      "Other": {
+        "slope": 0.626,
+        "se_approx": 0.025,
+        "ci95": [
+          0.576,
+          0.676
+        ],
+        "intercept_re": 0.003,
+        "n": 53
+      },
+      "Vision-Perception": {
+        "slope": 0.622,
+        "se_approx": 0.018,
+        "ci95": [
+          0.587,
+          0.656
+        ],
+        "intercept_re": -0.013,
+        "n": 557
+      },
+      "Benchmark/Eval": {
+        "slope": 0.608,
+        "se_approx": 0.017,
+        "ci95": [
+          0.574,
+          0.642
+        ],
+        "intercept_re": -0.068,
+        "n": 759
+      },
+      "LLM-core": {
+        "slope": 0.6,
+        "se_approx": 0.017,
+        "ci95": [
+          0.567,
+          0.633
+        ],
+        "intercept_re": -0.098,
+        "n": 1099
+      },
+      "Speech/Audio": {
+        "slope": 0.598,
+        "se_approx": 0.019,
+        "ci95": [
+          0.56,
+          0.636
+        ],
+        "intercept_re": -0.106,
+        "n": 238
+      },
+      "Efficiency/Systems": {
+        "slope": 0.597,
+        "se_approx": 0.017,
+        "ci95": [
+          0.564,
+          0.631
+        ],
+        "intercept_re": -0.109,
+        "n": 947
+      },
+      "Code/Math": {
+        "slope": 0.596,
+        "se_approx": 0.02,
+        "ci95": [
+          0.557,
+          0.634
+        ],
+        "intercept_re": -0.116,
+        "n": 218
+      },
+      "RAG/Retrieval": {
+        "slope": 0.594,
+        "se_approx": 0.018,
+        "ci95": [
+          0.559,
+          0.63
+        ],
+        "intercept_re": -0.12,
+        "n": 404
+      }
+    },
+    "slope_range": [
+      0.594,
+      0.672
+    ]
+  },
+  "dose_response_deciles": {
+    "note": "deciles of raw upvotes (ties split by order); adjusted = residual of log1p cites on log age + subfield_kw + month FE, plus grand mean",
+    "rows": [
+      {
+        "decile": 1,
+        "n": 1135,
+        "upvotes_min": 0,
+        "upvotes_max": 4,
+        "median_upvotes": 2.0,
+        "mean_log1p_cites": 1.964,
+        "ci95": [
+          1.879,
+          2.049
+        ],
+        "geo_mean_1p_cites": 7.1,
+        "median_cites": 5.0,
+        "mean_log1p_cites_adjusted": 2.183,
+        "ci95_adjusted": [
+          2.12,
+          2.245
+        ],
+        "share_zero_cites": 0.138,
+        "share_top_decile_cites_in_quarter": 0.012
+      },
+      {
+        "decile": 2,
+        "n": 1134,
+        "upvotes_min": 4,
+        "upvotes_max": 6,
+        "median_upvotes": 5.0,
+        "mean_log1p_cites": 2.334,
+        "ci95": [
+          2.249,
+          2.418
+        ],
+        "geo_mean_1p_cites": 10.3,
+        "median_cites": 8.0,
+        "mean_log1p_cites_adjusted": 2.39,
+        "ci95_adjusted": [
+          2.325,
+          2.455
+        ],
+        "share_zero_cites": 0.071,
+        "share_top_decile_cites_in_quarter": 0.022
+      },
+      {
+        "decile": 3,
+        "n": 1134,
+        "upvotes_min": 6,
+        "upvotes_max": 8,
+        "median_upvotes": 7.0,
+        "mean_log1p_cites": 2.447,
+        "ci95": [
+          2.371,
+          2.524
+        ],
+        "geo_mean_1p_cites": 11.6,
+        "median_cites": 10.0,
+        "mean_log1p_cites_adjusted": 2.536,
+        "ci95_adjusted": [
+          2.47,
+          2.602
+        ],
+        "share_zero_cites": 0.06,
+        "share_top_decile_cites_in_quarter": 0.027
+      },
+      {
+        "decile": 4,
+        "n": 1135,
+        "upvotes_min": 8,
+        "upvotes_max": 11,
+        "median_upvotes": 10.0,
+        "mean_log1p_cites": 2.681,
+        "ci95": [
+          2.6,
+          2.762
+        ],
+        "geo_mean_1p_cites": 14.6,
+        "median_cites": 13.0,
+        "mean_log1p_cites_adjusted": 2.618,
+        "ci95_adjusted": [
+          2.55,
+          2.686
+        ],
+        "share_zero_cites": 0.049,
+        "share_top_decile_cites_in_quarter": 0.035
+      },
+      {
+        "decile": 5,
+        "n": 1134,
+        "upvotes_min": 11,
+        "upvotes_max": 14,
+        "median_upvotes": 12.0,
+        "mean_log1p_cites": 2.871,
+        "ci95": [
+          2.791,
+          2.951
+        ],
+        "geo_mean_1p_cites": 17.7,
+        "median_cites": 16.0,
+        "mean_log1p_cites_adjusted": 2.747,
+        "ci95_adjusted": [
+          2.68,
+          2.813
+        ],
+        "share_zero_cites": 0.035,
+        "share_top_decile_cites_in_quarter": 0.052
+      },
+      {
+        "decile": 6,
+        "n": 1134,
+        "upvotes_min": 14,
+        "upvotes_max": 18,
+        "median_upvotes": 16.0,
+        "mean_log1p_cites": 3.045,
+        "ci95": [
+          2.963,
+          3.126
+        ],
+        "geo_mean_1p_cites": 21.0,
+        "median_cites": 19.0,
+        "mean_log1p_cites_adjusted": 2.915,
+        "ci95_adjusted": [
+          2.848,
+          2.982
+        ],
+        "share_zero_cites": 0.024,
+        "share_top_decile_cites_in_quarter": 0.073
+      },
+      {
+        "decile": 7,
+        "n": 1135,
+        "upvotes_min": 18,
+        "upvotes_max": 24,
+        "median_upvotes": 21.0,
+        "mean_log1p_cites": 3.161,
+        "ci95": [
+          3.079,
+          3.242
+        ],
+        "geo_mean_1p_cites": 23.6,
+        "median_cites": 22.0,
+        "mean_log1p_cites_adjusted": 3.068,
+        "ci95_adjusted": [
+          3.003,
+          3.133
+        ],
+        "share_zero_cites": 0.019,
+        "share_top_decile_cites_in_quarter": 0.086
+      },
+      {
+        "decile": 8,
+        "n": 1134,
+        "upvotes_min": 24,
+        "upvotes_max": 33,
+        "median_upvotes": 28.0,
+        "mean_log1p_cites": 3.363,
+        "ci95": [
+          3.279,
+          3.448
+        ],
+        "geo_mean_1p_cites": 28.9,
+        "median_cites": 26.0,
+        "mean_log1p_cites_adjusted": 3.295,
+        "ci95_adjusted": [
+          3.23,
+          3.361
+        ],
+        "share_zero_cites": 0.019,
+        "share_top_decile_cites_in_quarter": 0.131
+      },
+      {
+        "decile": 9,
+        "n": 1134,
+        "upvotes_min": 33,
+        "upvotes_max": 52,
+        "median_upvotes": 40.0,
+        "mean_log1p_cites": 3.54,
+        "ci95": [
+          3.45,
+          3.631
+        ],
+        "geo_mean_1p_cites": 34.5,
+        "median_cites": 33.0,
+        "mean_log1p_cites_adjusted": 3.536,
+        "ci95_adjusted": [
+          3.465,
+          3.606
+        ],
+        "share_zero_cites": 0.02,
+        "share_top_decile_cites_in_quarter": 0.207
+      },
+      {
+        "decile": 10,
+        "n": 1135,
+        "upvotes_min": 52,
+        "upvotes_max": 665,
+        "median_upvotes": 76.0,
+        "mean_log1p_cites": 3.929,
+        "ci95": [
+          3.83,
+          4.027
+        ],
+        "geo_mean_1p_cites": 50.8,
+        "median_cites": 45.0,
+        "mean_log1p_cites_adjusted": 4.047,
+        "ci95_adjusted": [
+          3.966,
+          4.128
+        ],
+        "share_zero_cites": 0.01,
+        "share_top_decile_cites_in_quarter": 0.36
+      }
+    ],
+    "spearman_upvotes_cites": 0.371
+  },
+  "selection_adjustment": {
+    "design": {
+      "treated": "upvotes >= 22 (top tertile)",
+      "control": "upvotes <= 9 (bottom tertile)",
+      "treated_threshold": 22.0,
+      "control_threshold": 9.0,
+      "middle_tertile_dropped": true,
+      "n_treated": 3826,
+      "n_control": 3953,
+      "outcome": "log1p citations",
+      "ps_model": "logit(treat) ~ Tier B prior papers (log1p) + years active + Tier B-missing flag + log age + subfield_kw dummies + release_month dummies",
+      "matching": "1:1 nearest neighbour on logit(PS), with replacement, caliper 0.2 SD of logit(PS)",
+      "ipw": "ATT weights ps/(1-ps) for controls, stabilised by P(T=0)/P(T=1), trimmed at the 99th pct, normalised (Hajek)",
+      "cem": "exact cells release_month \u00d7 subfield_kw \u00d7 Tier B prior-papers quintile (missing = own bin)",
+      "bootstrap": "300 paper-level reps stratified by treatment; PS refit + rematch each rep"
+    },
+    "naive_gap": {
+      "log_pts": 1.295,
+      "ci95": [
+        1.2387,
+        1.3684
+      ],
+      "ratio": 3.65
+    },
+    "ps_matching": {
+      "att_log_pts": 1.277,
+      "ci95": [
+        1.1854,
+        1.3674
+      ],
+      "ratio": 3.58,
+      "n_treated_matched": 3826,
+      "share_treated_within_caliper": 1.0,
+      "n_unique_controls_used": 1923
+    },
+    "ipw": {
+      "att_log_pts": 1.264,
+      "ci95": [
+        1.2082,
+        1.3294
+      ],
+      "ratio": 3.54,
+      "ess_controls": 2522.3,
+      "max_control_weight": 4.3
+    },
+    "cem": {
+      "att_log_pts": 1.241,
+      "ci95": [
+        1.1512,
+        1.2937
+      ],
+      "ratio": 3.46,
+      "n_treated_matched": 3170,
+      "n_controls_matched": 3109,
+      "n_cells": 832,
+      "share_treated_matched": 0.829
+    },
+    "variant_ps_with_hindex_LEAKY": {
+      "note": "PS also includes log1p max/last author h-index measured 2026-06-11 (as the June-11 v2 analysis did). h-index is downstream of citations, so this over-adjusts; shown to explain the gap to v2's 1.15 / 0.75.",
+      "ps_matching_att": 1.143,
+      "ps_matching_ci95": [
+        1.0444,
+        1.2125
+      ],
+      "ipw_att": 1.132,
+      "ipw_ci95": [
+        1.0723,
+        1.1889
+      ]
+    },
+    "balance": [
+      {
+        "covariate": "tierB_prior",
+        "smd_before": -0.131,
+        "smd_after_matching": 0.003,
+        "smd_after_ipw": 0.001
+      },
+      {
+        "covariate": "tierB_yrs",
+        "smd_before": -0.219,
+        "smd_after_matching": 0.013,
+        "smd_after_ipw": -0.023
+      },
+      {
+        "covariate": "log_age",
+        "smd_before": 0.028,
+        "smd_after_matching": 0.063,
+        "smd_after_ipw": 0.008
+      },
+      {
+        "covariate": "tierB_miss",
+        "smd_before": 0.018,
+        "smd_after_matching": 0.012,
+        "smd_after_ipw": 0.001
+      },
+      {
+        "covariate": "sf_Agents",
+        "smd_before": 0.082,
+        "smd_after_matching": -0.006,
+        "smd_after_ipw": -0.006
+      },
+      {
+        "covariate": "sf_Benchmark/Eval",
+        "smd_before": -0.12,
+        "smd_after_matching": 0.048,
+        "smd_after_ipw": 0.011
+      },
+      {
+        "covariate": "sf_Code/Math",
+        "smd_before": -0.069,
+        "smd_after_matching": 0.007,
+        "smd_after_ipw": 0.01
+      },
+      {
+        "covariate": "sf_Efficiency/Systems",
+        "smd_before": -0.024,
+        "smd_after_matching": 0.0,
+        "smd_after_ipw": 0.013
+      },
+      {
+        "covariate": "sf_LLM-core",
+        "smd_before": -0.131,
+        "smd_after_matching": 0.029,
+        "smd_after_ipw": 0.009
+      },
+      {
+        "covariate": "sf_Multimodal",
+        "smd_before": 0.18,
+        "smd_after_matching": 0.0,
+        "smd_after_ipw": 0.026
+      },
+      {
+        "covariate": "sf_Other",
+        "smd_before": -0.075,
+        "smd_after_matching": -0.01,
+        "smd_after_ipw": 0.001
+      },
+      {
+        "covariate": "sf_RAG/Retrieval",
+        "smd_before": -0.012,
+        "smd_after_matching": 0.022,
+        "smd_after_ipw": -0.004
+      },
+      {
+        "covariate": "sf_Reasoning/RL",
+        "smd_before": 0.109,
+        "smd_after_matching": -0.024,
+        "smd_after_ipw": 0.007
+      },
+      {
+        "covariate": "sf_Robotics/Embodied",
+        "smd_before": -0.059,
+        "smd_after_matching": 0.0,
+        "smd_after_ipw": -0.002
+      },
+      {
+        "covariate": "sf_Speech/Audio",
+        "smd_before": -0.098,
+        "smd_after_matching": -0.009,
+        "smd_after_ipw": -0.005
+      },
+      {
+        "covariate": "sf_Vision-Perception",
+        "smd_before": -0.18,
+        "smd_after_matching": 0.014,
+        "smd_after_ipw": 0.004
+      },
+      {
+        "covariate": "sf_Vision/Image-Gen",
+        "smd_before": 0.053,
+        "smd_after_matching": -0.032,
+        "smd_after_ipw": -0.05
+      }
+    ],
+    "balance_month_dummies_max_abs_smd": {
+      "before": 0.362,
+      "after_matching": 0.08,
+      "after_ipw": 0.053
+    },
+    "balance_max_abs_smd_all_listed": {
+      "before": 0.219,
+      "after_matching": 0.063,
+      "after_ipw": 0.05
+    }
+  },
+  "over_under": {
+    "definition": "attention residual = log1p upvotes minus OLS fit on log age + subfield_kw FE + release_month FE; impact residual = same for log1p citations; percentile ranks over all 11,344 papers. overrated = attention pct >= 2/3 AND impact pct <= 1/3; underrated = attention pct <= 1/3 AND impact pct >= 2/3; else neutral.",
+    "resid_model_r2": {
+      "attention": 0.114,
+      "impact": 0.321
+    },
+    "counts": {
+      "neutral": 10151,
+      "overrated": 632,
+      "underrated": 561
+    },
+    "spearman_attention_impact_resid": 0.43,
+    "logit_drivers": {
+      "overrated_vs_rest": {
+        "n": 11344,
+        "n_events": 632,
+        "pseudo_r2": 0.022,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features are 2026-measured (LEAKY, Matthew effect on the outcome side)",
+        "rows": [
+          {
+            "feature": "log_max_h (per SD)",
+            "or": 0.671,
+            "or_ci95": [
+              0.576,
+              0.782
+            ],
+            "beta": -0.399,
+            "se": 0.078,
+            "p": 0.0
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 1.13,
+            "or_ci95": [
+              1.037,
+              1.232
+            ],
+            "beta": 0.122,
+            "se": 0.044,
+            "p": 0.0055
+          },
+          {
+            "feature": "has_github",
+            "or": 0.787,
+            "or_ci95": [
+              0.662,
+              0.936
+            ],
+            "beta": -0.239,
+            "se": 0.089,
+            "p": 0.0068
+          },
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 1.211,
+            "or_ci95": [
+              1.045,
+              1.403
+            ],
+            "beta": 0.191,
+            "se": 0.075,
+            "p": 0.011
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.41,
+            "or_ci95": [
+              1.076,
+              1.846
+            ],
+            "beta": 0.343,
+            "se": 0.138,
+            "p": 0.0126
+          },
+          {
+            "feature": "kw_survey",
+            "or": 0.283,
+            "or_ci95": [
+              0.086,
+              0.933
+            ],
+            "beta": -1.263,
+            "se": 0.609,
+            "p": 0.0381
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 0.951,
+            "or_ci95": [
+              0.894,
+              1.012
+            ],
+            "beta": -0.05,
+            "se": 0.032,
+            "p": 0.1116
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.075,
+            "or_ci95": [
+              0.977,
+              1.183
+            ],
+            "beta": 0.072,
+            "se": 0.049,
+            "p": 0.1376
+          },
+          {
+            "feature": "log_last_h (per SD)",
+            "or": 0.894,
+            "or_ci95": [
+              0.768,
+              1.041
+            ],
+            "beta": -0.112,
+            "se": 0.077,
+            "p": 0.1492
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.367,
+            "or_ci95": [
+              0.89,
+              2.099
+            ],
+            "beta": 0.312,
+            "se": 0.219,
+            "p": 0.1535
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 0.822,
+            "or_ci95": [
+              0.603,
+              1.12
+            ],
+            "beta": -0.196,
+            "se": 0.158,
+            "p": 0.2137
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 0.896,
+            "or_ci95": [
+              0.751,
+              1.068
+            ],
+            "beta": -0.11,
+            "se": 0.09,
+            "p": 0.2195
+          },
+          {
+            "feature": "subfield Other (vs Vision/Image-Gen)",
+            "or": 0.295,
+            "or_ci95": [
+              0.035,
+              2.482
+            ],
+            "beta": -1.22,
+            "se": 1.086,
+            "p": 0.2614
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 1.299,
+            "or_ci95": [
+              0.782,
+              2.156
+            ],
+            "beta": 0.261,
+            "se": 0.259,
+            "p": 0.3126
+          },
+          {
+            "feature": "kw_agent",
+            "or": 0.86,
+            "or_ci95": [
+              0.615,
+              1.203
+            ],
+            "beta": -0.15,
+            "se": 0.171,
+            "p": 0.3797
+          },
+          {
+            "feature": "kw_rl",
+            "or": 0.678,
+            "or_ci95": [
+              0.24,
+              1.911
+            ],
+            "beta": -0.389,
+            "se": 0.529,
+            "p": 0.4618
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 0.734,
+            "or_ci95": [
+              0.309,
+              1.745
+            ],
+            "beta": -0.309,
+            "se": 0.442,
+            "p": 0.4843
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 1.104,
+            "or_ci95": [
+              0.808,
+              1.508
+            ],
+            "beta": 0.098,
+            "se": 0.159,
+            "p": 0.5363
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 0.865,
+            "or_ci95": [
+              0.535,
+              1.397
+            ],
+            "beta": -0.145,
+            "se": 0.245,
+            "p": 0.552
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 0.974,
+            "or_ci95": [
+              0.89,
+              1.065
+            ],
+            "beta": -0.027,
+            "se": 0.046,
+            "p": 0.5583
+          },
+          {
+            "feature": "kw_llm",
+            "or": 0.924,
+            "or_ci95": [
+              0.661,
+              1.291
+            ],
+            "beta": -0.079,
+            "se": 0.171,
+            "p": 0.6433
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.127,
+            "or_ci95": [
+              0.677,
+              1.875
+            ],
+            "beta": 0.119,
+            "se": 0.26,
+            "p": 0.6462
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.096,
+            "or_ci95": [
+              0.739,
+              1.627
+            ],
+            "beta": 0.092,
+            "se": 0.201,
+            "p": 0.6486
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 0.921,
+            "or_ci95": [
+              0.646,
+              1.313
+            ],
+            "beta": -0.082,
+            "se": 0.181,
+            "p": 0.6495
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 0.845,
+            "or_ci95": [
+              0.312,
+              2.29
+            ],
+            "beta": -0.169,
+            "se": 0.509,
+            "p": 0.7404
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 0.946,
+            "or_ci95": [
+              0.671,
+              1.334
+            ],
+            "beta": -0.055,
+            "se": 0.175,
+            "p": 0.7531
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 0.954,
+            "or_ci95": [
+              0.635,
+              1.434
+            ],
+            "beta": -0.047,
+            "se": 0.208,
+            "p": 0.8223
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 1.03,
+            "or_ci95": [
+              0.787,
+              1.348
+            ],
+            "beta": 0.029,
+            "se": 0.137,
+            "p": 0.8322
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 1.042,
+            "or_ci95": [
+              0.675,
+              1.607
+            ],
+            "beta": 0.041,
+            "se": 0.221,
+            "p": 0.8527
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.035,
+            "or_ci95": [
+              0.646,
+              1.661
+            ],
+            "beta": 0.035,
+            "se": 0.241,
+            "p": 0.8849
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 1.007,
+            "or_ci95": [
+              0.661,
+              1.534
+            ],
+            "beta": 0.007,
+            "se": 0.215,
+            "p": 0.9736
+          }
+        ]
+      },
+      "underrated_vs_rest": {
+        "n": 11344,
+        "n_events": 561,
+        "pseudo_r2": 0.017,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features are 2026-measured (LEAKY, Matthew effect on the outcome side)",
+        "rows": [
+          {
+            "feature": "log_max_h (per SD)",
+            "or": 1.221,
+            "or_ci95": [
+              1.064,
+              1.402
+            ],
+            "beta": 0.2,
+            "se": 0.07,
+            "p": 0.0045
+          },
+          {
+            "feature": "kw_agent",
+            "or": 1.648,
+            "or_ci95": [
+              1.146,
+              2.369
+            ],
+            "beta": 0.5,
+            "se": 0.185,
+            "p": 0.007
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 1.106,
+            "or_ci95": [
+              1.022,
+              1.198
+            ],
+            "beta": 0.101,
+            "se": 0.041,
+            "p": 0.0129
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 0.689,
+            "or_ci95": [
+              0.511,
+              0.928
+            ],
+            "beta": -0.373,
+            "se": 0.152,
+            "p": 0.0142
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 1.492,
+            "or_ci95": [
+              1.025,
+              2.171
+            ],
+            "beta": 0.4,
+            "se": 0.191,
+            "p": 0.0366
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 0.359,
+            "or_ci95": [
+              0.133,
+              0.971
+            ],
+            "beta": -1.023,
+            "se": 0.507,
+            "p": 0.0436
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 1.125,
+            "or_ci95": [
+              0.994,
+              1.274
+            ],
+            "beta": 0.118,
+            "se": 0.063,
+            "p": 0.0632
+          },
+          {
+            "feature": "kw_rl",
+            "or": 1.636,
+            "or_ci95": [
+              0.903,
+              2.964
+            ],
+            "beta": 0.492,
+            "se": 0.303,
+            "p": 0.1043
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.41,
+            "or_ci95": [
+              0.894,
+              2.225
+            ],
+            "beta": 0.344,
+            "se": 0.233,
+            "p": 0.1395
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 0.95,
+            "or_ci95": [
+              0.872,
+              1.035
+            ],
+            "beta": -0.051,
+            "se": 0.044,
+            "p": 0.2426
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 0.725,
+            "or_ci95": [
+              0.415,
+              1.269
+            ],
+            "beta": -0.321,
+            "se": 0.285,
+            "p": 0.2604
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 1.254,
+            "or_ci95": [
+              0.844,
+              1.864
+            ],
+            "beta": 0.226,
+            "se": 0.202,
+            "p": 0.2633
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 1.244,
+            "or_ci95": [
+              0.836,
+              1.85
+            ],
+            "beta": 0.218,
+            "se": 0.203,
+            "p": 0.282
+          },
+          {
+            "feature": "log_last_h (per SD)",
+            "or": 1.081,
+            "or_ci95": [
+              0.912,
+              1.283
+            ],
+            "beta": 0.078,
+            "se": 0.087,
+            "p": 0.3695
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.039,
+            "or_ci95": [
+              0.951,
+              1.134
+            ],
+            "beta": 0.038,
+            "se": 0.045,
+            "p": 0.3998
+          },
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 0.934,
+            "or_ci95": [
+              0.788,
+              1.108
+            ],
+            "beta": -0.068,
+            "se": 0.087,
+            "p": 0.4335
+          },
+          {
+            "feature": "kw_llm",
+            "or": 1.101,
+            "or_ci95": [
+              0.836,
+              1.451
+            ],
+            "beta": 0.096,
+            "se": 0.141,
+            "p": 0.4929
+          },
+          {
+            "feature": "has_github",
+            "or": 1.068,
+            "or_ci95": [
+              0.883,
+              1.293
+            ],
+            "beta": 0.066,
+            "se": 0.097,
+            "p": 0.4968
+          },
+          {
+            "feature": "kw_survey",
+            "or": 1.371,
+            "or_ci95": [
+              0.462,
+              4.075
+            ],
+            "beta": 0.316,
+            "se": 0.556,
+            "p": 0.5697
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.086,
+            "or_ci95": [
+              0.813,
+              1.452
+            ],
+            "beta": 0.083,
+            "se": 0.148,
+            "p": 0.5767
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.113,
+            "or_ci95": [
+              0.752,
+              1.646
+            ],
+            "beta": 0.107,
+            "se": 0.2,
+            "p": 0.5934
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.177,
+            "or_ci95": [
+              0.6,
+              2.31
+            ],
+            "beta": 0.163,
+            "se": 0.344,
+            "p": 0.635
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 1.204,
+            "or_ci95": [
+              0.557,
+              2.6
+            ],
+            "beta": 0.185,
+            "se": 0.393,
+            "p": 0.637
+          },
+          {
+            "feature": "subfield Other (vs Vision/Image-Gen)",
+            "or": 1.303,
+            "or_ci95": [
+              0.423,
+              4.017
+            ],
+            "beta": 0.265,
+            "se": 0.574,
+            "p": 0.6449
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 0.921,
+            "or_ci95": [
+              0.6,
+              1.414
+            ],
+            "beta": -0.083,
+            "se": 0.219,
+            "p": 0.7058
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 0.921,
+            "or_ci95": [
+              0.541,
+              1.569
+            ],
+            "beta": -0.082,
+            "se": 0.272,
+            "p": 0.7628
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 0.963,
+            "or_ci95": [
+              0.681,
+              1.362
+            ],
+            "beta": -0.037,
+            "se": 0.177,
+            "p": 0.8324
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.048,
+            "or_ci95": [
+              0.661,
+              1.663
+            ],
+            "beta": 0.047,
+            "se": 0.236,
+            "p": 0.842
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 0.972,
+            "or_ci95": [
+              0.675,
+              1.399
+            ],
+            "beta": -0.029,
+            "se": 0.186,
+            "p": 0.8767
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 1.029,
+            "or_ci95": [
+              0.691,
+              1.533
+            ],
+            "beta": 0.029,
+            "se": 0.203,
+            "p": 0.8864
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 1.001,
+            "or_ci95": [
+              0.807,
+              1.242
+            ],
+            "beta": 0.001,
+            "se": 0.11,
+            "p": 0.9925
+          }
+        ]
+      },
+      "overrated_vs_underrated": {
+        "n": 1193,
+        "n_events": 632,
+        "pseudo_r2": 0.076,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features are 2026-measured (LEAKY, Matthew effect on the outcome side)",
+        "rows": [
+          {
+            "feature": "log_max_h (per SD)",
+            "or": 0.57,
+            "or_ci95": [
+              0.476,
+              0.683
+            ],
+            "beta": -0.562,
+            "se": 0.092,
+            "p": 0.0
+          },
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 1.303,
+            "or_ci95": [
+              1.073,
+              1.581
+            ],
+            "beta": 0.264,
+            "se": 0.099,
+            "p": 0.0074
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 0.84,
+            "or_ci95": [
+              0.726,
+              0.972
+            ],
+            "beta": -0.174,
+            "se": 0.074,
+            "p": 0.0189
+          },
+          {
+            "feature": "kw_survey",
+            "or": 0.222,
+            "or_ci95": [
+              0.057,
+              0.869
+            ],
+            "beta": -1.503,
+            "se": 0.695,
+            "p": 0.0306
+          },
+          {
+            "feature": "kw_agent",
+            "or": 0.508,
+            "or_ci95": [
+              0.27,
+              0.955
+            ],
+            "beta": -0.677,
+            "se": 0.322,
+            "p": 0.0356
+          },
+          {
+            "feature": "log_last_h (per SD)",
+            "or": 0.81,
+            "or_ci95": [
+              0.664,
+              0.988
+            ],
+            "beta": -0.211,
+            "se": 0.101,
+            "p": 0.0374
+          },
+          {
+            "feature": "has_github",
+            "or": 0.756,
+            "or_ci95": [
+              0.572,
+              0.999
+            ],
+            "beta": -0.28,
+            "se": 0.142,
+            "p": 0.0488
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 1.769,
+            "or_ci95": [
+              0.942,
+              3.322
+            ],
+            "beta": 0.57,
+            "se": 0.321,
+            "p": 0.0761
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 1.429,
+            "or_ci95": [
+              0.946,
+              2.159
+            ],
+            "beta": 0.357,
+            "se": 0.211,
+            "p": 0.0901
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 1.133,
+            "or_ci95": [
+              0.98,
+              1.31
+            ],
+            "beta": 0.125,
+            "se": 0.074,
+            "p": 0.0922
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 0.91,
+            "or_ci95": [
+              0.806,
+              1.026
+            ],
+            "beta": -0.095,
+            "se": 0.061,
+            "p": 0.1231
+          },
+          {
+            "feature": "kw_rl",
+            "or": 0.41,
+            "or_ci95": [
+              0.113,
+              1.494
+            ],
+            "beta": -0.891,
+            "se": 0.66,
+            "p": 0.1767
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 0.716,
+            "or_ci95": [
+              0.429,
+              1.194
+            ],
+            "beta": -0.334,
+            "se": 0.261,
+            "p": 0.2006
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 1.505,
+            "or_ci95": [
+              0.731,
+              3.096
+            ],
+            "beta": 0.409,
+            "se": 0.368,
+            "p": 0.2669
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.254,
+            "or_ci95": [
+              0.812,
+              1.937
+            ],
+            "beta": 0.226,
+            "se": 0.222,
+            "p": 0.3071
+          },
+          {
+            "feature": "kw_llm",
+            "or": 0.803,
+            "or_ci95": [
+              0.525,
+              1.228
+            ],
+            "beta": -0.22,
+            "se": 0.217,
+            "p": 0.3107
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 1.921,
+            "or_ci95": [
+              0.48,
+              7.694
+            ],
+            "beta": 0.653,
+            "se": 0.708,
+            "p": 0.3563
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 0.888,
+            "or_ci95": [
+              0.68,
+              1.159
+            ],
+            "beta": -0.119,
+            "se": 0.136,
+            "p": 0.3818
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 0.826,
+            "or_ci95": [
+              0.501,
+              1.362
+            ],
+            "beta": -0.191,
+            "se": 0.255,
+            "p": 0.4535
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 0.856,
+            "or_ci95": [
+              0.563,
+              1.301
+            ],
+            "beta": -0.155,
+            "se": 0.214,
+            "p": 0.4675
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 1.227,
+            "or_ci95": [
+              0.505,
+              2.981
+            ],
+            "beta": 0.205,
+            "se": 0.453,
+            "p": 0.6509
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 1.098,
+            "or_ci95": [
+              0.719,
+              1.675
+            ],
+            "beta": 0.093,
+            "se": 0.216,
+            "p": 0.6651
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.119,
+            "or_ci95": [
+              0.558,
+              2.245
+            ],
+            "beta": 0.113,
+            "se": 0.355,
+            "p": 0.7507
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.013,
+            "or_ci95": [
+              0.924,
+              1.111
+            ],
+            "beta": 0.013,
+            "se": 0.047,
+            "p": 0.7772
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 0.834,
+            "or_ci95": [
+              0.204,
+              3.402
+            ],
+            "beta": -0.182,
+            "se": 0.718,
+            "p": 0.7999
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.119,
+            "or_ci95": [
+              0.439,
+              2.851
+            ],
+            "beta": 0.112,
+            "se": 0.477,
+            "p": 0.8145
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 0.931,
+            "or_ci95": [
+              0.503,
+              1.721
+            ],
+            "beta": -0.072,
+            "se": 0.314,
+            "p": 0.8188
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.072,
+            "or_ci95": [
+              0.529,
+              2.17
+            ],
+            "beta": 0.069,
+            "se": 0.36,
+            "p": 0.8479
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.035,
+            "or_ci95": [
+              0.625,
+              1.714
+            ],
+            "beta": 0.035,
+            "se": 0.257,
+            "p": 0.8922
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 0.99,
+            "or_ci95": [
+              0.542,
+              1.808
+            ],
+            "beta": -0.011,
+            "se": 0.307,
+            "p": 0.9726
+          }
+        ]
+      },
+      "overrated_vs_rest_NOLEAK": {
+        "n": 11344,
+        "n_events": 632,
+        "pseudo_r2": 0.01,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features EXCLUDED (leakage-free driver model)",
+        "rows": [
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 0.868,
+            "or_ci95": [
+              0.797,
+              0.946
+            ],
+            "beta": -0.141,
+            "se": 0.044,
+            "p": 0.0012
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.409,
+            "or_ci95": [
+              1.077,
+              1.843
+            ],
+            "beta": 0.343,
+            "se": 0.137,
+            "p": 0.0124
+          },
+          {
+            "feature": "has_github",
+            "or": 0.803,
+            "or_ci95": [
+              0.675,
+              0.956
+            ],
+            "beta": -0.219,
+            "se": 0.089,
+            "p": 0.0136
+          },
+          {
+            "feature": "kw_survey",
+            "or": 0.296,
+            "or_ci95": [
+              0.09,
+              0.976
+            ],
+            "beta": -1.216,
+            "se": 0.608,
+            "p": 0.0455
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.429,
+            "or_ci95": [
+              0.931,
+              2.194
+            ],
+            "beta": 0.357,
+            "se": 0.219,
+            "p": 0.1028
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.085,
+            "or_ci95": [
+              0.983,
+              1.198
+            ],
+            "beta": 0.082,
+            "se": 0.05,
+            "p": 0.1055
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 0.949,
+            "or_ci95": [
+              0.89,
+              1.011
+            ],
+            "beta": -0.053,
+            "se": 0.033,
+            "p": 0.1068
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 0.798,
+            "or_ci95": [
+              0.584,
+              1.091
+            ],
+            "beta": -0.225,
+            "se": 0.159,
+            "p": 0.1571
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 0.89,
+            "or_ci95": [
+              0.748,
+              1.058
+            ],
+            "beta": -0.117,
+            "se": 0.088,
+            "p": 0.1864
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 1.373,
+            "or_ci95": [
+              0.833,
+              2.261
+            ],
+            "beta": 0.317,
+            "se": 0.255,
+            "p": 0.2137
+          },
+          {
+            "feature": "subfield Other (vs Vision/Image-Gen)",
+            "or": 0.318,
+            "or_ci95": [
+              0.04,
+              2.552
+            ],
+            "beta": -1.147,
+            "se": 1.063,
+            "p": 0.2807
+          },
+          {
+            "feature": "kw_rl",
+            "or": 0.647,
+            "or_ci95": [
+              0.226,
+              1.853
+            ],
+            "beta": -0.435,
+            "se": 0.536,
+            "p": 0.4177
+          },
+          {
+            "feature": "kw_agent",
+            "or": 0.878,
+            "or_ci95": [
+              0.626,
+              1.232
+            ],
+            "beta": -0.13,
+            "se": 0.173,
+            "p": 0.4515
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 0.757,
+            "or_ci95": [
+              0.321,
+              1.784
+            ],
+            "beta": -0.278,
+            "se": 0.437,
+            "p": 0.5245
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.133,
+            "or_ci95": [
+              0.76,
+              1.688
+            ],
+            "beta": 0.124,
+            "se": 0.204,
+            "p": 0.5412
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 0.98,
+            "or_ci95": [
+              0.914,
+              1.051
+            ],
+            "beta": -0.02,
+            "se": 0.036,
+            "p": 0.5676
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 1.081,
+            "or_ci95": [
+              0.824,
+              1.418
+            ],
+            "beta": 0.078,
+            "se": 0.138,
+            "p": 0.573
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.148,
+            "or_ci95": [
+              0.699,
+              1.887
+            ],
+            "beta": 0.138,
+            "se": 0.254,
+            "p": 0.5859
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 1.08,
+            "or_ci95": [
+              0.795,
+              1.468
+            ],
+            "beta": 0.077,
+            "se": 0.157,
+            "p": 0.6217
+          },
+          {
+            "feature": "kw_llm",
+            "or": 0.929,
+            "or_ci95": [
+              0.665,
+              1.298
+            ],
+            "beta": -0.074,
+            "se": 0.171,
+            "p": 0.665
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 0.811,
+            "or_ci95": [
+              0.295,
+              2.229
+            ],
+            "beta": -0.209,
+            "se": 0.516,
+            "p": 0.6848
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 0.946,
+            "or_ci95": [
+              0.657,
+              1.362
+            ],
+            "beta": -0.055,
+            "se": 0.186,
+            "p": 0.7654
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 1.068,
+            "or_ci95": [
+              0.69,
+              1.655
+            ],
+            "beta": 0.066,
+            "se": 0.223,
+            "p": 0.7669
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.071,
+            "or_ci95": [
+              0.672,
+              1.707
+            ],
+            "beta": 0.069,
+            "se": 0.238,
+            "p": 0.7731
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 0.939,
+            "or_ci95": [
+              0.571,
+              1.544
+            ],
+            "beta": -0.063,
+            "se": 0.254,
+            "p": 0.8038
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 0.956,
+            "or_ci95": [
+              0.626,
+              1.46
+            ],
+            "beta": -0.045,
+            "se": 0.216,
+            "p": 0.8353
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 0.968,
+            "or_ci95": [
+              0.687,
+              1.364
+            ],
+            "beta": -0.032,
+            "se": 0.175,
+            "p": 0.8541
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 0.997,
+            "or_ci95": [
+              0.91,
+              1.093
+            ],
+            "beta": -0.003,
+            "se": 0.047,
+            "p": 0.9499
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 1.005,
+            "or_ci95": [
+              0.669,
+              1.509
+            ],
+            "beta": 0.005,
+            "se": 0.207,
+            "p": 0.9806
+          }
+        ]
+      },
+      "underrated_vs_rest_NOLEAK": {
+        "n": 11344,
+        "n_events": 561,
+        "pseudo_r2": 0.014,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features EXCLUDED (leakage-free driver model)",
+        "rows": [
+          {
+            "feature": "kw_agent",
+            "or": 1.619,
+            "or_ci95": [
+              1.124,
+              2.332
+            ],
+            "beta": 0.482,
+            "se": 0.186,
+            "p": 0.0096
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 0.676,
+            "or_ci95": [
+              0.5,
+              0.915
+            ],
+            "beta": -0.391,
+            "se": 0.154,
+            "p": 0.0113
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 1.091,
+            "or_ci95": [
+              1.01,
+              1.178
+            ],
+            "beta": 0.087,
+            "se": 0.039,
+            "p": 0.0276
+          },
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 1.115,
+            "or_ci95": [
+              1.01,
+              1.232
+            ],
+            "beta": 0.109,
+            "se": 0.051,
+            "p": 0.0313
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 0.354,
+            "or_ci95": [
+              0.131,
+              0.96
+            ],
+            "beta": -1.037,
+            "se": 0.508,
+            "p": 0.0412
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 1.462,
+            "or_ci95": [
+              1.008,
+              2.122
+            ],
+            "beta": 0.38,
+            "se": 0.19,
+            "p": 0.0454
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 1.122,
+            "or_ci95": [
+              0.992,
+              1.268
+            ],
+            "beta": 0.115,
+            "se": 0.063,
+            "p": 0.0675
+          },
+          {
+            "feature": "kw_rl",
+            "or": 1.677,
+            "or_ci95": [
+              0.925,
+              3.04
+            ],
+            "beta": 0.517,
+            "se": 0.304,
+            "p": 0.0886
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.383,
+            "or_ci95": [
+              0.881,
+              2.17
+            ],
+            "beta": 0.324,
+            "se": 0.23,
+            "p": 0.1587
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 1.275,
+            "or_ci95": [
+              0.858,
+              1.896
+            ],
+            "beta": 0.243,
+            "se": 0.202,
+            "p": 0.2294
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 1.244,
+            "or_ci95": [
+              0.842,
+              1.838
+            ],
+            "beta": 0.218,
+            "se": 0.199,
+            "p": 0.2731
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 0.736,
+            "or_ci95": [
+              0.418,
+              1.296
+            ],
+            "beta": -0.306,
+            "se": 0.289,
+            "p": 0.2885
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.04,
+            "or_ci95": [
+              0.954,
+              1.133
+            ],
+            "beta": 0.039,
+            "se": 0.044,
+            "p": 0.3731
+          },
+          {
+            "feature": "kw_llm",
+            "or": 1.094,
+            "or_ci95": [
+              0.835,
+              1.435
+            ],
+            "beta": 0.09,
+            "se": 0.138,
+            "p": 0.5139
+          },
+          {
+            "feature": "has_github",
+            "or": 1.055,
+            "or_ci95": [
+              0.872,
+              1.275
+            ],
+            "beta": 0.053,
+            "se": 0.097,
+            "p": 0.5834
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 1.235,
+            "or_ci95": [
+              0.564,
+              2.708
+            ],
+            "beta": 0.211,
+            "se": 0.4,
+            "p": 0.5976
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.108,
+            "or_ci95": [
+              0.75,
+              1.635
+            ],
+            "beta": 0.102,
+            "se": 0.199,
+            "p": 0.6074
+          },
+          {
+            "feature": "kw_survey",
+            "or": 1.323,
+            "or_ci95": [
+              0.45,
+              3.888
+            ],
+            "beta": 0.28,
+            "se": 0.55,
+            "p": 0.6113
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 1.017,
+            "or_ci95": [
+              0.95,
+              1.089
+            ],
+            "beta": 0.017,
+            "se": 0.035,
+            "p": 0.6226
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 0.903,
+            "or_ci95": [
+              0.589,
+              1.386
+            ],
+            "beta": -0.102,
+            "se": 0.218,
+            "p": 0.642
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.069,
+            "or_ci95": [
+              0.8,
+              1.429
+            ],
+            "beta": 0.067,
+            "se": 0.148,
+            "p": 0.653
+          },
+          {
+            "feature": "subfield Other (vs Vision/Image-Gen)",
+            "or": 1.283,
+            "or_ci95": [
+              0.421,
+              3.904
+            ],
+            "beta": 0.249,
+            "se": 0.568,
+            "p": 0.6611
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 0.888,
+            "or_ci95": [
+              0.522,
+              1.511
+            ],
+            "beta": -0.118,
+            "se": 0.271,
+            "p": 0.6622
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.142,
+            "or_ci95": [
+              0.581,
+              2.244
+            ],
+            "beta": 0.133,
+            "se": 0.345,
+            "p": 0.6997
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 0.941,
+            "or_ci95": [
+              0.668,
+              1.324
+            ],
+            "beta": -0.061,
+            "se": 0.174,
+            "p": 0.7262
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 0.946,
+            "or_ci95": [
+              0.661,
+              1.353
+            ],
+            "beta": -0.056,
+            "se": 0.183,
+            "p": 0.7613
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 1.044,
+            "or_ci95": [
+              0.697,
+              1.565
+            ],
+            "beta": 0.043,
+            "se": 0.206,
+            "p": 0.8335
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.046,
+            "or_ci95": [
+              0.661,
+              1.656
+            ],
+            "beta": 0.045,
+            "se": 0.234,
+            "p": 0.8463
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 1.005,
+            "or_ci95": [
+              0.809,
+              1.249
+            ],
+            "beta": 0.005,
+            "se": 0.111,
+            "p": 0.9636
+          }
+        ]
+      },
+      "overrated_vs_underrated_NOLEAK": {
+        "n": 1193,
+        "n_events": 632,
+        "pseudo_r2": 0.039,
+        "converged": true,
+        "note": "statsmodels Logit, cluster-robust by release_month; continuous features standardised (OR per SD); h-index features EXCLUDED (leakage-free driver model)",
+        "rows": [
+          {
+            "feature": "tierB_prior (per SD)",
+            "or": 0.788,
+            "or_ci95": [
+              0.692,
+              0.897
+            ],
+            "beta": -0.239,
+            "se": 0.066,
+            "p": 0.0003
+          },
+          {
+            "feature": "kw_survey",
+            "or": 0.201,
+            "or_ci95": [
+              0.054,
+              0.742
+            ],
+            "beta": -1.605,
+            "se": 0.667,
+            "p": 0.0161
+          },
+          {
+            "feature": "log_abs_chars (per SD)",
+            "or": 0.85,
+            "or_ci95": [
+              0.743,
+              0.971
+            ],
+            "beta": -0.163,
+            "se": 0.068,
+            "p": 0.0168
+          },
+          {
+            "feature": "kw_agent",
+            "or": 0.507,
+            "or_ci95": [
+              0.275,
+              0.934
+            ],
+            "beta": -0.68,
+            "se": 0.312,
+            "p": 0.0292
+          },
+          {
+            "feature": "has_github",
+            "or": 0.775,
+            "or_ci95": [
+              0.594,
+              1.012
+            ],
+            "beta": -0.254,
+            "se": 0.136,
+            "p": 0.0614
+          },
+          {
+            "feature": "kw_benchmark",
+            "or": 0.676,
+            "or_ci95": [
+              0.396,
+              1.155
+            ],
+            "beta": -0.391,
+            "se": 0.273,
+            "p": 0.152
+          },
+          {
+            "feature": "kw_reasoning",
+            "or": 1.368,
+            "or_ci95": [
+              0.873,
+              2.143
+            ],
+            "beta": 0.313,
+            "se": 0.229,
+            "p": 0.1716
+          },
+          {
+            "feature": "kw_rl",
+            "or": 0.402,
+            "or_ci95": [
+              0.106,
+              1.533
+            ],
+            "beta": -0.91,
+            "se": 0.682,
+            "p": 0.1822
+          },
+          {
+            "feature": "subfield Benchmark/Eval (vs Vision/Image-Gen)",
+            "or": 1.63,
+            "or_ci95": [
+              0.786,
+              3.382
+            ],
+            "beta": 0.489,
+            "se": 0.372,
+            "p": 0.1894
+          },
+          {
+            "feature": "kw_efficient",
+            "or": 1.328,
+            "or_ci95": [
+              0.852,
+              2.07
+            ],
+            "beta": 0.283,
+            "se": 0.227,
+            "p": 0.211
+          },
+          {
+            "feature": "title_n_words (per SD)",
+            "or": 0.929,
+            "or_ci95": [
+              0.826,
+              1.046
+            ],
+            "beta": -0.073,
+            "se": 0.06,
+            "p": 0.2229
+          },
+          {
+            "feature": "kw_multimodal",
+            "or": 1.433,
+            "or_ci95": [
+              0.759,
+              2.704
+            ],
+            "beta": 0.36,
+            "se": 0.324,
+            "p": 0.2669
+          },
+          {
+            "feature": "subfield Code/Math (vs Vision/Image-Gen)",
+            "or": 2.189,
+            "or_ci95": [
+              0.539,
+              8.888
+            ],
+            "beta": 0.783,
+            "se": 0.715,
+            "p": 0.2733
+          },
+          {
+            "feature": "kw_scaling",
+            "or": 0.807,
+            "or_ci95": [
+              0.504,
+              1.293
+            ],
+            "beta": -0.214,
+            "se": 0.24,
+            "p": 0.3736
+          },
+          {
+            "feature": "title_has_colon",
+            "or": 0.891,
+            "or_ci95": [
+              0.686,
+              1.156
+            ],
+            "beta": -0.115,
+            "se": 0.133,
+            "p": 0.3855
+          },
+          {
+            "feature": "subfield Multimodal (vs Vision/Image-Gen)",
+            "or": 1.198,
+            "or_ci95": [
+              0.792,
+              1.811
+            ],
+            "beta": 0.181,
+            "se": 0.211,
+            "p": 0.3921
+          },
+          {
+            "feature": "kw_llm",
+            "or": 0.842,
+            "or_ci95": [
+              0.562,
+              1.262
+            ],
+            "beta": -0.172,
+            "se": 0.206,
+            "p": 0.4053
+          },
+          {
+            "feature": "kw_diffusion",
+            "or": 0.854,
+            "or_ci95": [
+              0.561,
+              1.299
+            ],
+            "beta": -0.158,
+            "se": 0.214,
+            "p": 0.4603
+          },
+          {
+            "feature": "log_n_authors (per SD)",
+            "or": 0.969,
+            "or_ci95": [
+              0.865,
+              1.086
+            ],
+            "beta": -0.032,
+            "se": 0.058,
+            "p": 0.5866
+          },
+          {
+            "feature": "subfield Agents (vs Vision/Image-Gen)",
+            "or": 1.269,
+            "or_ci95": [
+              0.506,
+              3.184
+            ],
+            "beta": 0.238,
+            "se": 0.469,
+            "p": 0.6117
+          },
+          {
+            "feature": "tierB_yrs (per SD)",
+            "or": 1.021,
+            "or_ci95": [
+              0.928,
+              1.124
+            ],
+            "beta": 0.021,
+            "se": 0.049,
+            "p": 0.6655
+          },
+          {
+            "feature": "subfield RAG/Retrieval (vs Vision/Image-Gen)",
+            "or": 1.132,
+            "or_ci95": [
+              0.589,
+              2.176
+            ],
+            "beta": 0.124,
+            "se": 0.333,
+            "p": 0.7091
+          },
+          {
+            "feature": "subfield Robotics/Embodied (vs Vision/Image-Gen)",
+            "or": 0.774,
+            "or_ci95": [
+              0.189,
+              3.165
+            ],
+            "beta": -0.256,
+            "se": 0.718,
+            "p": 0.7216
+          },
+          {
+            "feature": "subfield Vision-Perception (vs Vision/Image-Gen)",
+            "or": 1.1,
+            "or_ci95": [
+              0.558,
+              2.169
+            ],
+            "beta": 0.095,
+            "se": 0.347,
+            "p": 0.7834
+          },
+          {
+            "feature": "subfield Reasoning/RL (vs Vision/Image-Gen)",
+            "or": 1.073,
+            "or_ci95": [
+              0.624,
+              1.848
+            ],
+            "beta": 0.071,
+            "se": 0.277,
+            "p": 0.7982
+          },
+          {
+            "feature": "subfield Efficiency/Systems (vs Vision/Image-Gen)",
+            "or": 1.052,
+            "or_ci95": [
+              0.574,
+              1.929
+            ],
+            "beta": 0.051,
+            "se": 0.309,
+            "p": 0.8685
+          },
+          {
+            "feature": "subfield Speech/Audio (vs Vision/Image-Gen)",
+            "or": 1.053,
+            "or_ci95": [
+              0.43,
+              2.578
+            ],
+            "beta": 0.052,
+            "se": 0.457,
+            "p": 0.9099
+          },
+          {
+            "feature": "subfield LLM-core (vs Vision/Image-Gen)",
+            "or": 0.97,
+            "or_ci95": [
+              0.512,
+              1.841
+            ],
+            "beta": -0.03,
+            "se": 0.327,
+            "p": 0.9268
+          }
+        ]
+      }
+    },
+    "prestige_asymmetry": {
+      "max_prior_papers_true_w99": {
+        "label": "Tier B max prior papers of first/last author (w99, leakage-free)",
+        "overrated": {
+          "median": 11.0,
+          "ci95": [
+            10.0,
+            12.0
+          ],
+          "n": 625
+        },
+        "underrated": {
+          "median": 14.0,
+          "ci95": [
+            13.0,
+            17.0
+          ],
+          "n": 556
+        },
+        "neutral": {
+          "median": 12.0,
+          "ci95": [
+            12.0,
+            13.0
+          ],
+          "n": 10065
+        },
+        "diff_median_over_minus_under": {
+          "est": -3.0,
+          "ci95": [
+            -6.0,
+            -1.0
+          ]
+        },
+        "mannwhitney_p_over_vs_under": 0.0001
+      },
+      "max_years_active": {
+        "label": "Tier B max years active before the paper",
+        "overrated": {
+          "median": 4.0,
+          "ci95": [
+            3.0,
+            4.0
+          ],
+          "n": 625
+        },
+        "underrated": {
+          "median": 5.0,
+          "ci95": [
+            4.0,
+            5.0
+          ],
+          "n": 556
+        },
+        "neutral": {
+          "median": 4.0,
+          "ci95": [
+            4.0,
+            4.0
+          ],
+          "n": 10049
+        },
+        "diff_median_over_minus_under": {
+          "est": -1.0,
+          "ci95": [
+            -2.0,
+            0.0
+          ]
+        },
+        "mannwhitney_p_over_vs_under": 0.0029
+      },
+      "max_hindex": {
+        "label": "max author h-index (2026-measured, LEAKY)",
+        "overrated": {
+          "median": 14.0,
+          "ci95": [
+            13.0,
+            16.0
+          ],
+          "n": 625
+        },
+        "underrated": {
+          "median": 20.0,
+          "ci95": [
+            18.5,
+            22.0
+          ],
+          "n": 556
+        },
+        "neutral": {
+          "median": 18.0,
+          "ci95": [
+            18.0,
+            19.0
+          ],
+          "n": 10071
+        },
+        "diff_median_over_minus_under": {
+          "est": -6.0,
+          "ci95": [
+            -8.0,
+            -4.0
+          ]
+        },
+        "mannwhitney_p_over_vs_under": 0.0
+      },
+      "last_author_hindex": {
+        "label": "last-author h-index (2026-measured, LEAKY)",
+        "overrated": {
+          "median": 7.0,
+          "ci95": [
+            6.0,
+            7.0
+          ],
+          "n": 625
+        },
+        "underrated": {
+          "median": 9.0,
+          "ci95": [
+            8.0,
+            10.0
+          ],
+          "n": 556
+        },
+        "neutral": {
+          "median": 8.0,
+          "ci95": [
+            8.0,
+            8.0
+          ],
+          "n": 10071
+        },
+        "diff_median_over_minus_under": {
+          "est": -2.0,
+          "ci95": [
+            -4.0,
+            -1.0
+          ]
+        },
+        "mannwhitney_p_over_vs_under": 0.0
+      }
+    },
+    "title_themes": {
+      "note": "TF-IDF (1-2 grams, min_df 5, english stop words) on TITLES only; L1 logistic overrated(1) vs underrated(0), balanced; 5-fold CV AUC reported as the (weak) separability of the two groups by title alone",
+      "n_overrated": 632,
+      "n_underrated": 561,
+      "vocab": 432,
+      "cv_auc_mean": 0.631,
+      "cv_auc_sd": 0.015,
+      "n_nonzero_terms": 201,
+      "overrated_terms": [
+        {
+          "term": "infinite",
+          "coef": 3.299
+        },
+        {
+          "term": "graph",
+          "coef": 3.297
+        },
+        {
+          "term": "need",
+          "coef": 3.206
+        },
+        {
+          "term": "technical report",
+          "coef": 3.134
+        },
+        {
+          "term": "approach",
+          "coef": 3.006
+        },
+        {
+          "term": "financial",
+          "coef": 2.465
+        },
+        {
+          "term": "arabic",
+          "coef": 2.362
+        },
+        {
+          "term": "efficiency",
+          "coef": 2.155
+        },
+        {
+          "term": "environment",
+          "coef": 2.109
+        },
+        {
+          "term": "personalized",
+          "coef": 1.997
+        },
+        {
+          "term": "better",
+          "coef": 1.795
+        },
+        {
+          "term": "multi agent",
+          "coef": 1.793
+        },
+        {
+          "term": "modal",
+          "coef": 1.787
+        },
+        {
+          "term": "head",
+          "coef": 1.701
+        },
+        {
+          "term": "capabilities",
+          "coef": 1.5
+        }
+      ],
+      "underrated_terms": [
+        {
+          "term": "manipulation",
+          "coef": -5.688
+        },
+        {
+          "term": "matching",
+          "coef": -4.05
+        },
+        {
+          "term": "gaussian",
+          "coef": -3.798
+        },
+        {
+          "term": "ai",
+          "coef": -3.6
+        },
+        {
+          "term": "software",
+          "coef": -3.537
+        },
+        {
+          "term": "tracking",
+          "coef": -3.35
+        },
+        {
+          "term": "systems",
+          "coef": -3.318
+        },
+        {
+          "term": "bench",
+          "coef": -3.316
+        },
+        {
+          "term": "discrete",
+          "coef": -3.205
+        },
+        {
+          "term": "prediction",
+          "coef": -2.977
+        },
+        {
+          "term": "r1",
+          "coef": -2.904
+        },
+        {
+          "term": "robot",
+          "coef": -2.762
+        },
+        {
+          "term": "agentic",
+          "coef": -2.684
+        },
+        {
+          "term": "spatial",
+          "coef": -2.617
+        },
+        {
+          "term": "world models",
+          "coef": -2.611
+        }
+      ]
+    },
+    "title_keyword_themes_secondary": {
+      "note": "same model on title + HF ai_keywords (secondary)",
+      "vocab": 861,
+      "cv_auc_mean": 0.662,
+      "cv_auc_sd": 0.015,
+      "overrated_terms": [
+        {
+          "term": "image diffusion",
+          "coef": 4.318
+        },
+        {
+          "term": "graph",
+          "coef": 4.204
+        },
+        {
+          "term": "report",
+          "coef": 3.982
+        },
+        {
+          "term": "complexity",
+          "coef": 3.792
+        },
+        {
+          "term": "group",
+          "coef": 3.742
+        },
+        {
+          "term": "need",
+          "coef": 3.74
+        },
+        {
+          "term": "structure",
+          "coef": 3.576
+        },
+        {
+          "term": "personalized",
+          "coef": 3.521
+        },
+        {
+          "term": "steps",
+          "coef": 3.368
+        },
+        {
+          "term": "caption",
+          "coef": 3.2
+        },
+        {
+          "term": "aware",
+          "coef": 2.881
+        },
+        {
+          "term": "image",
+          "coef": 2.768
+        },
+        {
+          "term": "bottleneck",
+          "coef": 2.652
+        },
+        {
+          "term": "single",
+          "coef": 2.566
+        },
+        {
+          "term": "pretrained",
+          "coef": 2.505
+        }
+      ],
+      "underrated_terms": [
+        {
+          "term": "hard",
+          "coef": -4.772
+        },
+        {
+          "term": "language action",
+          "coef": -4.359
+        },
+        {
+          "term": "metric",
+          "coef": -4.105
+        },
+        {
+          "term": "agentic",
+          "coef": -3.702
+        },
+        {
+          "term": "robot",
+          "coef": -3.152
+        },
+        {
+          "term": "robotic",
+          "coef": -3.119
+        },
+        {
+          "term": "3d gaussian",
+          "coef": -3.101
+        },
+        {
+          "term": "distribution",
+          "coef": -2.992
+        },
+        {
+          "term": "agents",
+          "coef": -2.94
+        },
+        {
+          "term": "bench",
+          "coef": -2.827
+        },
+        {
+          "term": "comprehensive benchmark",
+          "coef": -2.775
+        },
+        {
+          "term": "software",
+          "coef": -2.484
+        },
+        {
+          "term": "manipulation",
+          "coef": -2.466
+        },
+        {
+          "term": "local",
+          "coef": -2.448
+        },
+        {
+          "term": "tools",
+          "coef": -2.379
+        }
+      ]
+    },
+    "examples_note": "chosen by largest |attention pct - impact pct| among papers with age >= 12 months AND citation_count >= 1; zero-citation records at >= 12 months are excluded because several are Semantic Scholar matching failures (e.g. 2410.05258 'Differential Transformer', 182 upvotes, 0 recorded citations) rather than genuinely uncited papers.",
+    "overrated_zero_citation_records": {
+      "n_overrated_with_0_cites": 69,
+      "n_overrated_with_0_cites_age_ge_12": 19,
+      "note": "some of these are S2 match failures, i.e. part of the 'over-rated' set is measurement error on the impact side"
+    },
+    "examples_age_ge_12mo": {
+      "overrated": [
+        {
+          "arxiv_id": "2502.01237",
+          "title": "The Differences Between Direct Alignment Algorithms are a Blur",
+          "upvotes": 113,
+          "citations": 1,
+          "subfield_kw": "Reasoning/RL",
+          "release_month": "2025-02",
+          "age_months": 16.2,
+          "max_prior_papers_true_w99": 12.0,
+          "max_hindex": 8.0,
+          "attention_pct": 0.978,
+          "impact_pct": 0.026
+        },
+        {
+          "arxiv_id": "2311.10770",
+          "title": "Exponentially Faster Language Modelling",
+          "upvotes": 119,
+          "citations": 5,
+          "subfield_kw": "Efficiency/Systems",
+          "release_month": "2023-11",
+          "age_months": 30.8,
+          "max_prior_papers_true_w99": 100.0,
+          "max_hindex": 24.0,
+          "attention_pct": 0.973,
+          "impact_pct": 0.046
+        },
+        {
+          "arxiv_id": "2309.03926",
+          "title": "Large-Scale Automatic Audiobook Creation",
+          "upvotes": 55,
+          "citations": 2,
+          "subfield_kw": "Speech/Audio",
+          "release_month": "2023-09",
+          "age_months": 33.1,
+          "max_prior_papers_true_w99": 5.0,
+          "max_hindex": 60.0,
+          "attention_pct": 0.927,
+          "impact_pct": 0.013
+        },
+        {
+          "arxiv_id": "2503.16660",
+          "title": "When Less is Enough: Adaptive Token Reduction for Efficient Image Representation",
+          "upvotes": 73,
+          "citations": 2,
+          "subfield_kw": "Multimodal",
+          "release_month": "2025-03",
+          "age_months": 14.7,
+          "max_prior_papers_true_w99": 3.0,
+          "max_hindex": 6.0,
+          "attention_pct": 0.948,
+          "impact_pct": 0.061
+        },
+        {
+          "arxiv_id": "2506.02387",
+          "title": "VS-Bench: Evaluating VLMs for Strategic Reasoning and Decision-Making in Multi-Agent Environments",
+          "upvotes": 58,
+          "citations": 1,
+          "subfield_kw": "Multimodal",
+          "release_month": "2025-06",
+          "age_months": 12.2,
+          "max_prior_papers_true_w99": 11.0,
+          "max_hindex": 9.0,
+          "attention_pct": 0.94,
+          "impact_pct": 0.064
+        }
+      ],
+      "underrated": [
+        {
+          "arxiv_id": "2412.10345",
+          "title": "TraceVLA: Visual Trace Prompting Enhances Spatial-Temporal Awareness for Generalist Robotic Policies",
+          "upvotes": 2,
+          "citations": 240,
+          "subfield_kw": "Multimodal",
+          "release_month": "2024-12",
+          "age_months": 17.9,
+          "max_prior_papers_true_w99": 26.0,
+          "max_hindex": 13.0,
+          "attention_pct": 0.012,
+          "impact_pct": 0.946
+        },
+        {
+          "arxiv_id": "2410.11758",
+          "title": "Latent Action Pretraining from Videos",
+          "upvotes": 2,
+          "citations": 261,
+          "subfield_kw": "Multimodal",
+          "release_month": "2024-10",
+          "age_months": 19.8,
+          "max_prior_papers_true_w99": 17.0,
+          "max_hindex": 44.0,
+          "attention_pct": 0.018,
+          "impact_pct": 0.952
+        },
+        {
+          "arxiv_id": "2501.12387",
+          "title": "Continuous 3D Perception Model with Persistent State",
+          "upvotes": 4,
+          "citations": 466,
+          "subfield_kw": "LLM-core",
+          "release_month": "2025-01",
+          "age_months": 16.6,
+          "max_prior_papers_true_w99": 95.0,
+          "max_hindex": 111.0,
+          "attention_pct": 0.061,
+          "impact_pct": 0.989
+        },
+        {
+          "arxiv_id": "2307.05973",
+          "title": "VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models",
+          "upvotes": 4,
+          "citations": 943,
+          "subfield_kw": "Reasoning/RL",
+          "release_month": "2023-07",
+          "age_months": 35.0,
+          "max_prior_papers_true_w99": 344.0,
+          "max_hindex": 143.0,
+          "attention_pct": 0.061,
+          "impact_pct": 0.946
+        },
+        {
+          "arxiv_id": "2503.05689",
+          "title": "GoalFlow: Goal-Driven Flow Matching for Multimodal Trajectories Generation in End-to-End Autonomous Driving",
+          "upvotes": 3,
+          "citations": 117,
+          "subfield_kw": "Multimodal",
+          "release_month": "2025-03",
+          "age_months": 15.1,
+          "max_prior_papers_true_w99": 7.0,
+          "max_hindex": 12.0,
+          "attention_pct": 0.057,
+          "impact_pct": 0.914
+        }
+      ]
+    },
+    "subfield_share_by_label": {
+      "Agents": {
+        "neutral": 0.067,
+        "overrated": 0.052,
+        "underrated": 0.084
+      },
+      "Benchmark/Eval": {
+        "neutral": 0.066,
+        "overrated": 0.085,
+        "underrated": 0.062
+      },
+      "Code/Math": {
+        "neutral": 0.02,
+        "overrated": 0.014,
+        "underrated": 0.007
+      },
+      "Efficiency/Systems": {
+        "neutral": 0.084,
+        "overrated": 0.085,
+        "underrated": 0.077
+      },
+      "LLM-core": {
+        "neutral": 0.095,
+        "overrated": 0.103,
+        "underrated": 0.116
+      },
+      "Multimodal": {
+        "neutral": 0.19,
+        "overrated": 0.184,
+        "underrated": 0.169
+      },
+      "Other": {
+        "neutral": 0.005,
+        "overrated": 0.002,
+        "underrated": 0.005
+      },
+      "RAG/Retrieval": {
+        "neutral": 0.034,
+        "overrated": 0.047,
+        "underrated": 0.048
+      },
+      "Reasoning/RL": {
+        "neutral": 0.152,
+        "overrated": 0.157,
+        "underrated": 0.155
+      },
+      "Robotics/Embodied": {
+        "neutral": 0.01,
+        "overrated": 0.008,
+        "underrated": 0.012
+      },
+      "Speech/Audio": {
+        "neutral": 0.021,
+        "overrated": 0.022,
+        "underrated": 0.023
+      },
+      "Vision-Perception": {
+        "neutral": 0.049,
+        "overrated": 0.054,
+        "underrated": 0.048
+      },
+      "Vision/Image-Gen": {
+        "neutral": 0.206,
+        "overrated": 0.187,
+        "underrated": 0.193
+      }
+    }
+  },
+  "control_comparison": {
+    "control_sample_facts": {
+      "construction": "Project/scripts/10: for each month \u00d7 stratum {cs.CL, cs.CV, cs.LG} the first ~40 arXiv submissions by submittedDate ascending (i.e. the first day(s) of the month), de-duplicated across strata, minus ids that ever trended on HF; S2 citations/h-index fetched 2026-06-11.",
+      "n_after_dedup_and_hf_removal": 3287,
+      "n_s2_found": 3280,
+      "share_submitted_day1": 0.954,
+      "share_submitted_day1to3": 1.0,
+      "share_weekend_submissions": 0.273,
+      "strata_counts": {
+        "cs.CL": 1184,
+        "cs.CV": 1182,
+        "cs.LG": 914
+      },
+      "primary_category_top": {
+        "cs.CV": 987,
+        "cs.CL": 854,
+        "cs.LG": 741,
+        "eess.IV": 91,
+        "cs.AI": 80,
+        "stat.ML": 58,
+        "cs.CR": 45,
+        "cs.RO": 45
+      },
+      "share_primary_outside_stratum": 0.28,
+      "months": [
+        "2023-05",
+        "2025-12"
+      ],
+      "n_analysis_5_40_months": 3280,
+      "citations": {
+        "median": 4.0,
+        "p75": 11.0,
+        "p90": 30.0,
+        "share_zero": 0.177,
+        "share_ge100": 0.02,
+        "median_max_hindex": 11.0,
+        "median_age_months": 22.3
+      },
+      "control_subfield_source": {
+        "title_keyword_rules": 1739,
+        "arxiv_category_map": 1355,
+        "none": 186
+      },
+      "control_subfield_counts": {
+        "LLM-core": 1236,
+        "Vision-Perception": 660,
+        "Efficiency/Systems": 223,
+        "Other": 186,
+        "Vision/Image-Gen": 182,
+        "Benchmark/Eval": 171,
+        "Multimodal": 160,
+        "Reasoning/RL": 123,
+        "Agents": 99,
+        "RAG/Retrieval": 84,
+        "Speech/Audio": 83,
+        "Code/Math": 44,
+        "Robotics/Embodied": 29
+      },
+      "control_subfield_note": "Controls have no ai_keywords/abstract text, only titles: the SAME 13-level keyword rule set was applied to titles (labels ~53%); the remainder is mapped from the arXiv primary category to the nearest keyword label (cs.CV/eess.IV -> Vision-Perception, cs.CL/cs.LG/stat.ML/cs.AI -> LLM-core, cs.RO -> Robotics/Embodied, cs.SD/eess.AS -> Speech/Audio, cs.IR -> RAG/Retrieval, cs.SE -> Code/Math, else Other). On trending papers the title-only rule agrees with subfield_kw for ~64% of the labelled ones, so the subfield match is coarse; a 4-family variant is also reported.",
+      "trending": {
+        "n": 11252,
+        "median_cites": 16.0,
+        "p90": 146.0,
+        "share_zero": 0.045,
+        "share_ge100": 0.146,
+        "median_max_hindex": 18.0
+      },
+      "hindex_bin_edges": [
+        0.0,
+        8.0,
+        13.0,
+        21.0,
+        34.0,
+        191.0
+      ]
+    },
+    "trending_premium": {
+      "naive": {
+        "gap_log_pts": 1.232,
+        "ci95": [
+          1.1822,
+          1.2796
+        ],
+        "ratio": 3.43,
+        "median_ratio": 4.0
+      },
+      "cem_month_subfield13_hbin": {
+        "note": "exact: release_month \u00d7 13-level subfield \u00d7 h-index quintile [main]",
+        "gap_log_pts": 1.1,
+        "ci95": [
+          1.0042,
+          1.1573
+        ],
+        "ratio": 3.0,
+        "ratio_ci95": [
+          2.73,
+          3.18
+        ],
+        "n_trending_matched": 7296,
+        "n_control_matched": 2853,
+        "n_cells": 930,
+        "share_trending_matched": 0.648
+      },
+      "cem_month_family_hbin": {
+        "note": "exact: release_month \u00d7 4-family \u00d7 h-index quintile",
+        "gap_log_pts": 1.313,
+        "ci95": [
+          1.2389,
+          1.3598
+        ],
+        "ratio": 3.72,
+        "ratio_ci95": [
+          3.45,
+          3.9
+        ],
+        "n_trending_matched": 10905,
+        "n_control_matched": 3097,
+        "n_cells": 393,
+        "share_trending_matched": 0.969
+      },
+      "cem_month_hbin": {
+        "note": "exact: release_month \u00d7 h-index quintile (no field)",
+        "gap_log_pts": 1.336,
+        "ci95": [
+          1.2821,
+          1.3832
+        ],
+        "ratio": 3.8,
+        "ratio_ci95": [
+          3.6,
+          3.99
+        ],
+        "n_trending_matched": 11248,
+        "n_control_matched": 3270,
+        "n_cells": 159,
+        "share_trending_matched": 1.0
+      },
+      "ols_fe_month_subfield_hbin": {
+        "gap_log_pts": 1.125,
+        "ci95": [
+          1.011,
+          1.24
+        ],
+        "ratio": 3.08,
+        "n": 14532
+      }
+    },
+    "low_attention_vs_background": {
+      "bottom_tertile_attention_residual": {
+        "desc": "trending papers in the bottom tertile of the age/field/month-adjusted attention residual, regardless of citations [honest]",
+        "n": 3752,
+        "median_cites": 8.0,
+        "median_upvotes": 5.0,
+        "cem_gap_vs_background_log_pts": 0.497,
+        "cem_gap_ci95": [
+          0.4073,
+          0.5624
+        ],
+        "cem_ratio": 1.64,
+        "n_matched": 2540,
+        "percentile_in_background_same_month": {
+          "mean_percentile": 0.704,
+          "ci95": [
+            0.6963,
+            0.7125
+          ],
+          "median_percentile": 0.782,
+          "share_above_background_median": 0.787,
+          "n_used": 3751
+        },
+        "percentile_in_background_same_month_family": {
+          "mean_percentile": 0.7,
+          "ci95": [
+            0.692,
+            0.7089
+          ],
+          "median_percentile": 0.781,
+          "share_above_background_median": 0.777,
+          "n_used": 3646
+        }
+      },
+      "bottom_tertile_raw_upvotes": {
+        "desc": "trending papers with upvotes <= 9 (bottom tertile of raw upvotes), regardless of citations",
+        "n": 3928,
+        "median_cites": 8.0,
+        "median_upvotes": 5.0,
+        "cem_gap_vs_background_log_pts": 0.561,
+        "cem_gap_ci95": [
+          0.4678,
+          0.6398
+        ],
+        "cem_ratio": 1.75,
+        "n_matched": 2735,
+        "percentile_in_background_same_month": {
+          "mean_percentile": 0.709,
+          "ci95": [
+            0.7009,
+            0.7172
+          ],
+          "median_percentile": 0.789,
+          "share_above_background_median": 0.79,
+          "n_used": 3925
+        },
+        "percentile_in_background_same_month_family": {
+          "mean_percentile": 0.705,
+          "ci95": [
+            0.6971,
+            0.7137
+          ],
+          "median_percentile": 0.788,
+          "share_above_background_median": 0.781,
+          "n_used": 3776
+        }
+      },
+      "top_tertile_attention_residual": {
+        "desc": "trending papers in the top tertile of the adjusted attention residual (context)",
+        "n": 3754,
+        "median_cites": 29.0,
+        "median_upvotes": 37.0,
+        "cem_gap_vs_background_log_pts": 1.731,
+        "cem_gap_ci95": [
+          1.6048,
+          1.8231
+        ],
+        "cem_ratio": 5.65,
+        "n_matched": 2383,
+        "percentile_in_background_same_month": {
+          "mean_percentile": 0.891,
+          "ci95": [
+            0.8856,
+            0.897
+          ],
+          "median_percentile": 0.971,
+          "share_above_background_median": 0.952,
+          "n_used": 3753
+        },
+        "percentile_in_background_same_month_family": {
+          "mean_percentile": 0.89,
+          "ci95": [
+            0.884,
+            0.8957
+          ],
+          "median_percentile": 0.968,
+          "share_above_background_median": 0.951,
+          "n_used": 3646
+        }
+      },
+      "underrated_label_OUTCOME_SELECTED": {
+        "desc": "v2-style 'under-rated' = bottom-tertile attention AND top-tertile citation residual \u2014 selected on the outcome; shown only to document why the 91st-percentile claim was circular",
+        "n": 556,
+        "median_cites": 50.0,
+        "median_upvotes": 6.0,
+        "cem_gap_vs_background_log_pts": 2.121,
+        "cem_gap_ci95": [
+          1.9538,
+          2.2594
+        ],
+        "cem_ratio": 8.34,
+        "n_matched": 356,
+        "percentile_in_background_same_month": {
+          "mean_percentile": 0.979,
+          "ci95": [
+            0.9771,
+            0.9809
+          ],
+          "median_percentile": 0.99,
+          "share_above_background_median": 1.0,
+          "n_used": 555
+        },
+        "percentile_in_background_same_month_family": {
+          "mean_percentile": 0.978,
+          "ci95": [
+            0.9758,
+            0.9806
+          ],
+          "median_percentile": 0.985,
+          "share_above_background_median": 1.0,
+          "n_used": 535
+        },
+        "v2_style_pooled_percentile_no_age_match": 0.913
+      }
+    }
+  }
+}

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does crowd attention predict later citations?</title>
+<style>
+:root{
+  color-scheme:light;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#6b6a66; --muted2:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+  --blue:#2a78d6; --blue-soft:#cde2fb; --orange:#eb6834; --orange-soft:#fbd9c9;
+  --under:#4a3aa7; --over:#1baf7a; --grey:#898781;
+  --link:#1c5cab;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--link)}
+h1{font-size:1.75rem;line-height:1.2;margin:0 0 6px;font-weight:650}
+h2{font-size:1.15rem;margin:0 0 4px;font-weight:650}
+h3{font-size:0.98rem;margin:0 0 4px;font-weight:650}
+p{margin:0 0 8px}
+.wrap{max-width:1360px;margin:0 auto;padding:18px 22px 40px}
+header.top{padding:22px 0 10px;border-bottom:1px solid var(--grid);margin-bottom:16px}
+.q{color:var(--ink2);margin:6px 0}
+.ans{margin:8px 0 0;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.ans b{font-weight:650}
+.strip{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.strip .tile{flex:1 1 180px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:0.84rem;color:var(--ink2)}
+.strip .tile b{display:block;color:var(--ink);font-size:0.95rem;font-weight:650}
+.howto{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:8px;padding:12px 16px;margin:16px 0}
+.howto p{margin:0 0 6px;font-size:0.93rem}
+.howto p:last-child{margin-bottom:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0 4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;min-width:0}
+.card .lab{font-size:0.86rem;color:var(--ink2);margin-bottom:2px}
+.card .val{font-size:1.9rem;font-weight:650;line-height:1.1;letter-spacing:-0.01em}
+.card.hero .val{font-size:2.6rem}
+.card .ci{font-size:0.9rem;color:var(--ink2);margin-top:2px}
+.card .sub{font-size:0.8rem;color:var(--muted);margin-top:6px;line-height:1.4}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:16px 0}
+.section .lead{color:var(--ink2);font-size:0.92rem;margin-bottom:8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:8px 10px;background:var(--page);border-radius:8px;margin:8px 0 10px;font-size:0.88rem}
+.filters label{color:var(--ink2)}
+.filters select,.filters input[type=text]{font:inherit;padding:4px 6px;border:1px solid var(--axis);border-radius:6px;background:#fff;color:var(--ink)}
+.filters input[type=text]{width:220px}
+.btn{font:inherit;font-size:0.85rem;padding:4px 10px;border:1px solid var(--axis);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+.btn[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.btngroup{display:inline-flex;gap:4px}
+.count{color:var(--ink2);font-weight:600}
+.canvaswrap{position:relative;width:100%}
+canvas#explorer{display:block;width:100%;height:auto;cursor:crosshair;border-radius:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:0.84rem;color:var(--ink2);margin:8px 0 4px;align-items:center}
+.legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.legend .ln{display:inline-block;width:18px;height:0;border-top:2px solid;margin-right:6px;vertical-align:3px}
+.cap{font-size:0.83rem;color:var(--muted);line-height:1.45;margin-top:6px}
+#tt{position:fixed;z-index:20;pointer-events:none;background:#fff;color:var(--ink);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,0.12);border-radius:8px;padding:8px 10px;font-size:0.84rem;max-width:340px;display:none;line-height:1.35}
+#tt .t{font-weight:650;margin-bottom:4px}
+#tt .row{display:flex;gap:10px;flex-wrap:wrap}
+#tt .row span{white-space:nowrap}
+#tt .row b{font-weight:650}
+#tt .more{color:var(--muted);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two>*,.three>*,.grid2>*{min-width:0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+table{border-collapse:collapse;width:100%;font-size:0.86rem}
+th,td{padding:5px 8px;border-bottom:1px solid var(--grid);text-align:left;vertical-align:top}
+th{color:var(--ink2);font-weight:600;white-space:nowrap;background:var(--surface);position:sticky;top:0}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
+th .arrow{color:var(--muted);font-size:0.75rem;margin-left:2px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td{white-space:nowrap}
+td.title{max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+td.title a{color:var(--link);text-decoration:none}
+td.title a:hover{text-decoration:underline}
+.chip{display:inline-block;font-size:0.72rem;padding:1px 6px;border-radius:10px;color:#fff;font-weight:600}
+.chip.underrated{background:var(--under)}
+.chip.overrated{background:var(--over);color:#053a28}
+.chip.neutral{background:#d9d8d2;color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--grid);border-radius:6px}
+.pg{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:0.86rem;color:var(--ink2)}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;min-width:0}
+.panel svg{width:100%;height:auto;display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;align-items:start}
+.grid2 .wide{grid-column:1 / -1}
+.limits{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:8px;padding:12px 16px;margin:16px 0}
+.limits ul{margin:4px 0 0 18px;padding:0;font-size:0.92rem}
+footer{color:var(--muted);font-size:0.82rem;padding:14px 0 0;border-top:1px solid var(--grid);margin-top:14px;line-height:1.5}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.85em;background:#f1f0ec;padding:0 4px;border-radius:4px}
+.empty{color:var(--ink2);padding:14px;text-align:center}
+.svgtip{font-size:0.8rem}
+.mini{font-size:0.8rem;color:var(--muted)}
+.tabbtns{display:inline-flex;gap:4px;margin:0 0 6px}
+.srhint{font-size:0.8rem;color:var(--muted)}
+.vis-hidden{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media (max-width:900px){
+  .two,.three,.grid2{grid-template-columns:1fr}
+  .grid2 .wide{grid-column:auto}
+  h1{font-size:1.4rem}
+  .card.hero .val{font-size:2.1rem}
+}
+@media (max-width:800px){
+  .wrap{padding:12px 12px 30px}
+  .filters input[type=text]{width:160px}
+  td.title{max-width:220px}
+  .card .val{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Does crowd attention predict later citations?</h1>
+  <p class="q"><b>Question.</b> Do community upvotes on Hugging Face Daily Papers predict the later citation count of an Arxiv machine learning paper, and which papers does the crowd overrate or underrate?</p>
+  <div class="ans"><b>Answer.</b> Yes as a predictor, not as a cause. Adding upvotes to a leakage checked controls only model raises the forward in time AUC by <b>{{num:lg_dauc}} {{num:lg_dauc_ci}}</b>. Each doubling of upvotes goes with about <b>{{num:nb2_irr}} times</b> the citations (negative binomial, release month, day of week and subfield fixed effects, leakage free prestige), with the Poisson estimate {{num:pois_irr}} and the OLS scale ratio {{num:ols_ratio}} as the range across estimators. The crowd over rewards newer teams and under rewards established ones. Association and prediction only, upvotes are cumulative at collection rather than a day one signal, and the attempted crowding instrument is uninformative.</div>
+  <div class="strip" aria-label="Data provenance">
+    <div class="tile"><b>3 sources</b>Hugging Face Daily Papers (upvotes), Semantic Scholar (citations, author records), Arxiv (metadata)</div>
+    <div class="tile"><b>11344 featured papers</b>2023: 1602, 2024: 3417, 2025: 6325 papers, aged 5 to 40 months at collection</div>
+    <div class="tile"><b>3280 never trending papers</b>Same period, first submissions of each month in cs.CL, cs.CV, cs.LG, never featured</div>
+    <div class="tile"><b>One collection snapshot</b>Citations and upvotes were collected once, so recent papers are still accruing both</div>
+    <div class="tile"><b>Upvotes are cumulative</b>Counts at collection, not day one attention. Within 2024 and 2025 upvotes barely correlate with age</div>
+    <div class="tile"><b>Forward test</b>Train on {{num:n_train}} papers up to 2024, test on {{num:n_test}} papers from 2025</div>
+  </div>
+</header>
+
+<div class="howto" id="howto">
+  <h2>How to read this dashboard</h2>
+  <p><b>The data.</b> 11344 Arxiv machine learning papers featured on Hugging Face Daily Papers, each with its cumulative upvote count, its Semantic Scholar citation count from one collection snapshot, its subfield (a uniform 13 level keyword taxonomy), release month, and leakage free author prestige (prior papers and years active of the first or last author before the paper). Papers younger than 5 months or older than 40 months, or without a citation record, are excluded.</p>
+  <p><b>The headline is predictive, not causal.</b> "{{num:lg_dauc}} AUC" means: when a logistic regression that already knows a paper's subfield, release month, day of week, prestige and text metadata is also told its upvotes, it ranks 2025 papers by top decile citation status better, AUC {{num:lg_ctrl_auc}} to {{num:lg_att_auc}}, in a strict forward in time test (trained on papers up to 2024, tested on 2025 papers, interval from a paired bootstrap clustered by release month). Histogram gradient boosting gives {{num:hg_dauc}} {{num:hg_dauc_ci}}. Log upvotes alone reach AUC {{num:lg_up_auc}}. This says attention carries information. It does not say attention causes citations.</p>
+  <p><b>The association is measured with counts.</b> The incidence rate ratio per doubling of upvotes is {{num:nb2_irr}} {{num:nb2_irr_ci}} under a negative binomial (NB2) with release month, day of week and subfield fixed effects and leakage free prestige. Poisson quasi likelihood gives {{num:pois_irr}} and the OLS log scale ratio {{num:ols_ratio}}, so the estimator matters and the three are shown together.</p>
+  <p><b>The explorer is descriptive.</b> Each paper is placed by two percentiles. Horizontal: its <i>attention percentile</i>, the rank of its log upvotes after removing what log age, subfield and release month explain. Vertical: its <i>impact percentile</i>, the same for log citations. A paper in the top third of impact but the bottom third of attention is labelled <b>underrated</b> (violet, n {{num:n_under}}). The mirror image is <b>overrated</b> (green, n {{num:n_over}}). The cut lines are tertiles, the labels are a rule, not a model. Each of the other {{num:n_neutral}} papers is a small grey dot, the black line is the mean impact percentile in each attention bin. Hover for details, click to open the paper on Arxiv, or type part of a title or an Arxiv id to find a paper.</p>
+  <p><b>What it cannot tell you.</b> Only featured papers are observed, so there is no pool of submitted but not featured papers. Upvotes are a cumulative count. Citations come from one snapshot, so 2025 papers are still accruing them and the leaderboards default to papers at least 12 months old with at least one citation. The h-index is measured today and is downstream of the citations it is compared with. The crowding instrument is an attempted design whose weak instrument robust interval is too wide to be informative.</p>
+</div>
+
+<div class="cards" aria-label="Headline results">
+  <div class="card hero">
+    <div class="lab">Predictive lift from adding upvotes (change in AUC)</div>
+    <div class="val">{{num:lg_dauc}}</div>
+    <div class="ci">95% CI {{num:lg_dauc_ci}}</div>
+    <div class="sub">Logistic regression, the pre specified headline model. AUC {{num:lg_ctrl_auc}} to {{num:lg_att_auc}} on {{num:n_test}} papers from 2025, trained on {{num:n_train}} papers up to 2024, paired bootstrap clustered by month. Histogram gradient boosting: {{num:hg_dauc}} {{num:hg_dauc_ci}}. Predictive, not causal.</div>
+  </div>
+  <div class="card">
+    <div class="lab">Citations per doubling of upvotes</div>
+    <div class="val">×{{num:nb2_irr}}</div>
+    <div class="ci">95% CI {{num:nb2_irr_ci}}</div>
+    <div class="sub">Negative binomial (NB2) incidence rate ratio, release month, day of week and subfield fixed effects, leakage free prestige, n {{num:n_all}}. Poisson quasi likelihood ×{{num:pois_irr}} {{num:pois_irr_ci}}, OLS log scale ratio ×{{num:ols_ratio}} {{num:ols_ratio_ci}}. E-value {{num:e_nb2}} (NB2).</div>
+  </div>
+  <div class="card">
+    <div class="lab">AUC of log upvotes alone</div>
+    <div class="val">{{num:lg_up_auc}}</div>
+    <div class="ci">95% CI {{num:lg_up_auc_ci}}</div>
+    <div class="sub">One column ranks 2025 papers by top decile citation status better than the whole controls only model ({{num:lg_ctrl_auc}}). Adding the controls to upvotes adds only {{num:lg_att_minus_up}} {{num:lg_att_minus_up_ci}}.</div>
+  </div>
+  <div class="card">
+    <div class="lab">Precision at the top decile</div>
+    <div class="val">{{num:lg_dpk}}</div>
+    <div class="ci">95% CI {{num:lg_dpk_ci}}</div>
+    <div class="sub">{{num:lg_pk_ctrl}} to {{num:lg_pk_att}} among the {{num:k_top_decile}} highest scored 2025 papers (logistic). PR AUC {{num:lg_pr_ctrl}} to {{num:lg_pr_att}}, change {{num:lg_dpr}} {{num:lg_dpr_ci}}. Gradient boosting: {{num:hg_dpk}} {{num:hg_dpk_ci}}.</div>
+  </div>
+  <div class="card">
+    <div class="lab">Trending premium over never trending papers</div>
+    <div class="val">×{{num:prem_ratio}}</div>
+    <div class="ci">95% CI {{num:prem_ci}}</div>
+    <div class="sub">Citations of featured papers vs {{num:n_ctrl}} never trending Arxiv papers, exact matching on release month, subfield and h-index quintile ({{num:prem_nt}} featured and {{num:prem_nc}} control papers matched). Naive ratio ×{{num:prem_naive}}. Association only.</div>
+  </div>
+  <div class="card">
+    <div class="lab">Who gets misjudged: prior papers, overrated vs underrated</div>
+    <div class="val">{{num:pp_over}} vs {{num:pp_under}}</div>
+    <div class="ci">medians, CIs {{num:pp_over_ci}} vs {{num:pp_under_ci}}</div>
+    <div class="sub">Prior papers of the first or last author before the paper (leakage free). Medians over the papers with a resolved author record: {{num:pp_n_over}} of the {{num:n_over}} overrated and {{num:pp_n_under}} of the {{num:n_under}} underrated papers. Max author h-index measured today: {{num:h_over}} vs {{num:h_under}} (flagged as leaky, it is downstream of citations). The crowd over rewards newer teams and under rewards established ones.</div>
+  </div>
+</div>
+
+<div class="section" id="explorer-section">
+  <h2>Overrated vs underrated explorer</h2>
+  <p class="lead">Every featured paper, placed by its attention percentile (horizontal) and impact percentile (vertical) after adjusting log upvotes and log citations for log age, subfield and release month. Descriptive: the labels are a tertile rule on residual ranks, not a causal estimate. Filters below scope the explorer, the leaderboards and the paper table.</p>
+  <div class="filters" role="group" aria-label="Filters">
+    <label for="f-sf">Subfield</label>
+    <select id="f-sf"><option value="">All ({{sf_count}} subfields)</option></select>
+    <span><span style="color:var(--ink2)">Release year</span>
+      <span class="btngroup" id="f-years"></span></span>
+    <label><input type="checkbox" id="f-mature"> Age at least 12 months</label>
+    <label for="f-pm">Prestige</label>
+    <select id="f-pm">
+      <option value="pp">Prior papers of first or last author</option>
+      <option value="h">Max author h-index (measured today)</option>
+    </select>
+    <select id="f-band" aria-label="Prestige band"></select>
+    <label for="f-q">Search</label>
+    <input type="text" id="f-q" placeholder="Title or Arxiv id" aria-label="Search title or Arxiv id">
+    <span><span style="color:var(--ink2)">Show</span>
+      <span class="btngroup" id="f-mode">
+        <button type="button" class="btn" data-mode="all" aria-pressed="true">All</button>
+        <button type="button" class="btn" data-mode="over" aria-pressed="false">Overrated</button>
+        <button type="button" class="btn" data-mode="under" aria-pressed="false">Underrated</button>
+      </span></span>
+    <button type="button" class="btn" id="f-reset">Reset</button>
+    <span class="count" id="f-count" aria-live="polite"></span>
+  </div>
+  <div class="canvaswrap">
+    <canvas id="explorer" role="img" aria-label="Scatter of 11344 papers: attention percentile on the horizontal axis and impact percentile on the vertical axis. The paper table below lists the same papers."></canvas>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><span class="sw" style="background:var(--under)"></span>Underrated (bottom third attention, top third impact)</span>
+    <span><span class="sw" style="background:var(--over)"></span>Overrated (top third attention, bottom third impact)</span>
+    <span><span class="sw" style="background:rgba(137,135,129,0.5)"></span>Each grey dot is one paper in the current filter</span>
+    <span><span class="ln" style="border-color:var(--ink)"></span>Mean impact percentile per attention bin (20 bins)</span>
+    <span><span class="ln" style="border-color:var(--axis)"></span>Tertile cut lines (33rd and 67th percentile)</span>
+  </div>
+  <p class="cap"><b>Axes.</b> Attention percentile = rank over all {{num:n_all}} papers of the residual of log(1 + upvotes) after an OLS fit on log age, subfield and release month fixed effects. Impact percentile = the same for log(1 + citations). Spearman correlation between the two residuals {{num:spearman_resid}} (raw upvotes vs citations {{num:spearman_raw}}). Hover a point for details (values are also in the table below), click to open the paper on Arxiv. Search matches title text or an Arxiv id. The age toggle removes papers younger than 12 months, whose citations are still accruing. It is off by default so that the whole sample is visible, and on by default for the leaderboards.</p>
+</div>
+
+<div class="section" id="leaderboards">
+  <h2>Leaderboards</h2>
+  <p class="lead">Ranked by the residual gap, the absolute difference between the attention and impact percentiles, ties broken by raw upvotes (overrated) or raw citations (underrated). Both tables follow the filters above.
+    <label style="margin-left:10px"><input type="checkbox" id="lb-mature" checked> Only papers at least 12 months old with at least one citation</label></p>
+  <div class="two">
+    <div>
+      <h3 id="lb-over-title">Most overrated: largest attention minus impact gap</h3>
+      <div class="tablewrap"><table id="lb-over" aria-describedby="lb-over-title"><thead></thead><tbody></tbody></table></div>
+    </div>
+    <div>
+      <h3 id="lb-under-title">Most underrated: largest impact minus attention gap</h3>
+      <div class="tablewrap"><table id="lb-under" aria-describedby="lb-under-title"><thead></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+  <p class="cap"><b>Caveat.</b> 2025 papers were 5 to 17 months old at the citation snapshot, so a low citation count is partly immaturity rather than a verdict. {{num:n_over_zero}} of the {{num:n_over}} overrated papers have zero recorded citations ({{num:n_over_zero_12}} at 12 months or more), and some of those are Semantic Scholar matching failures. Click a title to open the paper on Arxiv. Sort by clicking a column header.</p>
+</div>
+
+<div class="section" id="papertable">
+  <h2>Paper table</h2>
+  <p class="lead">All papers in the current filter and mode, sortable, 25 per page. This is the keyboard accessible twin of the explorer.</p>
+  <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+  <div class="pg"><button type="button" class="btn" id="pg-prev">Previous</button><span id="pg-info"></span><button type="button" class="btn" id="pg-next">Next</button></div>
+</div>
+
+<h2 style="margin-top:22px">Evidence</h2>
+<p class="lead" style="color:var(--ink2)">Each panel is drawn from the same results files as the report, so the numbers match it. Blue marks the estimate that includes attention, orange the baseline without it, grey is a comparison or a secondary estimator.</p>
+<div class="grid2">
+  <div class="panel" id="p-dose">
+    <h3>Dose response: citations by upvote decile</h3>
+    <div id="c-dose"></div>
+    <p class="cap">Mean log(1 + citations) by decile of raw upvotes with 95% CIs, raw (grey) and adjusted for log age, subfield and release month (blue). The vertical axis is labelled in citations (geometric mean). Deciles hold about 1134 papers each. Spearman correlation between upvotes and citations {{num:spearman_raw}}. Top vs bottom tertile of upvotes: naive citation ratio ×{{num:sel_naive}}, after propensity matching on leakage free prestige, subfield and month ×{{num:sel_ps}}, inverse probability weighting ×{{num:sel_ipw}}, coarsened exact matching ×{{num:sel_cem}}. Descriptive.</p>
+  </div>
+  <div class="panel" id="p-ladder">
+    <h3>Specification ladder: citations per doubling of upvotes</h3>
+    <div id="c-ladder"></div>
+    <p class="cap">Incidence rate ratio per doubling of upvotes with 95% CIs, three estimators per specification (n {{num:n_all}}). The main specification adds leakage free prestige to month, day of week and subfield fixed effects: NB2 ×{{num:nb2_irr}} {{num:nb2_irr_ci}} (block bootstrap over release months {{num:nb2_boot_ci}}), Poisson quasi likelihood ×{{num:pois_irr}}, OLS log scale ratio ×{{num:ols_ratio}}. Poisson weights the top tail more, which is why it sits higher. E-values: {{num:e_pois}} (Poisson), {{num:e_nb2}} (NB2), {{num:e_ols}} (OLS ratio), sensitivity summaries rather than causal claims. Rows below the main one are shown for reference: the h-index row is leaky, the text row over controls.</p>
+  </div>
+  <div class="panel" id="p-roc">
+    <h3>Forward test: ROC and precision recall curves</h3>
+    <div class="tabbtns" id="roc-model">
+      <button type="button" class="btn" data-m="logistic" aria-pressed="true">Logistic (headline)</button>
+      <button type="button" class="btn" data-m="hgb" aria-pressed="false">Histogram gradient boosting</button>
+    </div>
+    <div class="two" style="gap:10px"><div id="c-roc"></div><div id="c-pr"></div></div>
+    <p class="cap">Test set: {{num:n_test}} papers from 2025, outcome = top decile of citations within release quarter (base rate 0.10), models trained on {{num:n_train}} papers up to 2024. Curves are computed from the per paper test scores. Legend values are the AUCs reported in the report. Controls only means subfield, release month, day of week, prestige and text metadata. Upvotes only is a single log upvotes column.</p>
+  </div>
+  <div class="panel" id="p-forest">
+    <h3>Change in AUC across specifications and robustness rows</h3>
+    <div id="c-forest"></div>
+    <p class="cap">Change in AUC from adding attention to the controls only model, 95% CIs from a paired bootstrap clustered by release month. Filled blue: logistic. Hollow grey: histogram gradient boosting. The first row is the headline. Rows marked flagged use a leaky control and are shown only to explain what changed. Sample sizes are the test set for each row.</p>
+  </div>
+  <div class="panel" id="p-slopes">
+    <h3>Where the crowd is most informative: slope by subfield</h3>
+    <div id="c-slopes"></div>
+    <p class="cap">Random slope of log citations on log upvotes by subfield from a linear mixed model with release month and day of week fixed effects and leakage free prestige (n {{num:n_all}}, 13 subfields). Fixed slope {{num:lmm_slope}} {{num:lmm_slope_ci}} (vertical line), between subfield slope SD {{num:lmm_sd}}, range {{num:lmm_range}}. The subfields differ little.</p>
+  </div>
+  <div class="panel" id="p-ccdf">
+    <h3>Trending vs never trending papers: citation survival curves</h3>
+    <div id="c-ccdf"></div>
+    <p class="cap">Share of papers with at least the given number of citations. Featured papers (blue, n {{num:n_all}}), never trending Arxiv papers from the same months (orange, n {{num:n_ctrl}}), and featured papers in the bottom third of adjusted attention (blue dashed, n {{num:lowatt_n}}). Matched premium ×{{num:prem_ratio}} {{num:prem_ci}} (exact matching on release month, subfield and h-index quintile). Even the low attention featured papers sit on average at the {{num:lowatt_pct}} quantile of the same month never trending distribution (CI {{num:lowatt_pct_ci}}), a ×{{num:lowatt_ratio}} matched ratio. Association only, selection into being featured is not modelled.</p>
+  </div>
+  <div class="panel wide" id="p-misjudged">
+    <h3>Who gets misjudged: prestige of overrated vs underrated papers, and what predicts each label</h3>
+    <div class="three"><div id="c-prestige"></div><div id="c-drv-over"></div><div id="c-drv-under"></div></div>
+    <p class="cap">Left: median prestige with bootstrap 95% CIs for overrated (green), underrated (violet) and all other papers (grey). The two h-index rows are measured today and are downstream of citations, so they are flagged as leaky. Middle and right: odds ratios per feature from a logistic regression of the label on paper features (leakage free version without h-index, cluster robust by release month, continuous features per SD, the 8 features with the smallest p values). Descriptive: these are correlates of a rule based label.</p>
+  </div>
+  <div class="panel wide" id="p-iv">
+    <h3>Attempted crowding instrument: uninformative</h3>
+    <div id="c-iv"></div>
+    <p class="cap">Elasticity of log citations on log upvotes. OLS with release month, day of week and subfield fixed effects and leakage free prestige: {{num:iv_ols}} (n {{num:iv_n}}). The 2SLS with the same fixed effects, instrumenting upvotes with same day crowding from other subfields: {{num:iv_b}} (SE {{num:iv_se}}), Anderson Rubin 95% CI {{num:iv_ar}}, first stage t {{num:iv_t}} and KP F {{num:iv_f}}. The interval is 0.90 log points wide, includes the OLS point and barely excludes zero, so it says nothing about the size of the effect. The day fixed effects version ({{num:iv_day_b}}, KP F {{num:iv_day_f}}, hollow marker) has a strong first stage only because of the within day adding up identity, so it is not exogenous variation. This is an attempted design, not causal evidence.</p>
+  </div>
+</div>
+
+<div class="limits" id="limits">
+  <h2>Limits</h2>
+  <ul>
+    <li><b>Predictive, not causal.</b> The headline is out of sample predictive lift, the association ladder is adjusted association with E-values as sensitivity summaries. Nothing here identifies a causal effect of attention on citations.</li>
+    <li><b>Cumulative upvotes.</b> Upvotes are counts at collection, not day one attention. Late accrual looks small (upvotes and age barely correlate within 2024 and 2025, Spearman {{num:sp_up_age}} by year for 2023, 2024, 2025), but a paper that later became famous may have gathered upvotes after the fact.</li>
+    <li><b>Single citation snapshot and right censoring.</b> 2025 papers had 5 to 17 months to accrue citations, 2023 papers up to 40. Labels and rankings are age adjusted, but zero counts for young papers are noisy and some are Semantic Scholar matching failures.</li>
+    <li><b>h-index measured today.</b> Any h-index shown is downstream of the citations it is compared with. Leakage free prestige (prior papers and years active before the paper) is used in every model, and h-index rows are flagged.</li>
+    <li><b>Keyword subfields.</b> The 13 subfields come from keyword rules on titles, abstracts and Hugging Face keywords, and the never trending papers are labelled from titles and Arxiv categories only, so the subfield match in the control comparison is coarse.</li>
+    <li><b>Instrument not identified.</b> The crowding instrument's weak instrument robust interval is uninformative and its strong looking day fixed effects variant is mechanical.</li>
+    <li><b>Only featured papers.</b> There is no pool of submitted but not featured papers, so selection into being featured is not modelled and results do not generalise beyond Hugging Face Daily Papers.</li>
+  </ul>
+</div>
+
+<footer>
+  <div><b>Reproducibility.</b> Built by <code>scripts/build_dashboard.py</code> from <code>results/prediction_v3.json</code>, <code>association_v3.json</code>, <code>crowding_iv_v3.json</code>, <code>prediction_v3_scores.csv</code>, <code>data/processed/overunder_v3.csv</code>, <code>analysis_final.csv</code> and the never trending control sample. Every headline number is read from those results files, none is typed by hand. Pipeline: <code>24_assemble.py</code>, <code>25_crowding_iv_v3.py</code>, <code>26_prediction_v3.py</code>, <code>27_association_v3.py</code>, <code>28_results_gate_v3.py</code>, then this build script.</div>
+  <div>Single self contained HTML file, vanilla JavaScript with inline SVG and canvas, no external requests, opens offline from a file URL. Built in place of a Shiny app so it runs without a server. Only outbound links are the Arxiv abstract pages opened on click.</div>
+  <div>Community attention and citation impact of machine learning papers.</div>
+</footer>
+
+</div>
+<div id="tt" role="tooltip"></div>
+
+<script>
+/*__DATA__*/
+(function(){
+"use strict";
+// ---------------------------------------------------------------- helpers
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const C={blue:"#2a78d6",orange:"#eb6834",under:"#4a3aa7",over:"#1baf7a",grey:"#898781",ink:"#0b0b0b",ink2:"#52514e",muted:"#6b6a66",grid:"#e1e0d9",axis:"#c3c2b7",surface:"#fcfcfb"};
+const ord=n=>{n=Math.round(n);const m=n%100;if(m>=11&&m<=13)return n+"th";return n+(["th","st","nd","rd"][n%10]||"th");};
+const pct=x=>ord(x*100)+" percentile";
+const fmt=(x,d)=>(x==null||isNaN(x))?"":Number(x).toFixed(d==null?2:d);
+const esc=s=>String(s==null?"":s);
+const SF=D.SF, P=D.P, NUM=D.NUM;
+// row accessors: [id,title,sf,ym,up,cit,age,ar,ir,lbl,h,pp]
+const R={id:0,t:1,sf:2,ym:3,up:4,cit:5,age:6,ar:7,ir:8,l:9,h:10,pp:11};
+const yearOf=r=>+r[R.ym].slice(0,4);
+const LBLNAME=["underrated","neutral","overrated"];
+
+// ---------------------------------------------------------------- state
+const state={sf:"",years:new Set(D.YEARS),mature:false,pm:"pp",band:"",q:"",mode:"all",lbMature:true};
+const BANDS={pp:[["","Any"],["0-5","0 to 5 prior papers"],["6-20","6 to 20"],["21-60","21 to 60"],["61-9999","61 or more"],["na","Not resolved"]],
+             h:[["","Any"],["0-10","0 to 10 (newer)"],["11-20","11 to 20"],["21-40","21 to 40"],["41-9999","41 or more (established)"],["na","Not resolved"]]};
+function bandOk(v){
+  if(!state.band)return true;
+  if(state.band==="na")return v==null;
+  if(v==null)return false;
+  const [lo,hi]=state.band.split("-").map(Number);
+  return v>=lo&&v<=hi;
+}
+function baseOk(r){
+  if(state.sf&&SF[r[R.sf]]!==state.sf)return false;
+  if(!state.years.has(yearOf(r)))return false;
+  if(state.mature&&r[R.age]<12)return false;
+  if(!bandOk(state.pm==="pp"?r[R.pp]:r[R.h]))return false;
+  if(state.q){const q=state.q;if(!(r[R.t].toLowerCase().includes(q)||r[R.id].includes(q)))return false;}
+  return true;
+}
+function modeOk(r){return state.mode==="all"||(state.mode==="over"&&r[R.l]===2)||(state.mode==="under"&&r[R.l]===0);}
+let BASE=[],VIS=[];
+function recompute(){BASE=P.filter(baseOk);VIS=BASE.filter(modeOk);}
+// exposed for the test harness (read only)
+window.__dash={state,recompute:()=>{recompute();return{base:BASE.length,vis:VIS.length,over:VIS.filter(r=>r[R.l]===2).length,under:VIS.filter(r=>r[R.l]===0).length};},P,R,SF};
+
+// ---------------------------------------------------------------- filter UI
+(function buildFilters(){
+  const sel=$("#f-sf");
+  const counts={};P.forEach(r=>counts[r[R.sf]]=(counts[r[R.sf]]||0)+1);
+  SF.forEach((s,i)=>{const o=document.createElement("option");o.value=s;o.textContent=s+" ("+counts[i]+")";sel.appendChild(o);});
+  sel.addEventListener("change",()=>{state.sf=sel.value;update();});
+  const yb=$("#f-years");
+  D.YEARS.forEach(y=>{const b=document.createElement("button");b.type="button";b.className="btn";b.textContent=y;b.setAttribute("aria-pressed","true");b.dataset.y=y;
+    b.addEventListener("click",()=>{if(state.years.has(y)){if(state.years.size>1)state.years.delete(y);}else state.years.add(y);syncYears();update();});yb.appendChild(b);});
+  function syncYears(){$$("#f-years .btn").forEach(b=>b.setAttribute("aria-pressed",state.years.has(+b.dataset.y)?"true":"false"));}
+  $("#f-mature").addEventListener("change",e=>{state.mature=e.target.checked;update();});
+  const pm=$("#f-pm"),band=$("#f-band");
+  function fillBands(){band.innerHTML="";BANDS[state.pm].forEach(([v,l])=>{const o=document.createElement("option");o.value=v;o.textContent=l;band.appendChild(o);});band.value=state.band;}
+  fillBands();
+  pm.addEventListener("change",()=>{state.pm=pm.value;state.band="";fillBands();update();});
+  band.addEventListener("change",()=>{state.band=band.value;update();});
+  let qt=null;$("#f-q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{state.q=e.target.value.trim().toLowerCase();update();},120);});
+  $$("#f-mode .btn").forEach(b=>b.addEventListener("click",()=>{state.mode=b.dataset.mode;$$("#f-mode .btn").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));update();}));
+  $("#f-reset").addEventListener("click",()=>{state.sf="";sel.value="";state.years=new Set(D.YEARS);syncYears();state.mature=false;$("#f-mature").checked=false;state.pm="pp";pm.value="pp";state.band="";fillBands();state.q="";$("#f-q").value="";state.mode="all";$$("#f-mode .btn").forEach(x=>x.setAttribute("aria-pressed",x.dataset.mode==="all"?"true":"false"));update();});
+  $("#lb-mature").addEventListener("change",e=>{state.lbMature=e.target.checked;renderLeaderboards();});
+})();
+
+// ---------------------------------------------------------------- explorer canvas
+const cv=$("#explorer"),ctx=cv.getContext("2d"),tt=$("#tt");
+const M={l:72,r:16,t:14,b:44};
+let W=0,H=0,plot={};
+function sizeCanvas(){
+  const w=cv.parentElement.clientWidth;
+  const h=Math.max(360,Math.min(600,Math.round(w*0.56)));
+  const dpr=window.devicePixelRatio||1;
+  W=w;H=h;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);cv.style.width=w+"px";cv.style.height=h+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  plot={x0:M.l,x1:w-M.r,y0:M.t,y1:h-M.b};plot.w=plot.x1-plot.x0;plot.h=plot.y1-plot.y0;
+}
+const X=v=>plot.x0+v*plot.w, Y=v=>plot.y1-v*plot.h;
+let hoverRow=null,highlightRow=null;
+function drawExplorer(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=C.surface;ctx.fillRect(0,0,W,H);
+  const fs=W<700?11:12;
+  ctx.font=fs+"px system-ui, sans-serif";
+  // gridlines (hairline) at 0.25 steps
+  ctx.strokeStyle=C.grid;ctx.lineWidth=1;
+  [0.25,0.5,0.75].forEach(v=>{ctx.beginPath();ctx.moveTo(X(v)+0.5,plot.y0);ctx.lineTo(X(v)+0.5,plot.y1);ctx.stroke();ctx.beginPath();ctx.moveTo(plot.x0,Y(v)+0.5);ctx.lineTo(plot.x1,Y(v)+0.5);ctx.stroke();});
+  // every paper in the current filter (mode ignored) as one faint grey dot, batched into a single path
+  const greyR=W<700?1.8:2.2;
+  ctx.beginPath();
+  BASE.forEach(r=>{const x=X(r[R.ar]),y=Y(r[R.ir]);ctx.moveTo(x+greyR,y);ctx.arc(x,y,greyR,0,6.2832);});
+  ctx.fillStyle="rgba(137,135,129,0.32)";ctx.fill();
+  // emphasis dots
+  const dotR=W<700?3.2:4;
+  const draw=(rows,col)=>{rows.forEach(r=>{const x=X(r[R.ar]),y=Y(r[R.ir]);ctx.beginPath();ctx.arc(x,y,dotR+1.2,0,6.2832);ctx.fillStyle=C.surface;ctx.fill();ctx.beginPath();ctx.arc(x,y,dotR,0,6.2832);ctx.fillStyle=col;ctx.fill();});};
+  if(state.mode!=="under")draw(VIS.filter(r=>r[R.l]===2),C.over);
+  if(state.mode!=="over")draw(VIS.filter(r=>r[R.l]===0),C.under);
+  // tertile lines (solid hairline)
+  ctx.strokeStyle=C.muted;ctx.lineWidth=1;
+  [1/3,2/3].forEach(v=>{ctx.beginPath();ctx.moveTo(X(v)+0.5,plot.y0);ctx.lineTo(X(v)+0.5,plot.y1);ctx.stroke();ctx.beginPath();ctx.moveTo(plot.x0,Y(v)+0.5);ctx.lineTo(plot.x1,Y(v)+0.5);ctx.stroke();});
+  // binned mean line of BASE
+  if(BASE.length>=40){const nb=20,s=new Float64Array(nb),n=new Float64Array(nb);
+    BASE.forEach(r=>{const i=Math.min(nb-1,Math.floor(r[R.ar]*nb));s[i]+=r[R.ir];n[i]++;});
+    ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin="round";ctx.beginPath();let started=false;
+    for(let i=0;i<nb;i++){if(n[i]<5)continue;const x=X((i+0.5)/nb),y=Y(s[i]/n[i]);if(!started){ctx.moveTo(x,y);started=true;}else ctx.lineTo(x,y);}
+    ctx.stroke();}
+  // highlight (search exact hit) and hover ring
+  const ring=(r,col)=>{if(!r)return;ctx.beginPath();ctx.arc(X(r[R.ar]),Y(r[R.ir]),dotR+4,0,6.2832);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();};
+  ring(highlightRow,C.ink);ring(hoverRow,C.ink);
+  // axes
+  ctx.strokeStyle=C.axis;ctx.beginPath();ctx.moveTo(plot.x0+0.5,plot.y0);ctx.lineTo(plot.x0+0.5,plot.y1+0.5);ctx.lineTo(plot.x1,plot.y1+0.5);ctx.stroke();
+  ctx.fillStyle=C.muted;ctx.textAlign="center";ctx.textBaseline="top";
+  [0,0.25,0.5,0.75,1].forEach(v=>ctx.fillText(v===0?"0":ord(v*100),X(v),plot.y1+5));
+  ctx.textAlign="right";ctx.textBaseline="middle";
+  [0,0.25,0.5,0.75,1].forEach(v=>ctx.fillText(v===0?"0":ord(v*100),plot.x0-6,Y(v)));
+  ctx.fillStyle=C.ink2;ctx.textAlign="center";ctx.textBaseline="bottom";
+  ctx.fillText("Attention percentile (log upvotes, adjusted for age, subfield and month)",(plot.x0+plot.x1)/2,H-4);
+  ctx.save();ctx.translate(12,(plot.y0+plot.y1)/2);ctx.rotate(-Math.PI/2);ctx.textBaseline="top";ctx.fillText("Impact percentile (log citations, adjusted)",0,0);ctx.restore();
+  // region labels drawn last, with halo
+  const halo=(txt,x,y,align)=>{ctx.font="600 "+(fs+1)+"px system-ui, sans-serif";const tw=ctx.measureText(txt).width;const bx=align==="left"?x-6:x-tw-6;ctx.fillStyle="rgba(252,252,251,0.94)";ctx.strokeStyle=C.axis;ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(bx,y-11,tw+12,22,4);ctx.fill();ctx.stroke();ctx.textAlign=align;ctx.textBaseline="middle";ctx.fillStyle=C.ink;ctx.fillText(txt,x,y);ctx.font=fs+"px system-ui, sans-serif";};
+  const nU=VIS.filter(r=>r[R.l]===0).length,nO=VIS.filter(r=>r[R.l]===2).length;
+  if(state.mode!=="over")halo("Underrated: low attention, high impact ("+nU+")",X(0.02),Y(0.96),"left");
+  if(state.mode!=="under")halo("Overrated: high attention, low impact ("+nO+")",X(0.98),Y(0.04),"right");
+  if(BASE.length===0){ctx.font="600 15px system-ui, sans-serif";ctx.fillStyle=C.ink2;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("No papers match the current filters. Use Reset to clear them.",(plot.x0+plot.x1)/2,(plot.y0+plot.y1)/2);}
+  else if(VIS.length===0){ctx.font="600 15px system-ui, sans-serif";ctx.fillStyle=C.ink2;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("No "+(state.mode==="over"?"overrated":"underrated")+" papers in this selection.",(plot.x0+plot.x1)/2,(plot.y0+plot.y1)/2);}
+}
+// nearest point search: labelled dots first (they are drawn on top), then any visible paper
+function nearest(mx,my){
+  const RAD=24;let best=null,bd=RAD*RAD,ties=[];
+  const scan=(rows,bonus)=>{for(const r of rows){const dx=X(r[R.ar])-mx,dy=Y(r[R.ir])-my;const d=dx*dx+dy*dy-bonus;if(d<bd){bd=d;best=r;}}};
+  const emph=VIS.filter(r=>r[R.l]!==1);
+  scan(emph,36); // labelled dots get a 6px advantage since they are painted on top
+  scan(VIS.filter(r=>r[R.l]===1),0);
+  if(best){const bx=X(best[R.ar]),by=Y(best[R.ir]);for(const r of VIS){if(r===best)continue;const dx=X(r[R.ar])-bx,dy=Y(r[R.ir])-by;if(dx*dx+dy*dy<=9)ties.push(r);}}
+  return {best,ties};
+}
+function showTip(r,ties,cx,cy){
+  const yr=yearOf(r);
+  tt.innerHTML="";
+  const t=document.createElement("div");t.className="t";t.textContent=r[R.t]||r[R.id];tt.appendChild(t);
+  const mk=(pairs)=>{const d=document.createElement("div");d.className="row";pairs.forEach(([v,l])=>{const s=document.createElement("span");const b=document.createElement("b");b.textContent=v;s.appendChild(b);s.appendChild(document.createTextNode(" "+l));d.appendChild(s);});tt.appendChild(d);};
+  const chip=document.createElement("div");chip.style.marginBottom="3px";const c=document.createElement("span");c.className="chip "+LBLNAME[r[R.l]];c.textContent=r[R.l]===1?"typical":LBLNAME[r[R.l]];chip.appendChild(c);chip.appendChild(document.createTextNode(" "+SF[r[R.sf]]+", "+r[R.ym]+", age "+fmt(r[R.age],1)+" months"));tt.appendChild(chip);
+  mk([[r[R.up],"upvotes"],[r[R.cit],"citations"]]);
+  mk([[pct(r[R.ar]),"attention"],[pct(r[R.ir]),"impact"]]);
+  const pr=r[R.pp]==null?"prior papers not resolved":r[R.pp]+" prior papers";const hh=r[R.h]==null?"":", h-index "+r[R.h]+" (today)";
+  const m2=document.createElement("div");m2.className="more";m2.textContent=pr+hh+". Click to open arXiv:"+r[R.id];tt.appendChild(m2);
+  if(ties.length){const m=document.createElement("div");m.className="more";m.textContent=ties.length+" more paper"+(ties.length>1?"s":"")+" at this spot: "+ties.slice(0,2).map(x=>x[R.t].slice(0,50)+(x[R.t].length>50?"...":"")).join(" | ")+(ties.length>2?" ...":"");tt.appendChild(m);}
+  tt.style.display="block";
+  const bw=tt.offsetWidth,bh=tt.offsetHeight;
+  let lx=cx+14,ly=cy+14;if(lx+bw>window.innerWidth-8)lx=cx-bw-14;if(ly+bh>window.innerHeight-8)ly=cy-bh-14;
+  tt.style.left=Math.max(4,lx)+"px";tt.style.top=Math.max(4,ly)+"px";
+}
+function hideTip(){tt.style.display="none";}
+cv.addEventListener("pointermove",e=>{const b=cv.getBoundingClientRect();const {best,ties}=nearest(e.clientX-b.left,e.clientY-b.top);
+  if(best!==hoverRow){hoverRow=best;drawExplorer();}
+  if(best)showTip(best,ties,e.clientX,e.clientY);else hideTip();
+  cv.style.cursor=best?"pointer":"crosshair";});
+cv.addEventListener("pointerleave",()=>{hoverRow=null;hideTip();drawExplorer();});
+cv.addEventListener("click",e=>{const b=cv.getBoundingClientRect();const {best}=nearest(e.clientX-b.left,e.clientY-b.top);if(best)window.open("https://arxiv.org/abs/"+best[R.id],"_blank","noopener");});
+window.addEventListener("resize",()=>{sizeCanvas();drawExplorer();});
+
+// ---------------------------------------------------------------- tables
+function th(cols,sortState,onSort){
+  const tr=document.createElement("tr");
+  cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.label;if(c.num)h.classList.add("num");if(c.key){h.classList.add("sortable");h.setAttribute("scope","col");h.tabIndex=0;h.setAttribute("aria-sort",sortState.key===c.key?(sortState.dir>0?"ascending":"descending"):"none");
+    const a=document.createElement("span");a.className="arrow";a.textContent=sortState.key===c.key?(sortState.dir>0?"▲":"▼"):"";h.appendChild(a);
+    const go=()=>{if(sortState.key===c.key)sortState.dir*=-1;else{sortState.key=c.key;sortState.dir=c.defaultDir||-1;}onSort();};
+    h.addEventListener("click",go);h.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go();}});}
+    tr.appendChild(h);});
+  return tr;
+}
+function td(txt,cls){const d=document.createElement("td");if(cls)d.className=cls;d.textContent=txt;return d;}
+function titleCell(r){const d=document.createElement("td");d.className="title";const a=document.createElement("a");a.href="https://arxiv.org/abs/"+r[R.id];a.target="_blank";a.rel="noopener";a.textContent=r[R.t]||r[R.id];a.title=r[R.t]||r[R.id];d.appendChild(a);return d;}
+function chipCell(r){const d=document.createElement("td");const c=document.createElement("span");c.className="chip "+LBLNAME[r[R.l]];c.textContent=r[R.l]===1?"typical":LBLNAME[r[R.l]];d.appendChild(c);return d;}
+const gap=r=>Math.abs(r[R.ar]-r[R.ir]);
+const LBCOLS=[{label:"#"},{label:"Title",key:"t",defaultDir:1},{label:"Subfield",key:"sf",defaultDir:1},{label:"Year",key:"yr",num:true},{label:"Age (months)",key:"age",num:true},{label:"Upvotes",key:"up",num:true},{label:"Citations",key:"cit",num:true},{label:"Attention pct",key:"ar",num:true},{label:"Impact pct",key:"ir",num:true},{label:"Gap",key:"gap",num:true}];
+const val=(r,k)=>k==="t"?r[R.t].toLowerCase():k==="sf"?SF[r[R.sf]]:k==="yr"?yearOf(r):k==="gap"?gap(r):r[R[k]];
+function sortRows(rows,s,tie){rows.sort((a,b)=>{let x=val(a,s.key),y=val(b,s.key);let c=x<y?-1:x>y?1:0;if(c===0&&tie)c=tie(a,b);return c*s.dir;});}
+const lbSort={over:{key:"gap",dir:-1},under:{key:"gap",dir:-1}};
+function renderLeaderboard(kind){
+  const tbl=$("#lb-"+kind),lbl=kind==="over"?2:0;
+  let rows=BASE.filter(r=>r[R.l]===lbl&&(!state.lbMature||(r[R.age]>=12&&r[R.cit]>=1)));
+  const tie=kind==="over"?((a,b)=>a[R.up]-b[R.up]):((a,b)=>a[R.cit]-b[R.cit]);
+  sortRows(rows,lbSort[kind],tie);
+  rows=rows.slice(0,15);
+  const thead=tbl.tHead,tbody=tbl.tBodies[0];thead.innerHTML="";tbody.innerHTML="";
+  thead.appendChild(th(LBCOLS,lbSort[kind],()=>renderLeaderboard(kind)));
+  if(!rows.length){const tr=document.createElement("tr");const d=td("No papers in this selection.","empty");d.colSpan=LBCOLS.length;tr.appendChild(d);tbody.appendChild(tr);return;}
+  rows.forEach((r,i)=>{const tr=document.createElement("tr");tr.appendChild(td(i+1,"num"));tr.appendChild(titleCell(r));tr.appendChild(td(SF[r[R.sf]]));tr.appendChild(td(yearOf(r),"num"));tr.appendChild(td(fmt(r[R.age],0),"num"));tr.appendChild(td(r[R.up],"num"));tr.appendChild(td(r[R.cit],"num"));tr.appendChild(td(ord(r[R.ar]*100),"num"));tr.appendChild(td(ord(r[R.ir]*100),"num"));tr.appendChild(td((gap(r)*100).toFixed(1),"num"));tbody.appendChild(tr);});
+}
+function renderLeaderboards(){renderLeaderboard("over");renderLeaderboard("under");}
+const TCOLS=[{label:"Title",key:"t",defaultDir:1},{label:"Label"},{label:"Subfield",key:"sf",defaultDir:1},{label:"Month",key:"ym",defaultDir:-1},{label:"Age (months)",key:"age",num:true},{label:"Upvotes",key:"up",num:true},{label:"Citations",key:"cit",num:true},{label:"Attention pct",key:"ar",num:true},{label:"Impact pct",key:"ir",num:true},{label:"Prior papers",key:"pp",num:true},{label:"h-index (today)",key:"h",num:true}];
+const tSort={key:"up",dir:-1};let page=0;const PAGE=25;
+function renderTable(){
+  const tbl=$("#tbl");const rows=VIS.slice();
+  sortRows(rows,tSort,(a,b)=>a[R.cit]-b[R.cit]);
+  const np=Math.max(1,Math.ceil(rows.length/PAGE));if(page>=np)page=np-1;
+  const thead=tbl.tHead,tbody=tbl.tBodies[0];thead.innerHTML="";tbody.innerHTML="";
+  thead.appendChild(th(TCOLS,tSort,()=>{page=0;renderTable();}));
+  const slice=rows.slice(page*PAGE,(page+1)*PAGE);
+  if(!slice.length){const tr=document.createElement("tr");const d=td("No papers match the current filters.","empty");d.colSpan=TCOLS.length;tr.appendChild(d);tbody.appendChild(tr);}
+  slice.forEach(r=>{const tr=document.createElement("tr");tr.appendChild(titleCell(r));tr.appendChild(chipCell(r));tr.appendChild(td(SF[r[R.sf]]));tr.appendChild(td(r[R.ym]));tr.appendChild(td(fmt(r[R.age],0),"num"));tr.appendChild(td(r[R.up],"num"));tr.appendChild(td(r[R.cit],"num"));tr.appendChild(td(ord(r[R.ar]*100),"num"));tr.appendChild(td(ord(r[R.ir]*100),"num"));tr.appendChild(td(r[R.pp]==null?"":r[R.pp],"num"));tr.appendChild(td(r[R.h]==null?"":r[R.h],"num"));tbody.appendChild(tr);});
+  $("#pg-info").textContent=rows.length?("Page "+(page+1)+" of "+np+", "+rows.length+" papers"):"0 papers";
+  $("#pg-prev").disabled=page===0;$("#pg-next").disabled=page>=np-1;
+}
+$("#pg-prev").addEventListener("click",()=>{if(page>0){page--;renderTable();}});
+$("#pg-next").addEventListener("click",()=>{page++;renderTable();});
+
+// ---------------------------------------------------------------- update
+function update(){
+  recompute();
+  // exact id search highlight
+  highlightRow=null;if(state.q&&/^\d{4}\.\d{4,5}$/.test(state.q)){highlightRow=VIS.find(r=>r[R.id]===state.q)||null;}
+  const nO=VIS.filter(r=>r[R.l]===2).length,nU=VIS.filter(r=>r[R.l]===0).length;
+  $("#f-count").textContent=VIS.length+" of "+P.length+" papers shown ("+nO+" overrated, "+nU+" underrated)";
+  drawExplorer();renderLeaderboards();page=0;renderTable();
+}
+
+// ---------------------------------------------------------------- SVG helpers
+const NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,children){const e=document.createElementNS(NS,tag);if(attrs)for(const k in attrs){if(attrs[k]!=null)e.setAttribute(k,attrs[k]);}if(children)children.forEach(c=>{if(c!=null)e.appendChild(typeof c==="string"?document.createTextNode(c):c);});return e;}
+function text(x,y,s,attrs){const a=Object.assign({x,y,fill:C.ink2,"font-size":12,"font-family":"system-ui, sans-serif"},attrs||{});return el("text",a,[s]);}
+function svgRoot(w,h,label){return el("svg",{viewBox:"0 0 "+w+" "+h,width:"100%",role:"img","aria-label":label,style:"max-width:"+w+"px"});}
+function lin(d0,d1,r0,r1){const f=v=>r0+(v-d0)/(d1-d0)*(r1-r0);f.inv=p=>d0+(p-r0)/(r1-r0)*(d1-d0);return f;}
+function log10s(d0,d1,r0,r1){const a=Math.log10(d0),b=Math.log10(d1);return v=>r0+(Math.log10(v)-a)/(b-a)*(r1-r0);}
+function log2s(d0,d1,r0,r1){const a=Math.log2(d0),b=Math.log2(d1);return v=>r0+(Math.log2(v)-a)/(b-a)*(r1-r0);}
+const stip=(node,html)=>{node.style.cursor="default";node.addEventListener("pointermove",e=>{tt.innerHTML="";const d=document.createElement("div");d.className="svgtip";html.split("\n").forEach((line,i)=>{const p=document.createElement("div");if(i===0)p.style.fontWeight="650";p.textContent=line;d.appendChild(p);});tt.appendChild(d);tt.style.display="block";let lx=e.clientX+14,ly=e.clientY+14;const bw=tt.offsetWidth,bh=tt.offsetHeight;if(lx+bw>window.innerWidth-8)lx=e.clientX-bw-14;if(ly+bh>window.innerHeight-8)ly=e.clientY-bh-14;tt.style.left=lx+"px";tt.style.top=ly+"px";});node.addEventListener("pointerleave",hideTip);};
+function legend(svg,x,y,items){let cx=x;items.forEach(it=>{const g=el("g");if(it.line){g.appendChild(el("line",{x1:cx,y1:y,x2:cx+18,y2:y,stroke:it.color,"stroke-width":2,"stroke-dasharray":it.dash||null}));}else{g.appendChild(el("circle",{cx:cx+9,cy:y,r:4.5,fill:it.hollow?C.surface:it.color,stroke:it.color,"stroke-width":2}));}
+  const t=text(cx+24,y+4,it.label,{"font-size":11.5,fill:C.ink2});g.appendChild(t);svg.appendChild(g);cx+=24+it.label.length*6.3+16;});}
+function grid(svg,xs,ys,x0,x1,y0,y1,xt,yt){yt.forEach(v=>svg.appendChild(el("line",{x1:x0,x2:x1,y1:ys(v)+0.5,y2:ys(v)+0.5,stroke:C.grid})));xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:y0,y2:y1,stroke:C.grid})));}
+function axes(svg,x0,x1,y0,y1){svg.appendChild(el("path",{d:"M"+x0+" "+y0+" V"+y1+" H"+x1,fill:"none",stroke:C.axis}));}
+function whisker(svg,x1,x2,y,color){svg.appendChild(el("line",{x1,x2,y1:y,y2:y,stroke:color,"stroke-width":1.5}));}
+function dot(svg,x,y,color,hollow,r){return svg.appendChild(el("circle",{cx:x,cy:y,r:r||4.5,fill:hollow?C.surface:color,stroke:hollow?color:C.surface,"stroke-width":2}));}
+
+// (a) dose response
+(function(){
+  const w=560,h=330,m={l:52,r:16,t:30,b:46};const x0=m.l,x1=w-m.r,y0=m.t,y1=h-m.b;
+  const svg=svgRoot(w,h,"Mean log citations by upvote decile, raw and adjusted");
+  const xs=log10s(1.5,110,x0,x1);const yl=Math.log1p(4),yh=Math.log1p(70);const ys=lin(yl,yh,y1,y0);
+  const yt=[5,10,20,50];grid(svg,xs,v=>ys(Math.log1p(v)),x0,x1,y0,y1,[2,5,10,20,50,100],yt);axes(svg,x0,x1,y0,y1);
+  [2,5,10,20,50,100].forEach(v=>svg.appendChild(text(xs(v),y1+16,String(v),{"text-anchor":"middle",fill:C.muted})));
+  yt.forEach(v=>svg.appendChild(text(x0-8,ys(Math.log1p(v))+4,String(v),{"text-anchor":"end",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-8,"Median upvotes of the decile (log scale)",{"text-anchor":"middle"}));
+  svg.appendChild(el("text",{transform:"translate(14 "+((y0+y1)/2)+") rotate(-90)","text-anchor":"middle",fill:C.ink2,"font-size":12,"font-family":"system-ui, sans-serif"},["Citations, geometric mean (log scale)"]));
+  const series=[["raw",C.grey,"Raw mean",-3],["adj",C.blue,"Adjusted for age, subfield and month",3]];
+  series.forEach(([k,col,lab,dx])=>{const pts=D.DR.map(d=>[xs(d.up)+dx,ys(d[k]),d]);
+    svg.appendChild(el("path",{d:pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join(" "),fill:"none",stroke:col,"stroke-width":2,"stroke-linejoin":"round"}));
+    pts.forEach(([x,y,d])=>{const ci=d[k+"_ci"];svg.appendChild(el("line",{x1:x,x2:x,y1:ys(ci[0]),y2:ys(ci[1]),stroke:col,"stroke-width":1.5}));const c=dot(svg,x,y,col);
+      stip(c,lab+"\nDecile "+d.d+": upvotes "+d.umin+" to "+d.umax+" (median "+d.up+"), n "+d.n+"\nGeometric mean citations "+fmt(Math.expm1(d[k]),1)+" [" +fmt(Math.expm1(ci[0]),1)+", "+fmt(Math.expm1(ci[1]),1)+"]\nMedian citations "+d.med+", share in top decile within quarter "+fmt(d.top,2));});});
+  legend(svg,x0,14,[{color:C.grey,label:"Raw mean"},{color:C.blue,label:"Adjusted for age, subfield and month"}]);
+  $("#c-dose").appendChild(svg);
+})();
+
+// (b) spec ladder
+(function(){
+  const rows=D.LADDER;const w=560,rowH=34,m={l:230,r:16,t:34,b:40};const h=m.t+rows.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+  const svg=svgRoot(w,h,"Incidence rate ratio per doubling of upvotes across specifications and estimators");
+  const xs=log2s(1,2.6,x0,x1);const xt=[1,1.25,1.5,1.75,2,2.5];
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:v===1?C.axis:C.grid})));
+  xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,"×"+v,{"text-anchor":"middle",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-6,"Citations per doubling of upvotes (log scale)",{"text-anchor":"middle"}));
+  const ser=[["poisson",C.orange,"Poisson QMLE",-9],["nb2",C.blue,"Negative binomial (NB2)",0],["ols",C.grey,"OLS log scale ratio",9]];
+  rows.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;
+    if(r.main)svg.appendChild(el("rect",{x:6,y:y-rowH/2+2,width:w-12,height:rowH-4,fill:"#f1f0ec",rx:4}));
+    svg.appendChild(text(x0-8,y+4,r.label,{"text-anchor":"end",fill:r.main?C.ink:C.ink2,"font-weight":r.main?650:400,"font-size":11.5}));
+    ser.forEach(([k,col,lab,dy])=>{const v=r[k];const yy=y+dy;whisker(svg,xs(v[1]),xs(v[2]),yy,col);const c=dot(svg,xs(v[0]),yy,col,false,r.main?5:4);
+      stip(c,lab+"\n"+r.label+"\n×"+fmt(v[0],2)+" [" +fmt(v[1],2)+", "+fmt(v[2],2)+"] per doubling");});});
+  legend(svg,x0-190,14,ser.map(([k,col,lab])=>({color:col,label:lab})));
+  $("#c-ladder").appendChild(svg);
+})();
+
+// (c) ROC + PR
+function drawROC(model){
+  const cur=D.CURVES[model];$("#c-roc").innerHTML="";$("#c-pr").innerHTML="";
+  const w=290,h=300,m={l:40,r:10,t:26,b:40};const x0=m.l,x1=w-m.r,y0=m.t,y1=h-m.b;
+  const S=[["controls_only",C.orange,"Controls only",null],["upvotes_only",C.blue,"Upvotes only","5 4"],["attention",C.blue,"Controls + upvotes",null]];
+  const mk=(kind)=>{const svg=svgRoot(w,h,kind==="roc"?"ROC curves":"Precision recall curves");const xs=lin(0,1,x0,x1),ys=lin(0,1,y1,y0);
+    grid(svg,xs,ys,x0,x1,y0,y1,[0.25,0.5,0.75],[0.25,0.5,0.75]);axes(svg,x0,x1,y0,y1);
+    [0,0.5,1].forEach(v=>{svg.appendChild(text(xs(v),y1+15,String(v),{"text-anchor":"middle",fill:C.muted,"font-size":11}));svg.appendChild(text(x0-6,ys(v)+4,String(v),{"text-anchor":"end",fill:C.muted,"font-size":11}));});
+    if(kind==="roc")svg.appendChild(el("line",{x1:xs(0),y1:ys(0),x2:xs(1),y2:ys(1),stroke:C.axis}));
+    else svg.appendChild(el("line",{x1:xs(0),y1:ys(D.BASE_RATE),x2:xs(1),y2:ys(D.BASE_RATE),stroke:C.axis}));
+    svg.appendChild(text((x0+x1)/2,h-8,kind==="roc"?"False positive rate":"Recall",{"text-anchor":"middle","font-size":11.5}));
+    svg.appendChild(el("text",{transform:"translate(11 "+((y0+y1)/2)+") rotate(-90)","text-anchor":"middle",fill:C.ink2,"font-size":11.5,"font-family":"system-ui, sans-serif"},[kind==="roc"?"True positive rate":"Precision"]));
+    svg.appendChild(text(x0,14,kind==="roc"?"ROC":"Precision recall",{fill:C.ink,"font-weight":650}));
+    S.forEach(([k,col,lab,dash])=>{const pts=cur[k][kind];const d=pts.map((p,i)=>(i?"L":"M")+fmt(xs(p[0]),1)+" "+fmt(ys(p[1]),1)).join(" ");
+      const path=el("path",{d,fill:"none",stroke:col,"stroke-width":2,"stroke-dasharray":dash,"stroke-linejoin":"round"});svg.appendChild(path);
+      const v=kind==="roc"?cur[k].auc_ledger:cur[k].pr_ledger;stip(path,lab+"\n"+(kind==="roc"?"AUC ":"PR AUC ")+fmt(v,3));});
+    return svg;};
+  $("#c-roc").appendChild(mk("roc"));$("#c-pr").appendChild(mk("pr"));
+  // legend with values under the pair
+  const lg=document.createElement("div");lg.className="legend";
+  S.forEach(([k,col,lab,dash])=>{const s=document.createElement("span");const l=document.createElement("span");l.className="ln";l.style.borderColor=col;if(dash)l.style.borderTopStyle="dashed";s.appendChild(l);s.appendChild(document.createTextNode(lab+": AUC "+fmt(cur[k].auc_ledger,3)+", PR AUC "+fmt(cur[k].pr_ledger,3)));lg.appendChild(s);});
+  const old=$("#p-roc .legend");if(old)old.remove();$("#p-roc .two").after(lg);
+}
+drawROC("logistic");
+$$("#roc-model .btn").forEach(b=>b.addEventListener("click",()=>{$$("#roc-model .btn").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));drawROC(b.dataset.m);}));
+
+// (d) forest of delta AUC
+(function(){
+  const rows=D.FOREST;const w=560,rowH=30,m={l:290,r:56,t:34,b:40};const h=m.t+rows.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+  const svg=svgRoot(w,h,"Change in AUC across specifications with confidence intervals");
+  const xs=lin(-0.02,0.18,x0,x1);const xt=[0,0.05,0.1,0.15];
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:v===0?C.axis:C.grid})));
+  xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,(v>0?"+":"")+v.toFixed(2),{"text-anchor":"middle",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-6,"Change in AUC from adding attention",{"text-anchor":"middle"}));
+  rows.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;
+    if(r.headline)svg.appendChild(el("rect",{x:6,y:y-rowH/2+2,width:w-12,height:rowH-4,fill:"#f1f0ec",rx:4}));
+    svg.appendChild(text(x0-8,y+4,r.label,{"text-anchor":"end",fill:r.flagged?C.muted:(r.headline?C.ink:C.ink2),"font-weight":r.headline?650:400,"font-size":11}));
+    [["logistic",C.blue,false,-5,"Logistic"],["hgb",C.grey,true,5,"Histogram gradient boosting"]].forEach(([k,col,hollow,dy,lab])=>{const v=r[k];const yy=y+dy;whisker(svg,xs(v[1]),xs(v[2]),yy,col);const c=dot(svg,xs(v[0]),yy,col,hollow,r.headline?5:4);
+      stip(c,lab+"\n"+r.label+"\nChange in AUC "+(v[0]>0?"+":"")+fmt(v[0],3)+" [" +(v[1]>0?"+":"")+fmt(v[1],3)+", "+(v[2]>0?"+":"")+fmt(v[2],3)+"], n test "+r.n);});
+    svg.appendChild(text(w-6,y+4,"n "+r.n,{"text-anchor":"end",fill:C.muted,"font-size":10}));});
+  legend(svg,x0-260,14,[{color:C.blue,label:"Logistic regression"},{color:C.grey,hollow:true,label:"Histogram gradient boosting"}]);
+  $("#c-forest").appendChild(svg);
+})();
+
+// (e) subfield slopes
+(function(){
+  const rows=D.SLOPES;const w=560,rowH=24,m={l:130,r:70,t:26,b:40};const h=m.t+rows.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+  const svg=svgRoot(w,h,"Slope of log citations on log upvotes by subfield with confidence intervals");
+  const xs=lin(0.54,0.74,x0,x1);const xt=[0.55,0.6,0.65,0.7];
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:C.grid})));
+  svg.appendChild(el("line",{x1:xs(NUM.lmm_slope)+0.5,x2:xs(NUM.lmm_slope)+0.5,y1:m.t,y2:h-m.b,stroke:C.axis,"stroke-width":1.5}));
+  svg.appendChild(text(xs(NUM.lmm_slope),m.t-8,"fixed slope "+fmt(NUM.lmm_slope,3),{"text-anchor":"middle",fill:C.muted,"font-size":10.5}));
+  xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,v.toFixed(2),{"text-anchor":"middle",fill:C.muted})));
+  svg.appendChild(text(x1,h-6,"Elasticity of citations to upvotes (log scale slope)",{"text-anchor":"end"}));
+  rows.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;svg.appendChild(text(x0-8,y+4,r.sf,{"text-anchor":"end","font-size":11.5}));
+    whisker(svg,xs(r.ci[0]),xs(r.ci[1]),y,C.blue);const c=dot(svg,xs(r.slope),y,C.blue);
+    stip(c,r.sf+"\nSlope "+fmt(r.slope,3)+" ["+fmt(r.ci[0],3)+", "+fmt(r.ci[1],3)+"], n "+r.n);
+    svg.appendChild(text(x1+8,y+4,"n "+r.n,{fill:C.muted,"font-size":10.5}));});
+  $("#c-slopes").appendChild(svg);
+})();
+
+// (f) misjudged: prestige medians + drivers
+(function(){
+  const rows=D.PRESTIGE;const w=380,rowH=52,m={l:172,r:14,t:30,b:40};const h=m.t+rows.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+  const svg=svgRoot(w,h,"Median prestige of overrated, underrated and other papers with confidence intervals");
+  const xs=lin(0,26,x0,x1);const xt=[0,5,10,15,20,25];
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:C.grid})));
+  xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,String(v),{"text-anchor":"middle",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-6,"Median (papers, years or h-index)",{"text-anchor":"middle"}));
+  const G=[["over",C.over,"Overrated",-11],["under",C.under,"Underrated",0],["neutral",C.grey,"All other papers",11]];
+  rows.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;
+    const lab=r.label.split(" (");svg.appendChild(text(x0-8,y+(lab[1]?0:4),lab[0],{"text-anchor":"end","font-size":11}));if(lab[1])svg.appendChild(text(x0-8,y+13,"("+lab[1],{"text-anchor":"end","font-size":10,fill:C.muted}));
+    G.forEach(([k,col,glab,dy])=>{const v=r[k];const yy=y+dy;whisker(svg,xs(v[1]),xs(v[2]),yy,col);const c=dot(svg,xs(v[0]),yy,col,r.leaky,4.5);
+      stip(c,glab+"\n"+r.label+"\nMedian "+v[0]+" ["+v[1]+", "+v[2]+"], n "+r["n_"+k]);});});
+  legend(svg,x0-166,14,G.map(([k,col,lab])=>({color:col,label:lab})));
+  $("#c-prestige").appendChild(svg);
+  const drv=(key,col,title,n)=>{const rs=D.DRIVERS[key];const w=380,rowH=26,m={l:170,r:14,t:30,b:40};const h=m.t+rs.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+    const svg=svgRoot(w,h,title);const xs=log2s(0.08,4,x0,x1);const xt=[0.1,0.25,0.5,1,2,4];
+    xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:v===1?C.axis:C.grid})));
+    xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,String(v),{"text-anchor":"middle",fill:C.muted})));
+    svg.appendChild(text((x0+x1)/2,h-6,"Odds ratio (log scale)",{"text-anchor":"middle"}));
+    svg.appendChild(text(6,14,title+" (n "+n+")",{fill:C.ink,"font-weight":650,"font-size":11.5}));
+    rs.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;svg.appendChild(text(x0-8,y+4,r.f,{"text-anchor":"end","font-size":11}));
+      const lo=Math.max(0.08,r.ci[0]),hi=Math.min(4,r.ci[1]);whisker(svg,xs(lo),xs(hi),y,col);const c=dot(svg,xs(r.or),y,col);
+      stip(c,r.f+"\nOdds ratio "+fmt(r.or,2)+" ["+fmt(r.ci[0],2)+", "+fmt(r.ci[1],2)+"], p "+fmt(r.p,3));});
+    return svg;};
+  $("#c-drv-over").appendChild(drv("over",C.over,"Correlates of being overrated",D.DRIVERS.n_over));
+  $("#c-drv-under").appendChild(drv("under",C.under,"Correlates of being underrated",D.DRIVERS.n_under));
+})();
+
+// (g) CCDF
+(function(){
+  const w=560,h=330,m={l:52,r:16,t:30,b:46};const x0=m.l,x1=w-m.r,y0=m.t,y1=h-m.b;
+  const svg=svgRoot(w,h,"Share of papers with at least a given number of citations, trending vs never trending");
+  const xs=v=>x0+(Math.log10(v+1)/Math.log10(5001))*(x1-x0);const ys=lin(0,1,y1,y0);
+  const xt=[0,1,3,10,30,100,300,1000,5000];const yt=[0.25,0.5,0.75,1];
+  yt.forEach(v=>svg.appendChild(el("line",{x1:x0,x2:x1,y1:ys(v)+0.5,y2:ys(v)+0.5,stroke:C.grid})));
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:y0,y2:y1,stroke:C.grid})));
+  axes(svg,x0,x1,y0,y1);
+  xt.forEach(v=>svg.appendChild(text(xs(v),y1+16,String(v),{"text-anchor":"middle",fill:C.muted})));
+  [0,0.25,0.5,0.75,1].forEach(v=>svg.appendChild(text(x0-8,ys(v)+4,String(v),{"text-anchor":"end",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-8,"Citations (log scale)",{"text-anchor":"middle"}));
+  svg.appendChild(el("text",{transform:"translate(14 "+((y0+y1)/2)+") rotate(-90)","text-anchor":"middle",fill:C.ink2,"font-size":12,"font-family":"system-ui, sans-serif"},["Share of papers with at least this many"]));
+  // 70th percentile of never trending reference line
+  const yref=ys(1-NUM.lowatt_pct);
+  svg.appendChild(el("line",{x1:x0,x2:x1,y1:yref,y2:yref,stroke:C.axis,"stroke-dasharray":"2 3"}));
+  svg.appendChild(text(x1-4,yref-5,"70th percentile of never trending papers",{"text-anchor":"end",fill:C.muted,"font-size":10}));
+  const S=[["control",C.orange,"Never trending",null,D.CCDF.n_control],["low_att",C.blue,"Featured, bottom third of attention","5 4",D.CCDF.n_low_att],["trending",C.blue,"Featured (all)",null,D.CCDF.n_trending]];
+  S.forEach(([k,col,lab,dash,n])=>{const pts=D.CCDF[k];const d=pts.map((p,i)=>(i?"L":"M")+fmt(xs(p[0]),1)+" "+fmt(ys(p[1]),1)).join(" ");
+    const path=el("path",{d,fill:"none",stroke:col,"stroke-width":2,"stroke-dasharray":dash,"stroke-linejoin":"round"});svg.appendChild(path);
+    stip(path,lab+" (n "+n+")\nMedian citations "+D.CCDF["median_"+(k==="control"?"control":k==="trending"?"trending":"low_att")]);
+    pts.forEach(p=>{if([1,10,100,1000].includes(p[0])){const c=dot(svg,xs(p[0]),ys(p[1]),col,false,3.5);stip(c,lab+"\nShare with at least "+p[0]+" citations: "+fmt(p[1],3));}});});
+  legend(svg,x0,14,[{color:C.blue,line:true,label:"Featured (all)"},{color:C.blue,line:true,dash:"5 4",label:"Featured, bottom third of attention"},{color:C.orange,line:true,label:"Never trending"}]);
+  svg.appendChild(text(x1-4,ys(0.62),"Matched premium ×"+fmt(NUM.prem_ratio,2)+" ["+fmt(NUM.prem_ci[0],2)+", "+fmt(NUM.prem_ci[1],2)+"]",{"text-anchor":"end",fill:C.ink,"font-size":11.5,"font-weight":650}));
+  $("#c-ccdf").appendChild(svg);
+})();
+
+// (h) IV coefficient plot
+(function(){
+  const rows=D.IVROWS;const w=1000,rowH=40,m={l:420,r:30,t:16,b:44};const h=m.t+rows.length*rowH+m.b;const x0=m.l,x1=w-m.r;
+  const svg=svgRoot(w,h,"Elasticity estimates from OLS and the attempted crowding instrument");
+  const xs=lin(-0.1,1.1,x0,x1);const xt=[0,0.25,0.5,0.75,1];
+  xt.forEach(v=>svg.appendChild(el("line",{x1:xs(v)+0.5,x2:xs(v)+0.5,y1:m.t,y2:h-m.b,stroke:v===0?C.axis:C.grid})));
+  xt.forEach(v=>svg.appendChild(text(xs(v),h-m.b+16,v.toFixed(2),{"text-anchor":"middle",fill:C.muted})));
+  svg.appendChild(text((x0+x1)/2,h-6,"Elasticity of citations to upvotes (log citations on log upvotes)",{"text-anchor":"middle"}));
+  rows.forEach((r,i)=>{const y=m.t+i*rowH+rowH/2;svg.appendChild(text(x0-10,y+4,r.label,{"text-anchor":"end","font-size":11.5,fill:r.kind==="mech"?C.muted:C.ink2}));
+    whisker(svg,xs(r.lo),xs(r.hi),y,r.kind==="ols"?C.blue:C.ink2);const c=dot(svg,xs(r.b),y,r.kind==="ols"?C.blue:C.ink2,r.kind==="mech",5);
+    stip(c,r.label+"\nEstimate "+fmt(r.b,3)+" ["+fmt(r.lo,3)+", "+fmt(r.hi,3)+"], n "+r.n+"\n"+r.note);
+    svg.appendChild(text(xs(r.hi)+8,y+4,fmt(r.b,3)+" ["+fmt(r.lo,3)+", "+fmt(r.hi,3)+"]",{fill:C.muted,"font-size":10.5}));});
+  $("#c-iv").appendChild(svg);
+})();
+
+// ---------------------------------------------------------------- go
+sizeCanvas();update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "track": "A_acl_companion",
+  "status": "documented_deferral",
+  "verdict_reason": "non_load_bearing_companion + new_corpus_overrun + parallel_trends_not_defensible (2023-2025 LLM shock) + credibly_answered_in_prior_work",
+  "policy": {
+    "event": "ACL/ARR anonymity-period repeal",
+    "adopted": "2017-10 (effective 2018 cycle)",
+    "revised_2022": "ACL 2022 commitment/anonymity clarification",
+    "repeal_announced": "2024-01-15 (one source 2024-01-12; confirm)",
+    "repeal_effective": "ARR 2024-02-15 cycle",
+    "confidence": "high_on_repeal; adoption_first-bound-deadline needs ACL admin-wiki confirm"
+  },
+  "prior_art": "arXiv:2306.13891 Elazar et al. (TMLR 2023): outcome=ACCEPTANCE (not citations), within-venue matching + negative-outcome-control, ICLR 2018-2022, naive ~9.8-10.0% -> ~2% adjusted (<4% in 7/9 specs, insignificant in 4/9); predates the Jan-2024 repeal; did NOT use a cross-venue policy DiD -> a neighbour result, not a full answer",
+  "design": {
+    "treated": "*CL/ACL-Anthology venues (ACL/EMNLP/NAACL/EACL/Findings via ARR)",
+    "control": "CVPR/NeurIPS/ICLR",
+    "estimator": "event-study DiD + Wald-DiD (policy as IV for early-arXiving)",
+    "outcome": "citations within K months / within-cycle citation percentile",
+    "identifying_assumption": "parallel trends (event-study pretest + placebo cutoff)"
+  },
+  "feasibility": {
+    "linkage": "ACL Anthology (offline XML) + S2 batch externalIds/citations + Kaggle arXiv v1",
+    "scale": "~1e4 papers, ~1e4 S2 calls, ~1 day collect + 0.5 day analyze",
+    "sample_not_binding": true,
+    "parallel_trends_defensible": false
+  },
+  "d5_flag": "D1 weak AND D4 deferred -> clean identification rests on D3 (predictive) alone; D1 suggestive support; flag per D5 follow-up"
+}

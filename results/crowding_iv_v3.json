@@ -1,0 +1,965 @@
+{
+ "ols": {
+  "honest_FE_tierB": {
+   "FE": "release_month + dow + subfield_kw",
+   "controls": [
+    "age_months",
+    "log_n_authors",
+    "has_github",
+    "title_n_words",
+    "title_has_colon",
+    "abstract_n_chars",
+    "kw_llm",
+    "kw_agent",
+    "kw_diffusion",
+    "kw_reasoning",
+    "kw_benchmark",
+    "kw_survey",
+    "kw_efficient",
+    "kw_multimodal",
+    "kw_rl",
+    "kw_scaling",
+    "log1p_max_prior_papers_true",
+    "max_years_active"
+   ],
+   "beta": 0.5080845095409993,
+   "N": 11230,
+   "se_cluster_day": 0.015168136978539764,
+   "se_cluster_month": 0.03514175391142091,
+   "G_day": 674,
+   "G_month": 34
+  },
+  "honest_FE_noprestige": {
+   "FE": "release_month + dow + subfield_kw",
+   "controls": [
+    "age_months",
+    "log_n_authors",
+    "has_github",
+    "title_n_words",
+    "title_has_colon",
+    "abstract_n_chars",
+    "kw_llm",
+    "kw_agent",
+    "kw_diffusion",
+    "kw_reasoning",
+    "kw_benchmark",
+    "kw_survey",
+    "kw_efficient",
+    "kw_multimodal",
+    "kw_rl",
+    "kw_scaling"
+   ],
+   "beta": 0.5103021149923962,
+   "se_cluster_day": 0.015150584521781139,
+   "N": 11344
+  },
+  "day_FE_tierB": {
+   "FE": "cohort_day + subfield_kw",
+   "controls": [
+    "age_months",
+    "log_n_authors",
+    "has_github",
+    "title_n_words",
+    "title_has_colon",
+    "abstract_n_chars",
+    "kw_llm",
+    "kw_agent",
+    "kw_diffusion",
+    "kw_reasoning",
+    "kw_benchmark",
+    "kw_survey",
+    "kw_efficient",
+    "kw_multimodal",
+    "kw_rl",
+    "kw_scaling",
+    "log1p_max_prior_papers_true",
+    "max_years_active"
+   ],
+   "beta": 0.5136240238975054,
+   "se_cluster_day": 0.015429776040894898,
+   "N": 11220
+  },
+  "legacy_v1_replication": {
+   "FE": "cohort_day + subfield",
+   "controls": [
+    "age_months",
+    "n_authors",
+    "has_github",
+    "title_n_words",
+    "title_has_colon",
+    "abstract_n_chars",
+    "kw_llm",
+    "kw_agent",
+    "kw_diffusion",
+    "kw_reasoning",
+    "kw_benchmark",
+    "kw_survey",
+    "kw_efficient",
+    "kw_multimodal",
+    "kw_rl",
+    "kw_scaling",
+    "max_hindex",
+    "max_papercount_cur2026_w99"
+   ],
+   "beta": 0.5965705581804344,
+   "se_cluster_day": 0.01825712770413626,
+   "N": 11236,
+   "note": "v1 OLS-primaryFE replication (legacy subfield, today-measured prestige, raw n_authors)"
+  }
+ },
+ "primary_honest": {
+  "label": "PRIMARY honest: Z1p_kw | month+dow+subfield_kw, tierB controls",
+  "FE": "release_month + dow + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 11230,
+  "N_dropped_singleton_fe": 0,
+  "first_stage": {
+   "pi": -0.10698004393350603,
+   "se": 0.019239671535927334,
+   "t": -5.56038827033695,
+   "kp_f": 30.917917716900735
+  },
+  "reduced_form": {
+   "beta": -0.050751309028653116,
+   "se": 0.024898070221612074,
+   "t": -2.038363157342205
+  },
+  "iv_2sls": {
+   "beta": 0.4743997774034728,
+   "se": 0.21489325131465664,
+   "wald_ci95": [
+    0.05320900482674579,
+    0.8955905499801997
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5080845095409993,
+   "se": 0.015168136978539764
+  },
+  "note": "No day FE: instrument variation is between-day crowding, not the within-day adding-up identity.",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 674,
+   "N": 11230,
+   "k_slopes": 19,
+   "ssc_factor": 1.0076778667177937,
+   "beta_2sls_fwl": 0.4743997774033243,
+   "closed_form_vs_pyfixest_abs_diff": 1.8248381472574238e-08,
+   "grid_half_width": 6.0,
+   "lower": 0.021046280297377148,
+   "upper": 0.9212100365226323,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(0.021, 0.921)"
+  }
+ },
+ "primary_honest_month_cluster": {
+  "label": "  same, clustered by release_month",
+  "FE": "release_month + dow + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "release_month",
+  "N": 11230,
+  "N_dropped_singleton_fe": 0,
+  "first_stage": {
+   "pi": -0.10698004393350603,
+   "se": 0.022803366160093944,
+   "t": -4.69141455618609,
+   "kp_f": 22.009370537994727
+  },
+  "reduced_form": {
+   "beta": -0.050751309028653116,
+   "se": 0.026994645940562854,
+   "t": -1.8800509234460039
+  },
+  "iv_2sls": {
+   "beta": 0.4743997774034728,
+   "se": 0.25786053344882365,
+   "wald_ci95": [
+    -0.031006868156221612,
+    0.9798064229631671
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5080845095409993,
+   "se": 0.03514175391142091
+  },
+  "note": "",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 34,
+   "N": 11230,
+   "k_slopes": 19,
+   "ssc_factor": 1.0336167897143507,
+   "beta_2sls_fwl": 0.4743997774033243,
+   "closed_form_vs_pyfixest_abs_diff": 2.46705766926425e-09,
+   "grid_half_width": 6.0,
+   "lower": -0.02155131445876554,
+   "upper": 1.0983209104702834,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(-0.022, 1.098)"
+  }
+ },
+ "primary_honest_noprestige": {
+  "label": "  honest, no prestige controls",
+  "FE": "release_month + dow + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling"
+  ],
+  "cluster": "cohort_day",
+  "N": 11344,
+  "N_dropped_singleton_fe": 0,
+  "first_stage": {
+   "pi": -0.1066467540301989,
+   "se": 0.019006203724826455,
+   "t": -5.611154945734577,
+   "kp_f": 31.485059825041603
+  },
+  "reduced_form": {
+   "beta": -0.04803486122557917,
+   "se": 0.024659635284222752,
+   "t": -1.9479145036792942
+  },
+  "iv_2sls": {
+   "beta": 0.4504109071333767,
+   "se": 0.21397791739706537,
+   "wald_ci95": [
+    0.031014189035128592,
+    0.8698076252316249
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5103021149923962,
+   "se": 0.015150584521781139
+  },
+  "note": "",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 683,
+   "N": 11344,
+   "k_slopes": 17,
+   "ssc_factor": 1.0074168113523752,
+   "beta_2sls_fwl": 0.4504109071334449,
+   "closed_form_vs_pyfixest_abs_diff": 1.8074917562671544e-08,
+   "grid_half_width": 6.0,
+   "lower": -0.0032145372118834127,
+   "upper": 0.892028732457542,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(-0.003, 0.892)"
+  }
+ },
+ "honest_count_instrument": {
+  "label": "  honest FE, other-subfield paper COUNT (Zc_kw)",
+  "FE": "release_month + dow + subfield_kw",
+  "instrument": "Zc_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 11230,
+  "N_dropped_singleton_fe": 0,
+  "first_stage": {
+   "pi": -0.17771561958696502,
+   "se": 0.02166486504763793,
+   "t": -8.202941453648286,
+   "kp_f": 67.28824849198146
+  },
+  "reduced_form": {
+   "beta": -0.056281059998996595,
+   "se": 0.03007558266559749,
+   "t": -1.871320686444247
+  },
+  "iv_2sls": {
+   "beta": 0.31669169052111923,
+   "se": 0.1667369843391124,
+   "wald_ci95": [
+    -0.0101127987835411,
+    0.6434961798257796
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5080845095409993,
+   "se": 0.015168136978539764
+  },
+  "note": "Count-based crowding: no upvote content in the instrument.",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 674,
+   "N": 11230,
+   "k_slopes": 19,
+   "ssc_factor": 1.0076778667177937,
+   "beta_2sls_fwl": 0.31669169052107704,
+   "closed_form_vs_pyfixest_abs_diff": 1.5730715396955475e-08,
+   "grid_half_width": 6.0,
+   "lower": -0.015690295128821974,
+   "upper": 0.6574544767072299,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(-0.016, 0.657)"
+  }
+ },
+ "honest_own_subfield_loo": {
+  "label": "  honest FE, own-subfield leave-one-out peer sum (Zown_loo_kw)",
+  "FE": "release_month + dow + subfield_kw",
+  "instrument": "Zown_loo_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 9221,
+  "N_dropped_singleton_fe": 2,
+  "first_stage": {
+   "pi": -0.0060695465514100985,
+   "se": 0.011119582642886521,
+   "t": -0.545843018244299,
+   "kp_f": 0.29794460056604616
+  },
+  "reduced_form": {
+   "beta": -0.011632525282096169,
+   "se": 0.013665312229344712,
+   "t": -0.8512447492503418
+  },
+  "iv_2sls": {
+   "beta": 1.9165394290274536,
+   "se": 3.2614923259657442,
+   "wald_ci95": [
+    -4.4759855298654045,
+    8.309064387920312
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.4905806537115086,
+   "se": 0.016232618597474748
+  },
+  "note": "Same-topic crowding with no adding-up link to own upvotes (no day FE); non-singleton cells only.",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 637,
+   "N": 9221,
+   "k_slopes": 19,
+   "ssc_factor": 1.0089038408550104,
+   "beta_2sls_fwl": 1.9165394290276379,
+   "closed_form_vs_pyfixest_abs_diff": 3.2271607261491475e-11,
+   "grid_half_width": 6.0,
+   "lower": null,
+   "upper": null,
+   "unbounded": true,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(-inf, +inf)"
+  }
+ },
+ "dayfe_Z1p_kw": {
+  "label": "day+subfield_kw FE: Z1p_kw (v1 design, uniform taxonomy)",
+  "FE": "cohort_day + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 11220,
+  "N_dropped_singleton_fe": 10,
+  "first_stage": {
+   "pi": -1.1589136004519607,
+   "se": 0.05702975319227235,
+   "t": -20.321210168046033,
+   "kp_f": 412.9515826938975
+  },
+  "reduced_form": {
+   "beta": -0.8265282748318679,
+   "se": 0.06641064650770016,
+   "t": -12.445719448553083
+  },
+  "iv_2sls": {
+   "beta": 0.7131923160704623,
+   "se": 0.050381462129253374,
+   "wald_ci95": [
+    0.6144446502971257,
+    0.8119399818437989
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5136240238975054,
+   "se": 0.015429776040894898
+  },
+  "note": "Under day FE, day_total is absorbed and Z1p_kw = f(-own cell sum), which contains the paper's own upvotes.",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 664,
+   "N": 11220,
+   "k_slopes": 19,
+   "ssc_factor": 1.0042833007353817,
+   "beta_2sls_fwl": 0.7131923160704419,
+   "closed_form_vs_pyfixest_abs_diff": 3.145005820215374e-07,
+   "grid_half_width": 6.0,
+   "lower": 0.6152969613168466,
+   "upper": 0.81373131125646,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(0.615, 0.814)"
+  }
+ },
+ "dayfe_singleton_cells": {
+  "label": "  singleton (day x subfield_kw) cells only",
+  "FE": "cohort_day + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 1907,
+  "N_dropped_singleton_fe": 100,
+  "first_stage": {
+   "pi": -3.77243645080265,
+   "se": 0.3802086821488941,
+   "t": -9.92201553494594,
+   "kp_f": 98.44639227570856
+  },
+  "reduced_form": {
+   "beta": -3.457762497687183,
+   "se": 0.3266497738566098,
+   "t": -10.58553464422432
+  },
+  "iv_2sls": {
+   "beta": 0.9165860161677428,
+   "se": 0.07022788958592699,
+   "wald_ci95": [
+    0.7789393525793259,
+    1.0542326797561596
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.6106218206038618,
+   "se": 0.039398252607525476
+  },
+  "note": "In singleton cells Z1p_kw | day = log1p(day_total - own upvotes) exactly: pure reflection."
+ },
+ "dayfe_nonsingleton_cells": {
+  "label": "  non-singleton cells only",
+  "FE": "cohort_day + subfield_kw",
+  "instrument": "Z1p_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 9221,
+  "N_dropped_singleton_fe": 2,
+  "first_stage": {
+   "pi": -1.1680178118130746,
+   "se": 0.0636810302682204,
+   "t": -18.34169150363081,
+   "kp_f": 336.4176472143626
+  },
+  "reduced_form": {
+   "beta": -0.7228516248114564,
+   "se": 0.0761811424867878,
+   "t": -9.488589974045368
+  },
+  "iv_2sls": {
+   "beta": 0.6188703780890203,
+   "se": 0.05703559552348011,
+   "wald_ci95": [
+    0.5070806108629994,
+    0.7306601453150413
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.49525457087817776,
+   "se": 0.016574000459444002
+  },
+  "note": ""
+ },
+ "dayfe_own_subfield_loo": {
+  "label": "  own-subfield leave-one-out peer sum (Zown_loo_kw)",
+  "FE": "cohort_day + subfield_kw",
+  "instrument": "Zown_loo_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 9221,
+  "N_dropped_singleton_fe": 2,
+  "first_stage": {
+   "pi": -0.05177988432256535,
+   "se": 0.013610005267020064,
+   "t": -3.8045455021269547,
+   "kp_f": 14.474566477754442
+  },
+  "reduced_form": {
+   "beta": -0.04344083385406518,
+   "se": 0.01541404917902806,
+   "t": -2.8182623105400237
+  },
+  "iv_2sls": {
+   "beta": 0.8389519293527951,
+   "se": 0.27556036643915877,
+   "wald_ci95": [
+    0.2988536111320439,
+    1.3790502475735462
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.49525457087817776,
+   "se": 0.016574000459444002
+  },
+  "note": "Genuine same-topic crowding with no mechanical link to own upvotes (non-singleton cells; singleton cells have no peers)."
+ },
+ "dayfe_count_instrument": {
+  "label": "  other-subfield paper COUNT (Zc_kw), day FE",
+  "FE": "cohort_day + subfield_kw",
+  "instrument": "Zc_kw",
+  "controls": [
+   "age_months",
+   "log_n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "log1p_max_prior_papers_true",
+   "max_years_active"
+  ],
+  "cluster": "cohort_day",
+  "N": 11220,
+  "N_dropped_singleton_fe": 10,
+  "first_stage": {
+   "pi": 0.1447491211376458,
+   "se": 0.0710102134937387,
+   "t": 2.0384267842035,
+   "kp_f": 4.155183754558223
+  },
+  "reduced_form": {
+   "beta": 0.1554647323991519,
+   "se": 0.11811004603449159,
+   "t": 1.316270187158776
+  },
+  "iv_2sls": {
+   "beta": 1.0740288519700327,
+   "se": 0.7701039994110257,
+   "wald_ci95": [
+    -0.43537498687557763,
+    2.583432690815643
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5136240238975054,
+   "se": 0.015429776040894898
+  },
+  "note": ""
+ },
+ "legacy_v1_primary_P": {
+  "label": "LEGACY v1 primary-P: Z1p_othersub | day+subfield(legacy), legacy prestige",
+  "FE": "cohort_day + subfield",
+  "instrument": "Z1p_othersub",
+  "controls": [
+   "age_months",
+   "n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "max_hindex",
+   "max_papercount_cur2026_w99"
+  ],
+  "cluster": "cohort_day",
+  "N": 11236,
+  "N_dropped_singleton_fe": 10,
+  "first_stage": {
+   "pi": -1.2924706576485772,
+   "se": 0.06863069744051892,
+   "t": -18.832252998284623,
+   "kp_f": 354.6537529914002
+  },
+  "reduced_form": {
+   "beta": -0.9795773839807072,
+   "se": 0.08695201315910829,
+   "t": -11.26572402858847
+  },
+  "iv_2sls": {
+   "beta": 0.7579107333569269,
+   "se": 0.05504932912067621,
+   "wald_ci95": [
+    0.6500140482804015,
+    0.8658074184334523
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5965705581804344,
+   "se": 0.01825712770413626
+  },
+  "note": "Replicates results/crowding_iv.json primary-P (v1 headline).",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 664,
+   "N": 11236,
+   "k_slopes": 19,
+   "ssc_factor": 1.0054459566935452,
+   "beta_2sls_fwl": 0.7579107333568998,
+   "closed_form_vs_pyfixest_abs_diff": 4.8798199259181274e-08,
+   "grid_half_width": 6.0,
+   "lower": 0.649744338430727,
+   "upper": 0.8667129250717662,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(0.650, 0.867)"
+  }
+ },
+ "legacy_v1_honest_FE": {
+  "label": "LEGACY: Z1p_othersub | month+dow+subfield(legacy), legacy prestige",
+  "FE": "release_month + dow + subfield",
+  "instrument": "Z1p_othersub",
+  "controls": [
+   "age_months",
+   "n_authors",
+   "has_github",
+   "title_n_words",
+   "title_has_colon",
+   "abstract_n_chars",
+   "kw_llm",
+   "kw_agent",
+   "kw_diffusion",
+   "kw_reasoning",
+   "kw_benchmark",
+   "kw_survey",
+   "kw_efficient",
+   "kw_multimodal",
+   "kw_rl",
+   "kw_scaling",
+   "max_hindex",
+   "max_papercount_cur2026_w99"
+  ],
+  "cluster": "cohort_day",
+  "N": 11246,
+  "N_dropped_singleton_fe": 0,
+  "first_stage": {
+   "pi": -0.08523514622526299,
+   "se": 0.017743638441770817,
+   "t": -4.803701704415282,
+   "kp_f": 23.075550065002282
+  },
+  "reduced_form": {
+   "beta": -0.033140892954287494,
+   "se": 0.02487314193661651,
+   "t": -1.3323967289190666
+  },
+  "iv_2sls": {
+   "beta": 0.3888172241378952,
+   "se": 0.2771407387873383,
+   "wald_ci95": [
+    -0.1543786238852879,
+    0.9320130721610783
+   ]
+  },
+  "ols_same_sample": {
+   "beta": 0.5883676367751112,
+   "se": 0.017802632795928457
+  },
+  "note": "",
+  "ar_ci95": {
+   "crit": 3.8414588206941205,
+   "G": 674,
+   "N": 11246,
+   "k_slopes": 19,
+   "ssc_factor": 1.0088424945548862,
+   "beta_2sls_fwl": 0.3888172241378148,
+   "closed_form_vs_pyfixest_abs_diff": 2.5136097647759925e-09,
+   "grid_half_width": 6.0,
+   "lower": -0.21690273910467972,
+   "upper": 0.9732107900947717,
+   "unbounded": false,
+   "empty": false,
+   "n_segments": 1,
+   "string": "(-0.217, 0.973)"
+  }
+ },
+ "diagnostics": {
+  "taxonomy": "subfield_kw (13 levels, one keyword rule set for all papers)",
+  "cells_day_x_subfield_kw": 4568,
+  "singleton_cell_share": 0.44176882661996497,
+  "paper_singleton_share": 0.17871772039180767,
+  "median_cell_size": 2.0,
+  "Z1p_kw_within_cell_variance_share": 8.071508384773044e-32,
+  "reflection_within_day": {
+   "corr_Z1p_kw_log_upvotes_within_day_all": -0.32343752825008093,
+   "corr_Z1p_kw_log_upvotes_within_day_singleton": -0.623191544094044,
+   "corr_Z1p_kw_log_upvotes_within_day_nonsingleton": -0.2998913920809327,
+   "corr_Z1p_kw_log_upvotes_within_month": -0.08201443954606526,
+   "slope_Z1p_on_logup_singleton_dayFE": {
+    "coef": -0.09714246268215941,
+    "t": -15.882496628927955
+   },
+   "slope_Z1p_on_logup_nonsingleton_dayFE": {
+    "coef": -0.062290593618187194,
+    "t": -19.10045588203747
+   }
+  },
+  "balance_on_Z1p_kw_honest_FE": {
+   "age_months": {
+    "coef": -0.012401563264922767,
+    "se": 0.016590330268375753,
+    "t": -0.7475175638041666,
+    "imbalance_flag": false
+   },
+   "log_n_authors": {
+    "coef": -0.028605826925313067,
+    "se": 0.010401146001885344,
+    "t": -2.7502572235913125,
+    "imbalance_flag": true
+   },
+   "has_github": {
+    "coef": 0.014650657027836366,
+    "se": 0.00974171125461217,
+    "t": 1.5039100056368513,
+    "imbalance_flag": false
+   },
+   "log1p_max_prior_papers_true": {
+    "coef": 0.03011943313096537,
+    "se": 0.02228841943520672,
+    "t": 1.351348991727462,
+    "imbalance_flag": false
+   },
+   "max_years_active": {
+    "coef": 0.0009886485322201197,
+    "se": 0.17997013647267832,
+    "t": 0.005493403247878343,
+    "imbalance_flag": false
+   }
+  }
+ },
+ "verdict": {
+  "string": "VERDICT: the crowding IV is an attempted design, not informative causal evidence. Under the honest specification (release_month + dow + subfield_kw FE, no day FE) the first stage is modest (t=-5.6, KP-F=31) and the weak-IV-robust AR 95% CI (0.021, 0.921) is 0.90 log-points wide, barely excludes zero and includes the OLS estimate (0.508). The day-FE first stage (KP-F=413) is the within-day adding-up identity, not exogenous variation (2SLS beta 0.917 in singleton cells vs 0.619 in non-singleton cells); a same-topic crowding instrument with no adding-up link to own upvotes (own-subfield leave-one-out peer sum, no day FE) has no usable first stage (t=-0.55). Report as 'consistent with OLS but uninformative'; do not describe as suggestive causal support.",
+  "facts": [
+   "Honest spec (month+dow+subfield_kw FE, leakage-free prestige, N=11,230): first-stage t=-5.56 (KP-F=30.9), 2SLS beta=0.474 (SE 0.215), AR 95% CI (0.021, 0.921), width 0.90 log-points.",
+   "The AR interval excludes zero and includes the OLS coefficient (0.508); it is too wide to be informative about the size of the effect.",
+   "Under day FE (v1 design) the first stage looks strong (t=-20.3, KP-F=413) but this is the within-day adding-up identity: 18% of papers sit in singleton (day x subfield) cells where Z1' is exactly log1p(day total - own upvotes); the 2SLS coefficient is 0.917 in singleton cells vs 0.619 in non-singleton cells (all-sample 0.713).",
+   "A crowding instrument with no mechanical link to own upvotes (own-subfield leave-one-out peer sum) has a first stage (t=-3.80); the other-subfield paper COUNT under day FE has first-stage sign positive (+0.145), the wrong sign for a crowding story."
+  ],
+  "flags": {
+   "ar_includes_zero": false,
+   "ar_includes_ols": true,
+   "ar_width": 0.9001637562252552,
+   "own_loo_dayFE_first_stage_null": false,
+   "own_loo_honestFE_first_stage_null": true,
+   "count_instrument_wrong_sign_dayFE": true
+  }
+ },
+ "headline": {
+  "spec": "primary_honest",
+  "beta_2sls": 0.4743997774034728,
+  "se_cluster_day": 0.21489325131465664,
+  "AR_CI_95": [
+   0.021046280297377148,
+   0.9212100365226323
+  ],
+  "AR_CI_string": "(0.021, 0.921)",
+  "first_stage_t": -5.56038827033695,
+  "first_stage_kp_f": 30.917917716900735,
+  "reduced_form_beta": -0.050751309028653116,
+  "reduced_form_t": -2.038363157342205,
+  "OLS_beta_same_FE": 0.5080845095409993,
+  "OLS_se_day": 0.015168136978539764,
+  "OLS_se_month": 0.03514175391142091,
+  "N": 11230,
+  "day_FE_beta_for_comparison": 0.7131923160704623,
+  "day_FE_kp_f": 412.9515826938975,
+  "legacy_v1_beta": 0.7579107333569269,
+  "verdict": "VERDICT: the crowding IV is an attempted design, not informative causal evidence. Under the honest specification (release_month + dow + subfield_kw FE, no day FE) the first stage is modest (t=-5.6, KP-F=31) and the weak-IV-robust AR 95% CI (0.021, 0.921) is 0.90 log-points wide, barely excludes zero and includes the OLS estimate (0.508). The day-FE first stage (KP-F=413) is the within-day adding-up identity, not exogenous variation (2SLS beta 0.917 in singleton cells vs 0.619 in non-singleton cells); a same-topic crowding instrument with no adding-up link to own upvotes (own-subfield leave-one-out peer sum, no day FE) has no usable first stage (t=-0.55). Report as 'consistent with OLS but uninformative'; do not describe as suggestive causal support."
+ },
+ "meta": {
+  "generated": "2026-08-18T13:31:39",
+  "script": "scripts/25_crowding_iv_v3.py",
+  "python_version": "3.12.13",
+  "pyfixest": "0.60.0",
+  "N_base": 11344,
+  "inputs": [
+   "data/processed/analysis_final.csv",
+   "data/processed/crowding_v3.csv"
+  ],
+  "runtime_seconds": 3.7
+ }
+}

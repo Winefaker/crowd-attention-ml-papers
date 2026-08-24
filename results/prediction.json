@@ -1,0 +1,347 @@
+{
+  "_superseded": "SUPERSEDED. This is the first pass, kept so the changes behind the revised numbers can be traced. The current numbers are in the files whose names end in `_v3` and in the ledger `D5_results_gate_v3.md`. The prediction gain is now +0.093 rather than +0.062, and the crowding instrument is reported as an attempted design rather than as suggestive causal support.",
+  "headline": {
+    "conservative_delta_auc": 0.06222,
+    "ci_lo_95": 0.04708,
+    "ci_hi_95": 0.0773,
+    "conservative_baseline": "P_interim",
+    "controls_only_auc": 0.73384,
+    "attention_auc": 0.79606,
+    "delta_p100": 0.14,
+    "n_train": 5019,
+    "n_test": 6325,
+    "model": "hgb_clf",
+    "interpretation": "HF attention adds modest incremental predictive value (\u0394AUC=+0.0622) over the P_interim controls-only baseline in a clean forward-in-time test.",
+    "v2_leaky_delta_auc_contrast": 0.05464
+  },
+  "results": [
+    {
+      "branch": "P_interim",
+      "leaky": false,
+      "n_train": 5019,
+      "n_test": 6325,
+      "controls_only": {
+        "logistic": {
+          "auc": 0.70893,
+          "p_at_100": 0.43,
+          "cv_auc_mean": 0.69763,
+          "mature_auc": 0.72409,
+          "mature_p100": 0.43
+        },
+        "hgb_clf": {
+          "auc": 0.73384,
+          "p_at_100": 0.46,
+          "cv_auc_mean": 0.68642,
+          "mature_auc": 0.74733,
+          "mature_p100": 0.36
+        },
+        "ridge": {
+          "r2": 0.10551,
+          "spearman": 0.40189,
+          "cv_r2": 0.11606
+        },
+        "hgb_reg": {
+          "r2": 0.20718,
+          "spearman": 0.46092,
+          "cv_r2": 0.14794
+        }
+      },
+      "+attention": {
+        "logistic": {
+          "auc": 0.80542,
+          "p_at_100": 0.59,
+          "cv_auc_mean": 0.80568,
+          "mature_auc": 0.81013,
+          "mature_p100": 0.55
+        },
+        "hgb_clf": {
+          "auc": 0.79606,
+          "p_at_100": 0.6,
+          "cv_auc_mean": 0.77372,
+          "mature_auc": 0.80148,
+          "mature_p100": 0.61
+        },
+        "ridge": {
+          "r2": 0.22969,
+          "spearman": 0.50167,
+          "cv_r2": 0.23811
+        },
+        "hgb_reg": {
+          "r2": 0.27004,
+          "spearman": 0.51811,
+          "cv_r2": 0.25168
+        }
+      },
+      "delta": {
+        "logistic": {
+          "delta_auc": 0.09649,
+          "delta_p100": 0.16,
+          "bootstrap_ci": {
+            "mean": 0.09668,
+            "ci_lo": 0.07848,
+            "ci_hi": 0.11514
+          }
+        },
+        "hgb_clf": {
+          "delta_auc": 0.06222,
+          "delta_p100": 0.14,
+          "bootstrap_ci": {
+            "mean": 0.06254,
+            "ci_lo": 0.04708,
+            "ci_hi": 0.0773
+          }
+        }
+      }
+    },
+    {
+      "branch": "P_none",
+      "leaky": false,
+      "n_train": 5019,
+      "n_test": 6325,
+      "controls_only": {
+        "logistic": {
+          "auc": 0.70855,
+          "p_at_100": 0.44,
+          "cv_auc_mean": 0.69863,
+          "mature_auc": 0.72354,
+          "mature_p100": 0.41
+        },
+        "hgb_clf": {
+          "auc": 0.72235,
+          "p_at_100": 0.45,
+          "cv_auc_mean": 0.69561,
+          "mature_auc": 0.73512,
+          "mature_p100": 0.36
+        },
+        "ridge": {
+          "r2": 0.10342,
+          "spearman": 0.40077,
+          "cv_r2": 0.11589
+        },
+        "hgb_reg": {
+          "r2": 0.20389,
+          "spearman": 0.45792,
+          "cv_r2": 0.14279
+        }
+      },
+      "+attention": {
+        "logistic": {
+          "auc": 0.80526,
+          "p_at_100": 0.59,
+          "cv_auc_mean": 0.80567,
+          "mature_auc": 0.80981,
+          "mature_p100": 0.55
+        },
+        "hgb_clf": {
+          "auc": 0.79594,
+          "p_at_100": 0.6,
+          "cv_auc_mean": 0.77773,
+          "mature_auc": 0.79894,
+          "mature_p100": 0.56
+        },
+        "ridge": {
+          "r2": 0.22836,
+          "spearman": 0.50066,
+          "cv_r2": 0.2378
+        },
+        "hgb_reg": {
+          "r2": 0.26901,
+          "spearman": 0.51768,
+          "cv_r2": 0.2499
+        }
+      },
+      "delta": {
+        "logistic": {
+          "delta_auc": 0.09671,
+          "delta_p100": 0.15,
+          "bootstrap_ci": {
+            "mean": 0.0969,
+            "ci_lo": 0.07878,
+            "ci_hi": 0.11534
+          }
+        },
+        "hgb_clf": {
+          "delta_auc": 0.07359,
+          "delta_p100": 0.15,
+          "bootstrap_ci": {
+            "mean": 0.07383,
+            "ci_lo": 0.05906,
+            "ci_hi": 0.08889
+          }
+        }
+      }
+    },
+    {
+      "branch": "v2_leaky_replication[LEAKY:max_hindex+P_interim]",
+      "leaky": true,
+      "n_train": 5019,
+      "n_test": 6325,
+      "controls_only": {
+        "logistic": {
+          "auc": 0.72445,
+          "p_at_100": 0.44,
+          "cv_auc_mean": 0.70394,
+          "mature_auc": 0.73891,
+          "mature_p100": 0.37
+        },
+        "hgb_clf": {
+          "auc": 0.75745,
+          "p_at_100": 0.43,
+          "cv_auc_mean": 0.68638,
+          "mature_auc": 0.76852,
+          "mature_p100": 0.42
+        },
+        "ridge": {
+          "r2": 0.15055,
+          "spearman": 0.42935,
+          "cv_r2": 0.13571
+        },
+        "hgb_reg": {
+          "r2": 0.24031,
+          "spearman": 0.49069,
+          "cv_r2": 0.17287
+        }
+      },
+      "+attention": {
+        "logistic": {
+          "auc": 0.81209,
+          "p_at_100": 0.63,
+          "cv_auc_mean": 0.8113,
+          "mature_auc": 0.81766,
+          "mature_p100": 0.57
+        },
+        "hgb_clf": {
+          "auc": 0.81209,
+          "p_at_100": 0.59,
+          "cv_auc_mean": 0.78024,
+          "mature_auc": 0.81643,
+          "mature_p100": 0.61
+        },
+        "ridge": {
+          "r2": 0.25725,
+          "spearman": 0.51569,
+          "cv_r2": 0.25517
+        },
+        "hgb_reg": {
+          "r2": 0.3043,
+          "spearman": 0.54611,
+          "cv_r2": 0.27641
+        }
+      },
+      "delta": {
+        "logistic": {
+          "delta_auc": 0.08764,
+          "delta_p100": 0.19,
+          "bootstrap_ci": {
+            "mean": 0.08784,
+            "ci_lo": 0.06989,
+            "ci_hi": 0.10538
+          }
+        },
+        "hgb_clf": {
+          "delta_auc": 0.05464,
+          "delta_p100": 0.16,
+          "bootstrap_ci": {
+            "mean": 0.05475,
+            "ci_lo": 0.03959,
+            "ci_hi": 0.06929
+          }
+        }
+      }
+    }
+  ],
+  "audit": {
+    "split_temporal": {
+      "status": "PASS",
+      "detail": "train=release_year\u22642024 (n=5019), test=release_year=2025 (n=6325); disjoint years"
+    },
+    "scalers_fit_on_train_only": {
+      "status": "PASS",
+      "detail": "StandardScaler + OneHotEncoder inside Pipeline, fit only on train_X; test transformed with frozen objects"
+    },
+    "hyperparameters_tuned_on_train_only": {
+      "status": "PASS",
+      "detail": "GroupKFold(5) grouped by release_month, CV scoring on train; no test data seen during tuning"
+    },
+    "target_is_label_only": {
+      "status": "PASS",
+      "detail": "citation_count used only to compute q_i / y_i; never entered as a feature; FORBIDDEN assert ran"
+    },
+    "within_month_rank_no_leakage": {
+      "status": "PASS",
+      "detail": "upvote_rank_within_month = groupby(release_month).rank(pct=True) on full df before split; within-group so no cross-split contamination; release_month itself excluded as feature"
+    },
+    "within_quarter_percentile_no_leakage": {
+      "status": "PASS",
+      "detail": "q_i = groupby(release_quarter).citation_count.rank(pct=True) on full df; train/test quarters are disjoint (2023-2024 vs 2025) so no cross-split leakage"
+    },
+    "forbidden_columns_absent": {
+      "status": "PASS",
+      "detail": "Assertion enforced in run_branch(); forbidden set checked per feature matrix; max_hindex included ONLY in the explicitly-flagged v2_leaky_replication row"
+    },
+    "features_available_at_day_one": {
+      "age_months": {
+        "available": "yes",
+        "note": "derived from release date"
+      },
+      "title_n_words": {
+        "available": "yes",
+        "note": "from title at submission"
+      },
+      "title_has_colon": {
+        "available": "yes",
+        "note": "from title at submission"
+      },
+      "abstract_n_chars": {
+        "available": "yes",
+        "note": "from abstract at submission"
+      },
+      "kw_llm/agent/diffusion/etc": {
+        "available": "yes",
+        "note": "keyword flags from abstract"
+      },
+      "n_authors": {
+        "available": "yes",
+        "note": "from submission metadata"
+      },
+      "has_github": {
+        "available": "flag",
+        "note": "BORDERLINE: may be added post-submission; flagged in spec"
+      },
+      "subfield": {
+        "available": "yes",
+        "note": "from HF Daily Papers category"
+      },
+      "dow": {
+        "available": "yes",
+        "note": "day-of-week of HF posting"
+      },
+      "max_papercount_cur2026_w99": {
+        "available": "flag",
+        "note": "ANACHRONISTIC: today-measured productivity (2026 snapshot); P_interim flagged provisional"
+      },
+      "log_upvotes": {
+        "available": "yes",
+        "note": "early/peak attention; never literal day-one (no timestamps); proxy"
+      },
+      "upvote_rank_within_month": {
+        "available": "yes",
+        "note": "within-month rank; no cross-split leakage"
+      },
+      "max_hindex (leaky row only)": {
+        "available": "no",
+        "note": "LEAKY: today-measured h-index; excluded from all headline rows"
+      }
+    },
+    "prestige_branch_tags": {
+      "P_interim": "FLAGGED anachronistic (today-measured productivity; conservative provisional baseline)",
+      "P_none": "no prestige (upper bracket baseline \u2014 removes all productivity confound)",
+      "P_tierB": "PENDING \u2014 leakage-free prior-count; becomes DEFINITIVE headline when file available",
+      "v2_leaky_replication": "LEAKY (max_hindex + P_interim) \u2014 context only, not headline"
+    },
+    "rerrun_hook_tierB": "When data/processed/prepub_prestige_tierB.csv appears, re-execute this script. P_tierB branch will join on arxiv_id_clean and use its leakage-free prior-count + years_active. P_tierB AUC will become the DEFINITIVE conservative headline baseline."
+  },
+  "spec": "the pre-specified plan",
+  "seed": 1626,
+  "python": "Project/.venv/bin/python"
+}

@@ -1,0 +1,238 @@
+{
+  "_superseded": "SUPERSEDED. This is the first pass, kept so the changes behind the revised numbers can be traced. The current numbers are in the files whose names end in `_v3` and in the ledger `D5_results_gate_v3.md`. The prediction gain is now +0.093 rather than +0.062, and the crowding instrument is reported as an attempted design rather than as suggestive causal support.",
+  "primary-P": {
+    "label": "Spec P (with-prestige, FLAGGED)",
+    "estimator": "2SLS",
+    "instrument": "Z1p_othersub",
+    "FE": "cohort_day + subfield",
+    "beta": 0.757911,
+    "se_cluster": 0.055049,
+    "N": 11236,
+    "N_dropped": 10,
+    "first_stage_pi1": -1.292471,
+    "first_stage_kp_f": 354.6538,
+    "ar_ci_95": {
+      "lower": 0.6489696642627037,
+      "upper": 0.8658764789501499,
+      "unbounded": false,
+      "note": "Bounded interval",
+      "G": 664,
+      "crit_used": 3.8415,
+      "beta2sls_fwl": 0.757911
+    },
+    "warning_weak_instrument": false,
+    "prestige_flagged": true
+  },
+  "primary-NP": {
+    "label": "Spec NP (no-prestige)",
+    "estimator": "2SLS",
+    "instrument": "Z1p_othersub",
+    "FE": "cohort_day + subfield",
+    "beta": 0.761,
+    "se_cluster": 0.055356,
+    "N": 11336,
+    "N_dropped": 8,
+    "first_stage_pi1": -1.291931,
+    "first_stage_kp_f": 363.1511,
+    "ar_ci_95": {
+      "lower": 0.65158952175462,
+      "upper": 0.8696967494077396,
+      "unbounded": false,
+      "note": "Bounded interval",
+      "G": 675,
+      "crit_used": 3.8415,
+      "beta2sls_fwl": 0.761
+    },
+    "warning_weak_instrument": false,
+    "prestige_flagged": false
+  },
+  "primary-no-subfieldFE": {
+    "label": "Primary Spec P, cohort_day FE only (no subfield FE)",
+    "estimator": "2SLS",
+    "instrument": "Z1p_othersub",
+    "FE": "cohort_day",
+    "beta": 0.674253,
+    "se_cluster": 0.030517,
+    "N": 11236,
+    "N_dropped": 10,
+    "first_stage_pi1": -2.057595,
+    "first_stage_kp_f": 580.3357,
+    "note": "Power-sensitivity: first-stage F reported separately for comparison"
+  },
+  "companion": {
+    "label": "Companion over-ID (Z2+Z3), release_month+subfield+dow FE",
+    "estimator": "2SLS over-ID",
+    "instruments": [
+      "Z2_count",
+      "Z3_blockbuster"
+    ],
+    "FE": "release_month + subfield + dow",
+    "beta": 0.285531,
+    "se_cluster": 0.257334,
+    "N": 11246,
+    "N_dropped": 0,
+    "first_stage_pi_Z2": -0.004967,
+    "first_stage_pi_Z3": -0.007186,
+    "first_stage_kp_f": 11.3328,
+    "hansen_j": {
+      "J_stat": 1.0217968180939712,
+      "J_p": 0.31209317770340994,
+      "df": 1,
+      "note": "Sargan (non-cluster-robust); unreliable under weak IV \u2014 see \u00a74 caveat"
+    },
+    "note": "cohort_size dropped from companion controls: Z2_count = cohort_size - 1 exactly (perfect collinearity would absorb the instrument). \u00a74 intent: daily-feature-count variation already embedded in Z2_count. cohort_day FE forbidden per \u00a77."
+  },
+  "OLS-primaryFE": {
+    "label": "OLS benchmark, cohort_day+subfield FE",
+    "estimator": "OLS",
+    "FE": "cohort_day + subfield",
+    "beta": 0.596571,
+    "se_cluster": 0.018257,
+    "N": 11236,
+    "N_dropped": 10,
+    "note": "Raw corr \u2248 0.37; OLS positive \u03b2 expected (endogeneity)"
+  },
+  "OLS-companionFE": {
+    "label": "OLS benchmark, release_month+subfield+dow FE",
+    "estimator": "OLS",
+    "FE": "release_month + subfield + dow",
+    "beta": 0.588368,
+    "se_cluster": 0.017803,
+    "N": 11246,
+    "N_dropped": 0
+  },
+  "reduced-form": {
+    "label": "Reduced form: log_citations ~ Z1p | cohort_day+subfield (primary); Z2+Z3 | month+subfield+dow (companion)",
+    "primary": {
+      "estimator": "OLS",
+      "outcome": "log_citations",
+      "instrument_coef": "Z1p_othersub",
+      "beta_Z1p": -0.979577,
+      "se_cluster": 0.086952,
+      "N": 11236,
+      "N_dropped": 10,
+      "expected_sign": "negative (\u03b2\u00b7\u03c01<0 per \u00a72)"
+    },
+    "companion": {
+      "estimator": "OLS",
+      "outcome": "log_citations",
+      "beta_Z2": -0.001099,
+      "se_Z2": 0.001332,
+      "beta_Z3": -0.034699,
+      "se_Z3": 0.030709,
+      "N": 11246,
+      "N_dropped": 0
+    }
+  },
+  "q_i-robustness": {
+    "label": "Robustness: q_i (citation percentile within release_year\u00d7quarter) as outcome",
+    "estimator": "2SLS",
+    "outcome": "q_i",
+    "FE": "cohort_day + subfield",
+    "instrument": "Z1p_othersub",
+    "beta": 0.13649,
+    "se_cluster": 0.011268,
+    "N": 11236,
+    "N_dropped": 10,
+    "first_stage_pi1": -1.292471,
+    "first_stage_kp_f": 354.6538,
+    "warning_weak_instrument": false
+  },
+  "diagnostics": {
+    "label": "Identification diagnostics (internal review, 2026-06-26)",
+    "instrument_variance_decomposition": {
+      "between_cell_share": 1.0,
+      "within_cell_share": 0.0,
+      "max_within_cell_sd": 0.0,
+      "grouping": "cohort_day \u00d7 subfield",
+      "note": "Z1p_othersub is a pure (cohort_day\u00d7subfield) aggregate: 100% between-cell variance, 0% within-cell variance. Max within-cell SD = 0 exactly."
+    },
+    "cell_size_structure": {
+      "total_cells": 5658,
+      "median_cell_size": 1.0,
+      "singleton_cells": 2975,
+      "singleton_cell_share": 0.5258,
+      "papers_in_singleton_cells": 2975,
+      "paper_singleton_share": 0.2623,
+      "note": "52.6% of (cohort_day\u00d7subfield) cells are singletons (2975 papers). For these, the other-subfield leave-out is effectively a leave-ego-out (the paper is the sole representative of its subfield on that day). The strong first-stage F is partly mechanical for these observations."
+    },
+    "mechanical_reflection_corr": {
+      "corr_Z1p_ego_upvotes_within_cohort_day": -0.4473,
+      "corr_Z1p_own_subfield_same_day_total_within_cohort_day": -0.8148,
+      "note": "Correlations computed after residualising on cohort_day FE. corr(Z1p_othersub, ego_upvotes) is non-trivially negative, reflecting mechanical competition for a fixed-size day pool. corr(Z1p_othersub, own_subfield_total) is strongly negative (own-subfield and other-subfield share the same day total)."
+    },
+    "covariate_balance": {
+      "method": "OLS: covariate ~ Z1p_othersub | cohort_day + subfield, CRV1(cohort_day)",
+      "results": {
+        "age_months": {
+          "coef": 0.072979,
+          "se": 0.029031,
+          "t_stat": 2.5138,
+          "N": 11242,
+          "imbalance_flag": true
+        },
+        "max_hindex": {
+          "coef": -1.115007,
+          "se": 1.299792,
+          "t_stat": -0.8578,
+          "N": 11242,
+          "imbalance_flag": false
+        },
+        "n_authors": {
+          "coef": -6.114702,
+          "se": 2.776653,
+          "t_stat": -2.2022,
+          "N": 11242,
+          "imbalance_flag": true
+        },
+        "has_github": {
+          "coef": -0.063384,
+          "se": 0.029289,
+          "t_stat": -2.1641,
+          "N": 11242,
+          "imbalance_flag": true
+        }
+      },
+      "note": "age_months shows real balance failure (t\u22482.5): papers with more cross-subfield competition tend to be older. n_authors and has_github also show t>2 imbalance. max_hindex is balanced. age_months imbalance could bias 2SLS if older papers cite differently for reasons unrelated to crowding (threat to exclusion)."
+    },
+    "reference_placebo": {
+      "outcome": "log(1+reference_count)",
+      "reduced_form": {
+        "beta_Z1p": 0.029403,
+        "se_cluster": 0.069294,
+        "t_stat": 0.4243,
+        "N": 11236
+      },
+      "iv_2sls": {
+        "beta_log_upvotes": -0.022749,
+        "se_cluster": 0.053771,
+        "t_stat": -0.4231,
+        "N": 11236
+      },
+      "ols_benchmark": {
+        "beta_log_upvotes": -0.023305,
+        "se_cluster": 0.015583,
+        "t_stat": -1.4955,
+        "N": 11236
+      },
+      "note": "RF t=0.42 \u2014 placebo passes (no strong first-stage leakage into reference list). HOWEVER, this placebo is LOW-POWERED against the subfield-day demand channel: OLS(log_ref ~ log_upvotes) \u2248 -0.023 (t\u2248-1.5), so even if the demand channel biased log_citations upward, it would not necessarily move log_ref much. A clean exclusion test would need a within-day-within-subfield control, which is unavailable (would absorb the instrument)."
+    }
+  },
+  "headline": {
+    "spec": "primary-P",
+    "beta_2sls": 0.757911,
+    "AR_CI_95": {
+      "lower": 0.649,
+      "upper": 0.8659,
+      "unbounded": false,
+      "string": "(0.6490, 0.8659)"
+    },
+    "first_stage_F_kp": 354.6538,
+    "N": 11236,
+    "OLS_beta_primaryFE": 0.596571,
+    "reduced_form_sign": "negative",
+    "hansen_j_p_companion": 0.3121,
+    "interpretation": "B3 (crowding-IV): 2SLS \u03b2=0.758 is a point inside the AR 95% CI (0.6490, 0.8659), consistent with OLS \u03b2=0.597; identification rests entirely on cross-subfield-within-day variation (Z1p is a day\u00d7subfield aggregate, KP F=355 partly mechanical due to ~53% singleton cells); binding exclusion threat \u2014 subfield-day demand shock \u2014 is structurally untestable; reference placebo is clean (RF t\u22480.42) but low-powered; age_months balance fails (t\u22482.5). B3 is suggestive, weak-IV-robust causal evidence triangulating B1/C1 associations, NOT a clean point identification. Project headline rests on Tracks C + A."
+  },
+  "interpretation": "B3 (crowding-IV): 2SLS \u03b2=0.758 is a point inside the weak-IV-robust AR 95% CI (0.6490, 0.8659), consistent with OLS \u03b2=0.597. Identification rests entirely on cross-subfield-within-day variation (Z1p is a pure day\u00d7subfield aggregate; KP F=355 is partly mechanical \u2014 ~53% of (cohort_day\u00d7subfield) cells are singletons so the leave-ego-out is effectively leave-ego-out for those observations). The binding exclusion threat is a subfield-day demand shock which is structurally untestable (adding a day\u00d7subfield control would kill the instrument). Reference placebo passes (RF t\u22480.42) but is low-powered against the demand channel (OLS(log_ref~log_upvotes)\u2248-0.02). age_months balance fails (t\u22482.5). B3 is suggestive, weak-IV-robust causal evidence consistent with the controlled association, NOT a clean point identification. Project headline leans on Tracks C (audited prediction) + A (ACL companion), with B3 as triangulating support."
+}
