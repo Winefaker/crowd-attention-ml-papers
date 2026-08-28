@@ -6,8 +6,6 @@ it earned later.
 
 **[Open the interactive dashboard](https://winefaker.github.io/crowd-attention-ml-papers/)**
 
-If that link is not live yet, clone the repository and open `index.html` in any browser. It needs no
-server and no network.
 
 Doubling upvotes goes with 1.74 times the later citations [1.67, 1.81] after prestige, subfield and
 time controls. Forward in time, attention lifts top decile detection AUC from 0.723 to 0.816, a gain
